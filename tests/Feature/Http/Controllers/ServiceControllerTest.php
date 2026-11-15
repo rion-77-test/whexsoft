@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Storage;
 uses(LazilyRefreshDatabase::class);
 
 test('services can be created updated and deleted with media and json sections', function () {
+    $this->actingAsAdmin();
+
     Storage::fake('public');
     $category = ServiceCategory::factory()->create();
 
@@ -85,6 +87,8 @@ test('services can be created updated and deleted with media and json sections',
 });
 
 test('service pages render the fallback image when no image has been uploaded', function () {
+    $this->actingAsAdmin();
+
     $service = Service::factory()->create();
 
     $this->get(route('admin.services.show', $service))
@@ -93,6 +97,8 @@ test('service pages render the fallback image when no image has been uploaded', 
 });
 
 test('services cannot be deleted while packages use them', function () {
+    $this->actingAsAdmin();
+
     $service = Service::factory()->create();
     Package::factory()->for($service, 'service')->create();
 
@@ -104,6 +110,8 @@ test('services cannot be deleted while packages use them', function () {
 });
 
 test('service show page lists related projects and testimonials', function () {
+    $this->actingAsAdmin();
+
     $service = Service::factory()->create();
     $project = Project::factory()->for($service, 'service')->create();
     $testimonial = Testimonial::factory()->for($service, 'service')->create();
@@ -116,6 +124,8 @@ test('service show page lists related projects and testimonials', function () {
 });
 
 test('projects and testimonials can be linked to a service', function () {
+    $this->actingAsAdmin();
+
     $service = Service::factory()->create();
     $category = ProjectCategory::factory()->create();
 

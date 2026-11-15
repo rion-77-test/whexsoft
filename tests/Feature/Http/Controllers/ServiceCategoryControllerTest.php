@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Storage;
 uses(LazilyRefreshDatabase::class);
 
 test('service categories can be created updated and deleted with media', function () {
+    $this->actingAsAdmin();
+
     Storage::fake('public');
 
     $this->post(route('admin.service-categories.store'), [
@@ -56,6 +58,8 @@ test('service categories can be created updated and deleted with media', functio
 });
 
 test('service categories cannot be deleted while services use them', function () {
+    $this->actingAsAdmin();
+
     $category = ServiceCategory::factory()->create();
     Service::factory()->for($category, 'serviceCategory')->create();
 

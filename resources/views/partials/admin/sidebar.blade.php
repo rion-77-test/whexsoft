@@ -13,6 +13,20 @@
         <nav class="mt-2" aria-label="Admin navigation">
             <ul class="nav sidebar-menu flex-column" id="navigation">
                 <li class="nav-item">
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-speedometer2"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.users.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-people"></i>
+                        <p>Users</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.posts.index') }}"
                         class="nav-link {{ request()->routeIs('admin.posts.*') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-journal-text"></i>

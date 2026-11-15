@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Package;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\Service;
@@ -16,11 +17,20 @@ class HomeController extends Controller
      */
     public function __invoke(): View
     {
+        $startingPackage = Package::lowestPricedActive();
+
+        $generalPackages = Package::query()
+            ->active()
+            ->whereNull('service_id')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get();
+
         $services = Service::query()
             ->active()
             ->with('media')
             ->orderBy('sort_order')
-            ->take(6)
+            ->take(3)
             ->get();
 
         $projects = Project::query()
@@ -55,6 +65,6 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
-        return view('frontend.home', compact('services', 'projects', 'posts', 'testimonials'));
+        return view('frontend.home', compact('startingPackage', 'generalPackages', 'services', 'projects', 'posts', 'testimonials'));
     }
 }

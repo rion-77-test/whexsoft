@@ -15,210 +15,17 @@
               </a>
             </li>
 
-            <li class="nav-item d-none d-md-block">
-              <a href="./index.html" class="nav-link">
-                <i class="bi bi-grid-1x2 me-1" aria-hidden="true"></i>
-                Live preview
-              </a>
-            </li>
-            <li class="nav-item d-none d-md-block">
-              <a href="./docs/introduction.html" class="nav-link">
-                <i class="bi bi-book me-1" aria-hidden="true"></i>
-                Documentation
-              </a>
-            </li>
+            
+            
           </ul>
           <!--end::Start Navbar Links-->
 
-          <!--begin::Navbar Search-->
-          <form
-            class="navbar-search d-none d-xl-block ms-3"
-            role="search"
-            action="./pages/search-results.html"
-          >
-            <label for="navbar-search-input" class="visually-hidden">Search</label>
-            <div class="navbar-search-field">
-              <input
-                type="search"
-                id="navbar-search-input"
-                name="q"
-                class="form-control"
-                placeholder="Search…"
-                autocomplete="off"
-              />
-              <button class="navbar-search-submit" type="submit" aria-label="Submit search">
-                <i class="bi bi-search" aria-hidden="true"></i>
-              </button>
-            </div>
-          </form>
-          <!--end::Navbar Search-->
+          
+          
 
           <!--begin::End Navbar Links-->
           <ul class="navbar-nav ms-auto">
-            <!--begin::Search (small screens: the field above is hidden, so link to the search page)-->
-            <li class="nav-item d-xl-none">
-              <a class="nav-link" href="./pages/search-results.html" aria-label="Search">
-                <i class="bi bi-search" aria-hidden="true"></i>
-              </a>
-            </li>
-            <!--end::Search-->
-            <!--begin::Messages Dropdown Menu-->
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link"
-                data-bs-toggle="dropdown"
-                href="#"
-                aria-label="Messages: 3 unread"
-              >
-                <i class="bi bi-chat-text"></i>
-                <span class="navbar-badge badge text-bg-danger">3</span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                <a href="#" class="dropdown-item">
-                  <!--begin::Message-->
-                  <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <img
-                        src="{{ asset('assets/admin/images/avatar.svg') }}"
-                        alt=""
-                        class="img-size-50 rounded-circle me-3"
-                      />
-                    </div>
-                    <div class="flex-grow-1">
-                      <p class="dropdown-item-title">
-                        Brad Diesel
-                        <span class="float-end fs-7 text-danger"
-                          ><i class="bi bi-star-fill"></i
-                        ></span>
-                      </p>
-                      <p class="fs-7">Call me whenever you can...</p>
-                      <p class="fs-7 text-secondary">
-                        <i class="bi bi-clock-fill me-1"></i> 4 Hours Ago
-                      </p>
-                    </div>
-                  </div>
-                  <!--end::Message-->
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                  <!--begin::Message-->
-                  <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <img
-                        src="{{ asset('assets/admin/images/avatar.svg') }}"
-                        alt=""
-                        class="img-size-50 rounded-circle me-3"
-                      />
-                    </div>
-                    <div class="flex-grow-1">
-                      <p class="dropdown-item-title">
-                        John Pierce
-                        <span class="float-end fs-7 text-secondary">
-                          <i class="bi bi-star-fill"></i>
-                        </span>
-                      </p>
-                      <p class="fs-7">I got your message bro</p>
-                      <p class="fs-7 text-secondary">
-                        <i class="bi bi-clock-fill me-1"></i> 4 Hours Ago
-                      </p>
-                    </div>
-                  </div>
-                  <!--end::Message-->
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                  <!--begin::Message-->
-                  <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <img
-                        src="{{ asset('assets/admin/images/avatar.svg') }}"
-                        alt=""
-                        class="img-size-50 rounded-circle me-3"
-                      />
-                    </div>
-                    <div class="flex-grow-1">
-                      <p class="dropdown-item-title">
-                        Nora Silvester
-                        <span class="float-end fs-7 text-warning">
-                          <i class="bi bi-star-fill"></i>
-                        </span>
-                      </p>
-                      <p class="fs-7">The subject goes here</p>
-                      <p class="fs-7 text-secondary">
-                        <i class="bi bi-clock-fill me-1"></i> 4 Hours Ago
-                      </p>
-                    </div>
-                  </div>
-                  <!--end::Message-->
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-              </div>
-            </li>
-            <!--end::Messages Dropdown Menu-->
-
-            <!--begin::Notifications Dropdown Menu-->
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link"
-                data-bs-toggle="dropdown"
-                href="#"
-                aria-label="Notifications: 15 unread"
-              >
-                <i class="bi bi-bell-fill"></i>
-                <span class="navbar-badge badge text-bg-warning">15</span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                <span class="dropdown-item dropdown-header">15 Notifications</span>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                  <i class="bi bi-envelope me-2"></i> 4 new messages
-                  <span class="float-end text-secondary fs-7">3 mins</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                  <i class="bi bi-people-fill me-2"></i> 8 friend requests
-                  <span class="float-end text-secondary fs-7">12 hours</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                  <i class="bi bi-file-earmark-fill me-2"></i> 3 new reports
-                  <span class="float-end text-secondary fs-7">2 days</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer"> See All Notifications </a>
-              </div>
-            </li>
-            <!--end::Notifications Dropdown Menu-->
-
-            <!--begin::Language Menu-->
-            <!-- Markup only: swapping the locale is the application's job. The docs
-           Recipes page shows how to wire this to a real locale switch. -->
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link"
-                href="#"
-                id="language-menu"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                aria-label="Change language, current language English"
-              >
-                <i class="bi bi-translate" aria-hidden="true"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="language-menu">
-                <li>
-                  <a class="dropdown-item active" href="#" hreflang="en" aria-current="true">
-                    English
-                    <i class="bi bi-check-lg ms-2" aria-hidden="true"></i>
-                  </a>
-                </li>
-                <li><a class="dropdown-item" href="#" hreflang="es">Español</a></li>
-                <li><a class="dropdown-item" href="#" hreflang="fr">Français</a></li>
-                <li><a class="dropdown-item" href="#" hreflang="de">Deutsch</a></li>
-                <li><a class="dropdown-item" href="#" hreflang="ar">العربية</a></li>
-              </ul>
-            </li>
-            <!--end::Language Menu-->
+            
 
             <!--begin::Fullscreen Toggle-->
             <li class="nav-item">
@@ -299,9 +106,9 @@
                 <img
                   src="{{ asset('assets/admin/images/avatar.svg') }}"
                   class="user-image rounded-circle shadow"
-                  alt="Alexander Pierce"
+                  alt="{{ auth()->user()->name }}"
                 />
-                <span class="d-none d-xl-inline">Alexander Pierce</span>
+                <span class="d-none d-xl-inline">{{ auth()->user()->name }}</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!--begin::User Image-->
@@ -309,35 +116,20 @@
                   <img
                     src="{{ asset('assets/admin/images/avatar.svg') }}"
                     class="rounded-circle shadow"
-                    alt="Alexander Pierce"
+                    alt="{{ auth()->user()->name }}"
                   />
                   <p>
-                    Alexander Pierce - Web Developer
-                    <small>Member since Nov. 2023</small>
+                    {{ auth()->user()->name }}
+                    <small>{{ auth()->user()->email }}</small>
                   </p>
                 </li>
                 <!--end::User Image-->
-                <!--begin::Menu Body-->
-                <li class="user-body">
-                  <!--begin::Row-->
-                  <div class="row">
-                    <div class="col-4 text-center">
-                      <a href="#">Followers</a>
-                    </div>
-                    <div class="col-4 text-center">
-                      <a href="#">Sales</a>
-                    </div>
-                    <div class="col-4 text-center">
-                      <a href="#">Friends</a>
-                    </div>
-                  </div>
-                  <!--end::Row-->
-                </li>
-                <!--end::Menu Body-->
                 <!--begin::Menu Footer-->
                 <li class="user-footer">
-                  <a href="#" class="btn btn-outline-secondary">Profile</a>
-                  <a href="#" class="btn btn-outline-danger float-end">Sign out</a>
+                  <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger w-100">Sign out</button>
+                  </form>
                 </li>
                 <!--end::Menu Footer-->
               </ul>

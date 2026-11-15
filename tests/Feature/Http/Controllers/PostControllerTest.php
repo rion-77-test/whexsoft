@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Storage;
 uses(LazilyRefreshDatabase::class);
 
 test('posts can be created updated and deleted with featured media', function () {
+    $this->actingAsAdmin();
+
     $this->travelTo('2026-11-14 12:00:00');
     Storage::fake('public');
     $category = PostCategory::factory()->create();
@@ -70,6 +72,8 @@ test('posts can be created updated and deleted with featured media', function ()
 });
 
 test('post pages render the image fallback when no image is uploaded', function () {
+    $this->actingAsAdmin();
+
     $post = Post::factory()->create();
 
     $this->get(route('admin.posts.index'))
@@ -84,6 +88,8 @@ test('post pages render the image fallback when no image is uploaded', function 
 });
 
 test('post content images are uploaded and attached to the post', function () {
+    $this->actingAsAdmin();
+
     Storage::fake('public');
     $category = PostCategory::factory()->create();
 
@@ -120,6 +126,8 @@ test('post content images are uploaded and attached to the post', function () {
 });
 
 test('post content image uploads reject non-image files', function () {
+    $this->actingAsAdmin();
+
     Storage::fake('public');
 
     $this->postJson(route('admin.posts.content-images.store'), [
@@ -131,6 +139,8 @@ test('post content image uploads reject non-image files', function () {
 });
 
 test('legacy post content is sanitized before it is rendered', function () {
+    $this->actingAsAdmin();
+
     $post = Post::factory()->create([
         'content' => '<p>Visible <em>formatting</em></p><script>alert(1)</script><img src="x" onerror="alert(1)"><a href="javascript:alert(1)">Unsafe link</a>',
     ]);

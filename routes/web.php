@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -35,11 +36,15 @@ Route::get('/privacy-policy', [PageController::class, 'privacy'])->name('privacy
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
 
 // Admin
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-});
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', function () {
+        // return view('admin.dashboard');
+        return redirect()->route('admin.dashboard');
+    });
+    Route::get('dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
 
-Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('posts/content-images', [PostController::class, 'uploadContentImage'])
         ->name('posts.content-images.store');
     Route::resource('posts', PostController::class);
@@ -50,4 +55,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('service-categories', ServiceCategoryController::class);
     Route::resource('packages', PackageController::class);
     Route::resource('testimonials', TestimonialController::class);
+    Route::resource('users', AdminUserController::class);
 });
+
+require __DIR__.'/auth.php';

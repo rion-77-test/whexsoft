@@ -9,7 +9,7 @@
             <img alt="WhexSoft logo" class="h-8 w-auto object-contain shrink-0 rounded" src="{{ asset('assets/frontend/images/whexsoft-logo.jpg') }}" />
             <div class="flex flex-col min-w-0">
                 <span class="font-title-md text-title-md text-text-primary tracking-tight">WhexSoft</span>
-                <span class="hidden min-[380px]:block font-label-md text-label-md text-text-muted uppercase tracking-wider">Dhaka Studio</span>
+                {{-- <span class="hidden min-[380px]:block font-label-md text-label-md text-text-muted uppercase tracking-wider">website agency</span> --}}
             </div>
         </a>
         <nav class="hidden lg:flex items-center gap-8" aria-label="প্রধান মেনু">
@@ -24,8 +24,8 @@
                 <span class="material-symbols-outlined text-[18px]">call</span>
                 <span>০১৩৩৫-১৯৮৮৫৯</span>
             </a>
-            <button id="theme-toggle" type="button" class="w-11 h-11 rounded-lg bg-surface-card border border-border-subtle flex items-center justify-center text-text-primary transition-colors hover:bg-surface-card-elevated focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" aria-label="লাইট মোড" aria-pressed="false" title="লাইট মোড চালু করুন">
-                <span id="theme-toggle-icon" class="material-symbols-outlined" aria-hidden="true">light_mode</span>
+            <button id="theme-toggle" type="button" class="w-11 h-11 rounded-lg bg-surface-card border border-border-subtle flex items-center justify-center text-text-primary transition-colors hover:bg-surface-card-elevated focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" aria-label="থিম পরিবর্তন করুন" aria-pressed="true" title="ডার্ক মোড চালু করুন">
+                <span id="theme-toggle-icon" class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
             </button>
             <a class="hidden sm:inline-flex items-center justify-center h-10 px-space-md rounded-lg bg-primary-container text-text-inverse font-label-lg text-label-lg font-semibold hover:bg-primary-fixed-dim transition-all shadow-[0_0_20px_rgba(198,244,50,0.25)]" href="{{ route('contact') }}">ফ্রি পরামর্শ নিন</a>
             <button id="menu-toggle" type="button" class="lg:hidden w-11 h-11 rounded-lg bg-surface-card flex items-center justify-center text-text-primary" aria-expanded="false" aria-controls="mobile-menu" aria-label="মেনু খুলুন">

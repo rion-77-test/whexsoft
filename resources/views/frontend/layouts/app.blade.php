@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="bn" data-theme="dark">
+<html lang="bn" data-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,7 +14,7 @@
     </script>
     <title>@yield('title', 'WhexSoft - Dhaka Studio | ডিজিটাল ও ওয়েব ডেভেলপমেন্ট এজেন্সি')</title>
     <meta name="description" content="@yield('description', 'আপনার ব্যবসার জন্য এমন ওয়েবসাইট, যা ফলাফল এনে দেয়।')" />
-    <meta name="theme-color" content="#070A0E" id="theme-color-meta" />
+    <meta name="theme-color" content="#ffffff" id="theme-color-meta" />
     <link rel="canonical" href="{{ url()->current() }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="@yield('title', 'WhexSoft - Dhaka Studio')" />

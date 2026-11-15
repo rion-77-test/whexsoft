@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 uses(LazilyRefreshDatabase::class);
 
 test('project categories can be created updated and deleted', function () {
+    $this->actingAsAdmin();
+
     $this->post(route('admin.project-categories.store'), [
         'name' => 'Web Development',
         'slug' => 'web-development',
@@ -47,6 +49,8 @@ test('project categories can be created updated and deleted', function () {
 });
 
 test('project categories cannot be deleted while projects use them', function () {
+    $this->actingAsAdmin();
+
     $category = ProjectCategory::factory()->create();
     Project::factory()->for($category, 'projectCategory')->create();
 

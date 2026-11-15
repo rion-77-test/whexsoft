@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 uses(LazilyRefreshDatabase::class);
 
 test('post categories can be created updated and renamed for their posts', function () {
+    $this->actingAsAdmin();
+
     $this->post(route('admin.post-categories.store'), [
         'name' => 'News',
         'slug' => 'news',
@@ -40,6 +42,8 @@ test('post categories can be created updated and renamed for their posts', funct
 });
 
 test('post categories cannot be deleted while posts use them', function () {
+    $this->actingAsAdmin();
+
     $category = PostCategory::factory()->create();
     Post::factory()->create(['category' => $category->name]);
 
@@ -51,6 +55,8 @@ test('post categories cannot be deleted while posts use them', function () {
 });
 
 test('unused post categories can be deleted', function () {
+    $this->actingAsAdmin();
+
     $category = PostCategory::factory()->create();
 
     $this->delete(route('admin.post-categories.destroy', $category))

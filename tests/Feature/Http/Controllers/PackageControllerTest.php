@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 uses(LazilyRefreshDatabase::class);
 
 test('packages can be created updated and deleted', function () {
+    $this->actingAsAdmin();
+
     $service = Service::factory()->create();
 
     $this->post(route('admin.packages.store'), [

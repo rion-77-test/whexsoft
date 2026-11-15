@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 uses(LazilyRefreshDatabase::class);
 
 test('testimonials can be created updated and deleted with media', function () {
+    $this->actingAsAdmin();
+
     Storage::fake('public');
 
     $this->post(route('admin.testimonials.store'), [
@@ -54,6 +56,8 @@ test('testimonials can be created updated and deleted with media', function () {
 });
 
 test('testimonial pages render the fallback photo when none has been uploaded', function () {
+    $this->actingAsAdmin();
+
     $testimonial = Testimonial::factory()->create();
 
     $this->get(route('admin.testimonials.show', $testimonial))

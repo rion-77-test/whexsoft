@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Storage;
 uses(LazilyRefreshDatabase::class);
 
 test('projects can be created updated and deleted with media', function () {
+    $this->actingAsAdmin();
+
     Storage::fake('public');
     $category = ProjectCategory::factory()->create();
 
@@ -67,6 +69,8 @@ test('projects can be created updated and deleted with media', function () {
 });
 
 test('project pages render the fallback image when no image has been uploaded', function () {
+    $this->actingAsAdmin();
+
     $project = Project::factory()->create();
 
     $this->get(route('admin.projects.index'))
