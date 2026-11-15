@@ -1,5 +1,15 @@
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
     <div class="sidebar-wrapper">
+        <div class="sidebar-brand">
+            <a href="{{ url('/admin/dashboard') }}" class="brand-link">
+                <img
+                    src="{{ asset('assets/frontend/images/whexsoft-logo.jpg') }}"
+                    alt="WhexSoft logo"
+                    class="brand-image shadow"
+                />
+                <span class="brand-text fw-light">WhexSoft</span>
+            </a>
+        </div>
         <nav class="mt-2" aria-label="Admin navigation">
             <ul class="nav sidebar-menu flex-column" id="navigation">
                 <li class="nav-item">
@@ -28,6 +38,34 @@
                         class="nav-link {{ request()->routeIs('admin.project-categories.*') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-tags"></i>
                         <p>Project Categories</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.services.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.services.*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-gear"></i>
+                        <p>Services</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.service-categories.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.service-categories.*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-diagram-3"></i>
+                        <p>Service Categories</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.packages.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.packages.*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-box-seam"></i>
+                        <p>Packages</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.testimonials.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-chat-quote"></i>
+                        <p>Testimonials</p>
                     </a>
                 </li>
             </ul>

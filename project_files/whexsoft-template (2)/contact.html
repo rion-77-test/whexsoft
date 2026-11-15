@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="dark" lang="bn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>যোগাযোগ - WhexSoft</title>
+<meta name="description" content="ফ্রি পরামর্শের জন্য আমাদের সাথে যোগাযোগ করুন।"/>
+<meta name="theme-color" content="#070A0E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&family=Anek+Bangla:wght@400..800&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="text-slate-100 font-sans antialiased min-h-screen selection:bg-primary-fixed selection:text-text-inverse bg-ambient" data-page="contact">
+<!-- Site header (shared across pages: keep in sync) -->
+<header class="fixed top-0 w-full z-50 bg-canvas-base/85 backdrop-blur-xl border-b border-border-subtle" id="site-header">
+  <div class="h-20 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 flex items-center justify-between gap-space-md">
+    <a class="flex items-center gap-2.5 sm:gap-3 min-w-0" href="index.html" aria-label="WhexSoft হোম">
+      <img alt="WhexSoft logo" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/ALJJyrB-xA2T7kXBYgfQN956FLr1QuzAEH4HCasCdY1knbCZaRqIozJd-IUeyM_y9u_bLVJA1cAL_u2g51td7YnYP61h0ugcUT7ZO68D53XrUwBTczcY0aul1s4JOHarLk1uRyoYk2Hu0AB_bkTmZo9ylKXl4CcVM2VSO3STJvzZdQmNnG1wB0JaHTRZfKvm73XEBITaBuPQZwMbfPJgHsoj2cPej53CLANarvYJxNJBpeYR7m6Oy9SjR9SEaXM"/>
+      <div class="flex flex-col min-w-0"><span class="font-title-md text-title-md text-text-primary tracking-tight">WhexSoft</span><span class="hidden min-[380px]:block font-label-md text-label-md text-text-muted uppercase tracking-wider">Dhaka Studio</span></div>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8" aria-label="প্রধান মেনু"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" href="index.html">হোম</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" href="services.html">সার্ভিসসমূহ</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" href="portfolio.html">আমাদের কাজ</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" href="pricing.html">প্যাকেজ ও মূল্য</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" href="blog.html">ব্লগ</a></nav>
+    <div class="flex items-center gap-space-md shrink-0">
+      <a class="hidden xl:flex items-center gap-2 font-label-lg text-label-lg text-text-secondary hover:text-primary-container transition-colors" href="tel:01335198859"><span class="material-symbols-outlined text-[18px]">call</span><span>০১৩৩৫-১৯৮৮৫৯</span></a>
+      <a class="hidden sm:inline-flex items-center justify-center h-10 px-space-md rounded-lg bg-primary-container text-text-inverse font-label-lg text-label-lg font-semibold hover:bg-primary-fixed-dim transition-all shadow-[0_0_20px_rgba(198,244,50,0.25)]" href="contact.html">ফ্রি পরামর্শ নিন</a>
+      <button id="menu-toggle" type="button" class="lg:hidden w-11 h-11 rounded-lg bg-surface-card flex items-center justify-center text-text-primary" aria-expanded="false" aria-controls="mobile-menu" aria-label="মেনু খুলুন"><span class="material-symbols-outlined">menu</span></button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden lg:hidden bg-canvas-base border-t border-border-subtle max-h-[calc(100vh-5rem)] overflow-y-auto pb-space-md"><a class="block px-5 sm:px-8 py-3.5 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface" href="index.html">হোম</a><a class="block px-5 sm:px-8 py-3.5 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface" href="services.html">সার্ভিসসমূহ</a><a class="block px-5 sm:px-8 py-3.5 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface" href="portfolio.html">আমাদের কাজ</a><a class="block px-5 sm:px-8 py-3.5 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface" href="pricing.html">প্যাকেজ ও মূল্য</a><a class="block px-5 sm:px-8 py-3.5 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface" href="blog.html">ব্লগ</a>
+    <div class="px-5 sm:px-8 pt-3 flex flex-col gap-3"><a class="flex items-center justify-center h-12 rounded-lg bg-primary-container text-text-inverse font-label-lg text-label-lg font-semibold" href="contact.html">ফ্রি পরামর্শ নিন</a><a class="flex items-center justify-center gap-2 h-12 rounded-lg bg-surface-card text-text-primary font-label-lg text-label-lg" href="tel:01335198859"><span class="material-symbols-outlined text-[18px] text-primary-container">call</span>০১৩৩৫-১৯৮৮৫৯</a></div>
+  </div>
+</header>
+<main class="w-full relative overflow-x-clip"><section class="relative overflow-hidden lg:py-24 w-full pt-32 md:pt-40 pb-12 md:pb-16">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-primary-fixed/10 blur-[130px] rounded-full pointer-events-none -z-10"></div>
+<div class="max-w-7xl mx-auto flex flex-col items-center text-center w-full relative px-5 sm:px-8 lg:px-10">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-card border border-border-accent mb-6 shadow-md">
+<span class="material-symbols-outlined text-primary-fixed text-[18px]">support_agent</span>
+<span class="text-primary-fixed font-label-md uppercase tracking-wider">তাত্ক্ষণিক যোগাযোগ ও ফ্রি কোটেশন</span>
+</div>
+<h1 class="font-headline-lg text-text-primary max-w-4xl tracking-tight mb-6">
+        আপনার প্রজেক্ট নিয়ে আজই আমাদের <span class="text-primary-fixed underline decoration-primary-fixed/40 decoration-wavy decoration-2">বিশেষজ্ঞদের সাথে</span> কথা বলুন
+      </h1>
+<p class="font-body-lg text-text-secondary max-w-2xl leading-relaxed">
+        আমরা আপনার ব্যবসার লক্ষ্য শুনব এবং সর্বোচ্চ সাশ্রয়ী বাজেটে সেরা ওয়েব সলিউশন প্রস্তাব করব। ৩০ মিনিটের মধ্যে রেসপন্স নিশ্চিত।
+      </p>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12 w-full max-w-2xl">
+<div class="bg-surface-card/80 backdrop-blur-md p-4 rounded-xl shadow-sm text-center">
+<div class="font-headline-sm text-primary-fixed font-bold">৩০ মি.</div>
+<div class="font-caption text-text-muted mt-1">গড় প্রতিক্রিয়া সময়</div>
+</div>
+<div class="bg-surface-card/80 backdrop-blur-md p-4 rounded-xl shadow-sm text-center">
+<div class="font-headline-sm text-text-primary font-bold">১০০% ফ্রি</div>
+<div class="font-caption text-text-muted mt-1">টেকনিক্যাল অডিট ও গাইড</div>
+</div>
+<div class="bg-surface-card/80 backdrop-blur-md p-4 rounded-xl shadow-sm text-center col-span-2 md:col-span-1">
+<div class="font-headline-sm text-primary-fixed font-bold">২৪/৭</div>
+<div class="font-caption text-text-muted mt-1">জরুরি সাপোর্ট লাইন</div>
+</div>
+</div>
+</div>
+</section><section class="w-full relative py-12 md:py-16">
+<div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10"><div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-7 bg-surface-card rounded-2xl p-8 lg:p-10 shadow-xl relative overflow-hidden">
+<div class="absolute -top-12 -right-12 w-40 h-40 bg-primary-fixed/10 blur-[60px] rounded-full pointer-events-none"></div>
+<div class="flex items-center justify-between mb-8 pb-4">
+<div>
+<h2 class="font-headline-md text-text-primary">প্রজেক্টের বিবরণ পাঠান</h2>
+<p class="font-body-sm text-text-secondary mt-1">নিচের ফর্মটি পূরণ করুন, আমরা দ্রুত আপনার সাথে যোগাযোগ করব।</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed/10 text-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+</div>
+</div>
+<form class="flex flex-col gap-6" id="contactQuoteForm" onsubmit="event.preventDefault(); alert('ধন্যবাদ! আপনার অনুরোধটি সফলভাবে গৃহীত হয়েছে। আমাদের টিম ৩০ মিনিটের মধ্যে আপনার সাথে যোগাযোগ করবে।');">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="font-label-lg text-text-primary flex items-center gap-1" for="clientName">
+                আপনার নাম <span class="text-primary-fixed">*</span>
+</label>
+<input class="w-full h-[52px] bg-surface-default text-text-primary px-4 rounded-xl placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary-fixed/40 transition-all font-body-sm" id="clientName" placeholder="যেমন: মো. রফিকুল ইসলাম" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-lg text-text-primary flex items-center gap-1" for="clientPhone">
+                ফোন নম্বর / হোয়াটসঅ্যাপ <span class="text-primary-fixed">*</span>
+</label>
+<input class="w-full h-[52px] bg-surface-default text-text-primary px-4 rounded-xl placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary-fixed/40 transition-all font-body-sm" id="clientPhone" placeholder="০১XXXXXXXXX" required="" type="tel"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="font-label-lg text-text-primary" for="clientEmail">
+                ইমেইল ঠিকানা <span class="text-text-muted font-caption">(ঐচ্ছিক)</span>
+</label>
+<input class="w-full h-[52px] bg-surface-default text-text-primary px-4 rounded-xl placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary-fixed/40 transition-all font-body-sm" id="clientEmail" placeholder="name@company.com" type="email"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-lg text-text-primary flex items-center gap-1" for="serviceType">
+                ওয়েবসাইটের ধরন নির্বাচন করুন <span class="text-primary-fixed">*</span>
+</label>
+<select class="w-full h-[52px] bg-surface-default text-text-primary px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-fixed/40 transition-all font-body-sm cursor-pointer" id="serviceType" required="">
+<option class="text-text-muted" disabled="" selected="" value="">ওয়েবসাইটের ধরন বেছে নিন</option>
+<option value="ecommerce">ই-কমার্স ওয়েবসাইট (ফুল ফাংশনাল শপ)</option>
+<option value="landing">হাই-কনভার্টিং ল্যান্ডিং পেজ</option>
+<option value="corporate">কর্পোরেট / বিজনেস ওয়েবসাইট</option>
+<option value="clinic">ক্লিনিক ও ডায়াগনস্টিক পোর্টাল</option>
+<option value="custom">কাস্টম ওয়েব অ্যাপ্লিকেশন / SaaS</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-lg text-text-primary" for="budgetRange">আনুমানিক বাজেট</label>
+<select class="w-full h-[52px] bg-surface-default text-text-primary px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-fixed/40 transition-all font-body-sm cursor-pointer" id="budgetRange">
+<option value="basic">৫,৯৯৯ - ৯,৯৯৯ টাকা (স্টার্টার ল্যান্ডিং)</option>
+<option selected="" value="standard">১০,০০০ - ১৯,৯৯৯ টাকা (স্ট্যান্ডার্ড বিজনেস/ইকমার্স)</option>
+<option value="premium">২০,০০০+ টাকা (ফুল কাস্টম / এন্টারপ্রাইজ)</option>
+<option value="custom">আলোচনা সাপেক্ষে কাস্টম বাজেট</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-lg text-text-primary" for="projectDetails">প্রজেক্টের সংক্ষিপ্ত বিবরণ</label>
+<textarea class="w-full bg-surface-default text-text-primary p-4 rounded-xl placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary-fixed/40 transition-all font-body-sm resize-none" id="projectDetails" placeholder="আপনার ব্যবসার ধরন, প্রয়োজনীয় ফিচার বা ওয়েবসাইটের রেফারেন্স লিংক থাকলে লিখুন..." rows="4"></textarea>
+</div>
+<button class="w-full py-4 mt-2 bg-primary-fixed text-text-inverse font-headline-sm rounded-xl font-bold shadow-[0_0_24px_rgba(197,243,49,0.35)] hover:bg-primary-fixed-dim hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 group cursor-pointer" type="submit">
+<span>তাত্ক্ষণিক ফ্রি কোটেশন রিকোয়েস্ট পাঠান</span>
+<span class="material-symbols-outlined text-[22px] group-hover:translate-x-1 transition-transform">rocket_launch</span>
+</button>
+<div class="flex items-center justify-center gap-2 text-text-muted font-caption pt-2">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">lock</span>
+<span>আপনার তথ্য সম্পূর্ণ সুরক্ষিত। কোনো অতিরিক্ত হিডেন চার্জ নেই।</span>
+</div>
+</form>
+</div>
+<div class="lg:col-span-5 flex flex-col gap-6">
+<div class="bg-surface-card rounded-2xl p-6 lg:p-8 shadow-xl flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed/15 text-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">headset_mic</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-text-primary">সরাসরি কথা বলুন</h3>
+<p class="font-caption text-text-muted">তাত্ক্ষণিক কল বা মেসেজের মাধ্যমে প্রজেক্ট শুরু করুন</p>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<a class="flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-surface-card-elevated text-primary-fixed font-headline-sm hover:bg-surface-container-high transition-all shadow-sm" href="tel:01335198859">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span class="font-label-lg">কল করুন</span>
+</a>
+<a class="flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-success-whatsapp text-text-inverse font-headline-sm font-bold hover:brightness-110 transition-all shadow-md" href="https://wa.me/8801335198859" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+<span class="font-label-lg">হোয়াটসঅ্যাপ চ্যাট</span>
+</a>
+</div>
+<div class="flex flex-col gap-3.5 pt-2">
+<div class="flex items-center gap-3 p-3 rounded-lg bg-surface-default">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">phone_in_talk</span>
+<div class="flex flex-col">
+<span class="font-caption text-text-muted">অফিসিয়াল হটলাইন</span>
+<a class="font-label-lg text-text-primary hover:text-primary-fixed transition-colors" href="tel:01335198859">০১৩৩৫-১৯৮৮৫৯</a>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-lg bg-surface-default">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">mail</span>
+<div class="flex flex-col">
+<span class="font-caption text-text-muted">অফিসিয়াল ইমেইল</span>
+<a class="font-label-lg text-text-primary hover:text-primary-fixed transition-colors" href="mailto:contact.whexsoft@gmail.com">contact.whexsoft@gmail.com</a>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-card rounded-2xl p-6 lg:p-8 shadow-xl flex flex-col gap-4">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed/15 text-primary-fixed flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[22px]">location_on</span>
+</div>
+<div>
+<h4 class="font-title-md text-text-primary">হেড অফিস ও স্টুডিও</h4>
+<p class="font-body-sm text-text-secondary mt-1">
+                সোনির আখড়া, যাত্রাবাড়ী, ঢাকা-১২৩৬, বাংলাদেশ
+              </p>
+</div>
+</div>
+<div class="flex items-start gap-3 pt-2">
+<div class="w-10 h-10 rounded-lg bg-surface-card-elevated text-text-muted flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[22px]">schedule</span>
+</div>
+<div>
+<h4 class="font-title-md text-text-primary">অফিস খোলা থাকার সময়</h4>
+<p class="font-body-sm text-text-secondary mt-1">
+                শনি - বৃহস্পতি: সকাল ১০:০০ - রাত ৮:০০
+              </p>
+<span class="inline-block mt-1 text-primary-fixed font-caption">শুক্রবার সাপ্তাহিক বন্ধ (অনলাইন হটলাইন চালু থাকে)</span>
+</div>
+</div>
+<div class="w-full mt-2 rounded-xl overflow-hidden shadow-inner relative group h-52 bg-surface-card-elevated">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-location="Sonir Akhra, Jatrabari, Dhaka, Bangladesh" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYfUKWL-MNZjFys64dbGO26-8DyJY6ZB1V_1nVBDpHEBFhIDWFSTHkKr8YWEM6l_jYkx72kjUPS9H2ROBtEjb8-wbhDAjy1Xr5bQuVZcotNrGiW4XsALoWslYFqhl0FpHU2MpCD1_TexJ9JZe-SOBKc5BLkzRc7qT0mZJOZ3KnWgJhZC3vA3aof_53879HTYUrCfyQR8-ypne6H7RRU8aN_WGg828-5Tjbbf14btp1')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-card via-transparent to-black/30 pointer-events-none"></div>
+<div class="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-surface-card/95 backdrop-blur-md flex items-center justify-between shadow-lg">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-fixed animate-ping"></span>
+<span class="font-label-lg text-text-primary">WhexSoft Dhaka Studio</span>
+</div>
+<a class="font-caption text-primary-fixed hover:underline flex items-center gap-1" href="https://maps.google.com/?q=Sonir+Akhra,+Jatrabari,+Dhaka" rel="noopener noreferrer" target="_blank">
+<span>ম্যাপে দেখুন</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4">
+<span class="font-caption text-text-muted uppercase tracking-wider">সোশ্যাল কানেক্ট:</span>
+<div class="flex items-center gap-2">
+<a class="w-9 h-9 rounded-lg bg-surface-card-elevated flex items-center justify-center text-text-secondary hover:text-primary-fixed hover:bg-primary-fixed/10 transition-all" href="https://facebook.com" rel="noopener noreferrer" target="_blank" title="Facebook">
+<span class="material-symbols-outlined text-[18px]">public</span>
+</a>
+<a class="w-9 h-9 rounded-lg bg-surface-card-elevated flex items-center justify-center text-text-secondary hover:text-primary-fixed hover:bg-primary-fixed/10 transition-all" href="https://linkedin.com/company/whexsoft" rel="noopener noreferrer" target="_blank" title="LinkedIn">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+</a>
+<a class="w-9 h-9 rounded-lg bg-surface-card-elevated flex items-center justify-center text-text-secondary hover:text-success-whatsapp hover:bg-success-whatsapp/10 transition-all" href="https://wa.me/8801335198859" rel="noopener noreferrer" target="_blank" title="WhatsApp">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</a>
+<a class="w-9 h-9 rounded-lg bg-surface-card-elevated flex items-center justify-center text-text-secondary hover:text-primary-fixed hover:bg-primary-fixed/10 transition-all" href="#" title="Messenger">
+<span class="material-symbols-outlined text-[18px]">forum</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+</section><section class="w-full relative py-12 md:py-16">
+<div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10"><div class="text-center mb-10">
+<h3 class="font-headline-md text-text-primary">জরুরি জিজ্ঞাসাসমূহ (FAQ)</h3>
+<p class="font-body-sm text-text-secondary mt-1">যোগাযোগ করার আগে সাধারণ প্রশ্নগুলোর চটজলদি উত্তর জেনে নিন</p>
+</div><div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-card p-6 rounded-xl shadow-md flex flex-col gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed/15 text-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">help</span>
+</div>
+<h4 class="font-title-md text-text-primary">কল বা কনসালটেশনে কি কোনো ফি আছে?</h4>
+<p class="font-body-sm text-text-secondary leading-relaxed">
+          একদমই না! প্রাথমিক কনসালটেশন, প্রজেক্ট প্ল্যানিং এবং কোটেশন নির্ধারণ সম্পূর্ণ ফ্রি। আপনি আলোচনা করার পর নিশ্চিন্তে সিদ্ধান্ত নিতে পারেন।
+        </p>
+</div>
+<div class="bg-surface-card p-6 rounded-xl shadow-md flex flex-col gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed/15 text-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+</div>
+<h4 class="font-title-md text-text-primary">কত দ্রুত বিস্তারিত কোটেশন পাব?</h4>
+<p class="font-body-sm text-text-secondary leading-relaxed">
+          ফর্ম সাবমিট করার পর আমাদের বিজনেস এনালিস্ট সাধারণত ৩০ মিনিট থেকে সর্বোচ্চ ২ ঘণ্টার মধ্যে আপনার স্পেসিফিকেশন অনুযায়ী পূর্ণাঙ্গ প্রস্তাবনা পাঠায়।
+        </p>
+</div>
+<div class="bg-surface-card p-6 rounded-xl shadow-md flex flex-col gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed/15 text-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+<h4 class="font-title-md text-text-primary">কাজ শুরু করার নিয়ম কী?</h4>
+<p class="font-body-sm text-text-secondary leading-relaxed">
+          প্রজেক্টের স্কোপ চূড়ান্ত হওয়ার পর প্রাথমিক ৩০% অ্যাডভান্স পেমেন্টেই কাজ শুরু হয়। বাকি টাকা ডেভেলপমেন্ট ও লাইভ ডেলিভারির পর পরিশোধ করতে পারবেন।
+        </p>
+</div>
+</div></div>
+
+</section><section class="w-full relative py-12 md:py-16">
+<div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10"><div class="bg-gradient-to-r from-surface-card-elevated via-surface-card to-surface-card-elevated p-8 lg:p-12 rounded-3xl shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="absolute -left-16 -top-16 w-60 h-60 bg-primary-fixed/10 blur-[80px] pointer-events-none rounded-full"></div>
+<div class="flex flex-col gap-2 max-w-xl text-center md:text-left">
+<span class="font-label-md text-primary-fixed uppercase tracking-wider">দ্রুত এগিয়ে যান</span>
+<h3 class="font-headline-md text-text-primary">
+          দেরি না করে আজই আপনার সেলস বৃদ্ধি শুরু করুন
+        </h3>
+<p class="font-body-sm text-text-secondary">
+          আমাদের দক্ষ ডেভেলপার ও ডিজাইনার দল আপনার স্বপ্নকে ডিজিটাল বাস্তবতায় রূপ দিতে প্রস্তুত। বিশেষজ্ঞ পরামর্শ সম্পূর্ণ ফ্রি!
+        </p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full sm:w-auto">
+<a class="w-full sm:w-auto px-8 py-4 bg-primary-fixed text-text-inverse font-headline-sm font-bold rounded-xl shadow-[0_0_25px_rgba(197,243,49,0.3)] hover:bg-primary-fixed-dim hover:scale-105 active:scale-95 transition-all text-center flex items-center justify-center gap-2" href="tel:01335198859">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span>০১৩৩৫-১৯৮৮৫৯</span>
+</a>
+<a class="w-full sm:w-auto px-6 py-4 bg-surface-card-elevated text-text-primary font-headline-sm font-semibold rounded-xl hover:bg-surface-container-high transition-all text-center flex items-center justify-center gap-2" href="https://wa.me/8801335198859" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px] text-success-whatsapp">chat</span>
+<span>হোয়াটসঅ্যাপ মেসেজ</span>
+</a>
+</div>
+</div></div>
+</section></main>
+<footer class="w-full bg-surface-default pt-space-3xl pb-space-xl shadow-[0_-1px_12px_rgba(0,0,0,0.5)]"><div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter mb-space-2xl"><div class="lg:col-span-4 space-y-space-md"><div class="flex items-center gap-3"><img alt="logo.jpg" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrB-xA2T7kXBYgfQN956FLr1QuzAEH4HCasCdY1knbCZaRqIozJd-IUeyM_y9u_bLVJA1cAL_u2g51td7YnYP61h0ugcUT7ZO68D53XrUwBTczcY0aul1s4JOHarLk1uRyoYk2Hu0AB_bkTmZo9ylKXl4CcVM2VSO3STJvzZdQmNnG1wB0JaHTRZfKvm73XEBITaBuPQZwMbfPJgHsoj2cPej53CLANarvYJxNJBpeYR7m6Oy9SjR9SEaXM"/><span class="font-title-md text-title-md text-text-primary">WhexSoft</span></div><p class="font-body-sm text-body-sm text-text-secondary leading-relaxed pr-space-lg">আপনার ব্যবসার জন্য এমন ওয়েবসাইট, যা ফলাফল এনে দেয়। আমরা আধুনিক টেকনোলজি এবং কনভার্সন অপ্টিমাইজড ডিজাইনের মাধ্যমে ব্র্যান্ড তৈরি করি।</p><div class="flex items-center gap-space-sm pt-space-xs"><a class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-text-secondary hover:text-primary-container hover:bg-surface-card-elevated transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">public</span></a><a class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-text-secondary hover:text-primary-container hover:bg-surface-card-elevated transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">share</span></a><a class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-text-secondary hover:text-primary-container hover:bg-surface-card-elevated transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">forum</span></a></div></div><div class="lg:col-span-2 space-y-space-md"><h4 class="font-title-md text-title-md text-text-primary">কুইক লিংক</h4><ul class="space-y-space-xs"><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="index.html">হোম</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="about.html">আমাদের সম্পর্কে</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="portfolio.html">আমাদের কাজ</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="pricing.html">প্যাকেজ ও মূল্য</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="process.html">কাজের ধাপ</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="blog.html">ব্লগ</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="faq.html">এফএকিউ</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="contact.html">যোগাযোগ</a></li></ul></div><div class="lg:col-span-3 space-y-space-md"><h4 class="font-title-md text-title-md text-text-primary">সার্ভিসসমূহ</h4><ul class="space-y-space-xs"><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="service-ecommerce.html">ই-কমার্স সলিউশন</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="service-landing-page.html">কনভার্সন ল্যান্ডিং পেজ</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="service-corporate.html">কর্পোরেট ওয়েবসাইট</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="service-web-app.html">কাস্টম ওয়েব অ্যাপ</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="service-ui-ux.html">UI/UX ডিজাইন</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="service-maintenance.html">ওয়েবসাইট মেইনটেন্যান্স</a></li></ul></div><div class="lg:col-span-3 space-y-space-md"><h4 class="font-title-md text-title-md text-text-primary">যোগাযোগের ঠিকানা</h4><div class="space-y-space-sm font-body-sm text-body-sm text-text-secondary"><div class="flex items-start gap-space-xs"><span class="material-symbols-outlined text-[18px] text-primary-container shrink-0 mt-0.5">location_on</span><span>সোনির আখড়া, যাত্রাবাড়ী, ঢাকা-১২৩৬</span></div><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-primary-container shrink-0">call</span><a class="hover:text-primary-container transition-colors" href="tel:01335198859">০১৩৩৫-১৯৮৮৫৯</a></div><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-primary-container shrink-0">mail</span><a class="hover:text-primary-container transition-colors" href="mailto:contact.whexsoft@gmail.com">contact.whexsoft@gmail.com</a></div><div class="flex items-start gap-space-xs"><span class="material-symbols-outlined text-[18px] text-primary-container shrink-0 mt-0.5">schedule</span><span>শনি - বৃহস্পতি: সকাল ১০টা - রাত ৮টা</span></div></div></div></div><div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md font-caption text-caption text-text-muted"><p>© ২০২৬ WhexSoft। সর্বস্বত্ব সংরক্ষিত।</p><div class="flex items-center gap-space-lg"><a class="hover:text-text-primary transition-colors" href="privacy-policy.html">গোপনীয়তা নীতি</a><a class="hover:text-text-primary transition-colors" href="terms.html">শর্তাবলী</a><a class="hover:text-text-primary transition-colors" href="index.html">সাইটম্যাপ</a></div></div></div></footer>
+<div class="fixed bottom-6 right-6 z-50 flex items-center gap-3"><a class="hidden sm:flex items-center gap-2 h-12 px-space-md rounded-full bg-surface-card-elevated text-text-primary font-label-md text-label-md shadow-[0_4px_24px_rgba(0,0,0,0.6)] hover:bg-surface-bright transition-all" href="tel:01335198859"><span class="material-symbols-outlined text-[18px] text-primary-container">call</span><span>সরাসরি কথা বলুন: ০১৩৩৫-১৯৮৮৫৯</span></a><a class="w-14 h-14 rounded-full bg-success-whatsapp text-white flex items-center justify-center shadow-[0_4px_24px_rgba(37,211,102,0.4)] hover:scale-105 transition-transform" href="https://wa.me/8801335198859" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[28px]">chat</span></a></div>
+<script src="js/main.js" defer></script>
+</body>
+</html>

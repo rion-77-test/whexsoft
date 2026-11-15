@@ -37,6 +37,8 @@
                                 <dd class="col-sm-8">{{ $project->slug }}</dd>
                                 <dt class="col-sm-4">Category</dt>
                                 <dd class="col-sm-8">{{ $project->projectCategory?->name ?? '—' }}</dd>
+                                <dt class="col-sm-4">Related Service</dt>
+                                <dd class="col-sm-8">{{ $project->service?->title ?? '—' }}</dd>
                                 <dt class="col-sm-4">Client Type</dt>
                                 <dd class="col-sm-8">{{ $project->is_real_client ? 'Real Client' : 'Demo' }}</dd>
                                 <dt class="col-sm-4">Featured</dt>

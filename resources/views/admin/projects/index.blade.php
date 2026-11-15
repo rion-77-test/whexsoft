@@ -37,6 +37,7 @@
                                 <tr>
                                     <th>Project</th>
                                     <th>Category</th>
+                                    <th>Service</th>
                                     <th>Client Type</th>
                                     <th>Featured</th>
                                     <th>Status</th>
@@ -58,6 +59,7 @@
                                             </div>
                                         </td>
                                         <td>{{ $project->projectCategory?->name ?? '—' }}</td>
+                                        <td>{{ $project->service?->title ?? '—' }}</td>
                                         <td>
                                             <span class="badge {{ $project->is_real_client ? 'text-bg-primary' : 'text-bg-secondary' }}">
                                                 {{ $project->is_real_client ? 'Real Client' : 'Demo' }}
@@ -98,7 +100,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center text-secondary py-4">
+                                        <td colspan="8" class="text-center text-secondary py-4">
                                             No projects yet. Create your first project to get started.
                                         </td>
                                     </tr>

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Service;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer('frontend.partials.footer', function ($view): void {
+            $view->with('navServices', Service::query()
+                ->where('is_active', true)
+                ->orderBy('sort_order')
+                ->orderBy('title')
+                ->take(6)
+                ->get());
+        });
     }
 }

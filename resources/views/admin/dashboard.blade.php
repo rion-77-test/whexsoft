@@ -213,7 +213,7 @@
                                     <!-- /.direct-chat-infos -->
                                     <img
                                         class="direct-chat-img"
-                                        src="./assets/img/user1-128x128.jpg"
+                                        src="{{ asset('assets/admin/images/avatar.svg') }}"
                                         alt="message user image" />
                                     <!-- /.direct-chat-img -->
                                     <div class="direct-chat-text">
@@ -232,7 +232,7 @@
                                     <!-- /.direct-chat-infos -->
                                     <img
                                         class="direct-chat-img"
-                                        src="./assets/img/user3-128x128.jpg"
+                                        src="{{ asset('assets/admin/images/avatar.svg') }}"
                                         alt="message user image" />
                                     <!-- /.direct-chat-img -->
                                     <div class="direct-chat-text">You better believe it!</div>
@@ -249,7 +249,7 @@
                                     <!-- /.direct-chat-infos -->
                                     <img
                                         class="direct-chat-img"
-                                        src="./assets/img/user1-128x128.jpg"
+                                        src="{{ asset('assets/admin/images/avatar.svg') }}"
                                         alt="message user image" />
                                     <!-- /.direct-chat-img -->
                                     <div class="direct-chat-text">
@@ -268,7 +268,7 @@
                                     <!-- /.direct-chat-infos -->
                                     <img
                                         class="direct-chat-img"
-                                        src="./assets/img/user3-128x128.jpg"
+                                        src="{{ asset('assets/admin/images/avatar.svg') }}"
                                         alt="message user image" />
                                     <!-- /.direct-chat-img -->
                                     <div class="direct-chat-text">I would love to.</div>
@@ -285,7 +285,7 @@
                                         <a href="#">
                                             <img
                                                 class="contacts-list-img"
-                                                src="./assets/img/user1-128x128.jpg"
+                                                src="{{ asset('assets/admin/images/avatar.svg') }}"
                                                 alt="User Avatar" />
 
                                             <div class="contacts-list-info">
@@ -303,7 +303,7 @@
                                         <a href="#">
                                             <img
                                                 class="contacts-list-img"
-                                                src="./assets/img/user7-128x128.jpg"
+                                                src="{{ asset('assets/admin/images/avatar.svg') }}"
                                                 alt="User Avatar" />
 
                                             <div class="contacts-list-info">
@@ -321,7 +321,7 @@
                                         <a href="#">
                                             <img
                                                 class="contacts-list-img"
-                                                src="./assets/img/user3-128x128.jpg"
+                                                src="{{ asset('assets/admin/images/avatar.svg') }}"
                                                 alt="User Avatar" />
 
                                             <div class="contacts-list-info">
@@ -339,7 +339,7 @@
                                         <a href="#">
                                             <img
                                                 class="contacts-list-img"
-                                                src="./assets/img/user5-128x128.jpg"
+                                                src="{{ asset('assets/admin/images/avatar.svg') }}"
                                                 alt="User Avatar" />
 
                                             <div class="contacts-list-info">
@@ -357,7 +357,7 @@
                                         <a href="#">
                                             <img
                                                 class="contacts-list-img"
-                                                src="./assets/img/user6-128x128.jpg"
+                                                src="{{ asset('assets/admin/images/avatar.svg') }}"
                                                 alt="User Avatar" />
 
                                             <div class="contacts-list-info">
@@ -375,7 +375,7 @@
                                         <a href="#">
                                             <img
                                                 class="contacts-list-img"
-                                                src="./assets/img/user8-128x128.jpg"
+                                                src="{{ asset('assets/admin/images/avatar.svg') }}"
                                                 alt="User Avatar" />
 
                                             <div class="contacts-list-info">
@@ -469,3 +469,149 @@
     <!--end::App Content-->
 </main>
 @endsection
+
+@push('scripts')
+<!-- sortablejs -->
+<script
+  src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.7/Sortable.min.js"
+  crossorigin="anonymous"
+></script>
+<script>
+  (() => {
+    const sortable = document.querySelector('.connectedSortable');
+    if (!sortable || !globalThis.Sortable) {
+      return;
+    }
+
+    new Sortable(sortable, {
+      group: 'shared',
+      handle: '.card-header',
+    });
+
+    sortable.querySelectorAll('.card-header').forEach((cardHeader) => {
+      cardHeader.style.cursor = 'move';
+    });
+  })();
+</script>
+
+<!-- Chart.js demo charts -->
+<script>
+  (() => {
+    const { Chart } = globalThis;
+    const { areaFill } = globalThis.lteChartTheme ?? {};
+    if (!Chart || !areaFill) {
+      return;
+    }
+
+    const revenueChart = document.querySelector('#revenue-chart');
+    if (revenueChart) {
+      new Chart(revenueChart, {
+        type: 'line',
+        data: {
+          labels: ["Jan '23", "Feb '23", "Mar '23", "Apr '23", "May '23", "Jun '23", "Jul '23"],
+          datasets: [
+            {
+              label: 'Digital Goods',
+              data: [28, 48, 40, 19, 86, 27, 90],
+              borderColor: '#0d6efd',
+              backgroundColor: areaFill('#0d6efd'),
+              pointBackgroundColor: '#0d6efd',
+              fill: true,
+              tension: 0.4,
+            },
+            {
+              label: 'Electronics',
+              data: [65, 59, 80, 81, 56, 55, 40],
+              borderColor: '#20c997',
+              backgroundColor: areaFill('#20c997'),
+              pointBackgroundColor: '#20c997',
+              fill: true,
+              tension: 0.4,
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                title: ([item]) =>
+                  `${new Date(2023, item.dataIndex).toLocaleString('en', { month: 'long' })} 2023`,
+              },
+            },
+          },
+          scales: {
+            y: { beginAtZero: true },
+          },
+        },
+      });
+    }
+
+    const sparkline = (selector, data) => {
+      const canvas = document.querySelector(selector);
+      if (!canvas) {
+        return;
+      }
+
+      new Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: data.map((value, index) => index + 1),
+          datasets: [
+            {
+              data,
+              borderColor: '#DCE6EC',
+              backgroundColor: 'rgba(220, 230, 236, 0.3)',
+              pointBackgroundColor: '#DCE6EC',
+              fill: true,
+            },
+          ],
+        },
+        options: {
+          layout: { padding: { top: 2 } },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              displayColors: false,
+              callbacks: { title: () => '' },
+            },
+          },
+          scales: {
+            x: { display: false },
+            y: { display: false, min: 0 },
+          },
+        },
+      });
+    };
+
+    sparkline('#sparkline-1', [1000, 1200, 920, 927, 931, 1027, 819, 930, 1021]);
+    sparkline('#sparkline-2', [515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921]);
+    sparkline('#sparkline-3', [15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21]);
+  })();
+</script>
+
+<!-- jsvectormap -->
+<script
+  src="https://cdn.jsdelivr.net/npm/jsvectormap@1.7.0/dist/jsvectormap.min.js"
+  integrity="sha256-yjoBT8ZtgknE2gcA8yvWExzw8LsIAfj6/r/XAw889Qw="
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/jsvectormap@1.7.0/dist/maps/world.js"
+  integrity="sha256-3jwsIc9jvdlaTPxHelZqSxiVedrrJhV+jssQEAAiTt0="
+  crossorigin="anonymous"
+></script>
+<script>
+  (() => {
+    const worldMap = document.querySelector('#world-map');
+    if (!worldMap || !globalThis.jsVectorMap) {
+      return;
+    }
+
+    new jsVectorMap({
+      selector: '#world-map',
+      map: 'world',
+    });
+  })();
+</script>
+@endpush

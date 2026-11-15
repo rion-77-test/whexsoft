@@ -31,6 +31,9 @@
                             <x-admin.form-fields.select name="project_category_id" label="Category"
                                 :options="$categoryOptions" :value="$project->project_category_id"
                                 placeholder="Select a category" class="col-md-6" required />
+                            <x-admin.form-fields.select name="service_id" label="Related Service"
+                                :options="$services" :value="$project->service_id"
+                                placeholder="No related service" class="col-md-6" />
                             <x-admin.form-fields.input name="summary" label="Summary" :value="$project->summary"
                                 class="col-md-6" required />
                             <x-admin.form-fields.textarea name="description" label="Description"

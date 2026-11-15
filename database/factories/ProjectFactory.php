@@ -22,6 +22,7 @@ class ProjectFactory extends Factory
             'title' => fake()->sentence(),
             'slug' => fake()->unique()->slug(),
             'project_category_id' => ProjectCategory::factory(),
+            'service_id' => null,
             'summary' => fake()->sentence(),
             'description' => fake()->paragraphs(3, true),
             'live_url' => fake()->optional()->url(),

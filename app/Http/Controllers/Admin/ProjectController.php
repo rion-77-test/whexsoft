@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\ProjectCategory;
+use App\Models\Service;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -17,7 +19,7 @@ class ProjectController extends Controller
     public function index(): View
     {
         $projects = Project::query()
-            ->with(['projectCategory', 'media'])
+            ->with(['projectCategory', 'service', 'media'])
             ->orderBy('sort_order')
             ->latest()
             ->paginate(15);
@@ -31,8 +33,9 @@ class ProjectController extends Controller
     public function create(): View
     {
         $categories = ProjectCategory::query()->orderBy('name')->get();
+        $services = Service::query()->orderBy('title')->pluck('title', 'id')->all();
 
-        return view('admin.projects.create', compact('categories'));
+        return view('admin.projects.create', compact('categories', 'services'));
     }
 
     /**
@@ -60,7 +63,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project): View
     {
-        $project->load(['projectCategory', 'media']);
+        $project->load(['projectCategory', 'service', 'media']);
 
         return view('admin.projects.show', compact('project'));
     }
@@ -71,8 +74,9 @@ class ProjectController extends Controller
     public function edit(Project $project): View
     {
         $categories = ProjectCategory::query()->orderBy('name')->get();
+        $services = Service::query()->orderBy('title')->pluck('title', 'id')->all();
 
-        return view('admin.projects.edit', compact('project', 'categories'));
+        return view('admin.projects.edit', compact('project', 'categories', 'services'));
     }
 
     /**
@@ -124,6 +128,7 @@ class ProjectController extends Controller
                 Rule::unique('projects', 'slug')->ignore($project),
             ],
             'project_category_id' => ['required', 'integer', 'exists:project_categories,id'],
+            'service_id' => ['nullable', 'integer', 'exists:services,id'],
             'summary' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'live_url' => ['nullable', 'url:http,https', 'max:255'],

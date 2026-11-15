@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html class="dark" lang="bn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>প্যাকেজ ও মূল্য - WhexSoft</title>
+<meta name="description" content="আপনার বাজেট অনুযায়ী ওয়েবসাইট প্যাকেজ।"/>
+<meta name="theme-color" content="#070A0E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&family=Anek+Bangla:wght@400..800&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="bg-[#070a0e] text-[#F8FAFC] font-sans antialiased selection:bg-[#c5f331] selection:text-black relative min-h-screen bg-ambient-pricing" data-page="pricing">
+<!-- Site header (shared across pages: keep in sync) -->
+<header class="fixed top-0 w-full z-50 bg-canvas-base/85 backdrop-blur-xl border-b border-border-subtle" id="site-header">
+  <div class="h-20 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 flex items-center justify-between gap-space-md">
+    <a class="flex items-center gap-2.5 sm:gap-3 min-w-0" href="index.html" aria-label="WhexSoft হোম">
+      <img alt="WhexSoft logo" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/ALJJyrB-xA2T7kXBYgfQN956FLr1QuzAEH4HCasCdY1knbCZaRqIozJd-IUeyM_y9u_bLVJA1cAL_u2g51td7YnYP61h0ugcUT7ZO68D53XrUwBTczcY0aul1s4JOHarLk1uRyoYk2Hu0AB_bkTmZo9ylKXl4CcVM2VSO3STJvzZdQmNnG1wB0JaHTRZfKvm73XEBITaBuPQZwMbfPJgHsoj2cPej53CLANarvYJxNJBpeYR7m6Oy9SjR9SEaXM"/>
+      <div class="flex flex-col min-w-0"><span class="font-title-md text-title-md text-text-primary tracking-tight">WhexSoft</span><span class="hidden min-[380px]:block font-label-md text-label-md text-text-muted uppercase tracking-wider">Dhaka Studio</span></div>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8" aria-label="প্রধান মেনু"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" href="index.html">হোম</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" href="services.html">সার্ভিসসমূহ</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" href="portfolio.html">আমাদের কাজ</a><a aria-current="page" class="transition-colors text-primary-container font-semibold" href="pricing.html">প্যাকেজ ও মূল্য</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" href="blog.html">ব্লগ</a></nav>
+    <div class="flex items-center gap-space-md shrink-0">
+      <a class="hidden xl:flex items-center gap-2 font-label-lg text-label-lg text-text-secondary hover:text-primary-container transition-colors" href="tel:01335198859"><span class="material-symbols-outlined text-[18px]">call</span><span>০১৩৩৫-১৯৮৮৫৯</span></a>
+      <a class="hidden sm:inline-flex items-center justify-center h-10 px-space-md rounded-lg bg-primary-container text-text-inverse font-label-lg text-label-lg font-semibold hover:bg-primary-fixed-dim transition-all shadow-[0_0_20px_rgba(198,244,50,0.25)]" href="contact.html">ফ্রি পরামর্শ নিন</a>
+      <button id="menu-toggle" type="button" class="lg:hidden w-11 h-11 rounded-lg bg-surface-card flex items-center justify-center text-text-primary" aria-expanded="false" aria-controls="mobile-menu" aria-label="মেনু খুলুন"><span class="material-symbols-outlined">menu</span></button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden lg:hidden bg-canvas-base border-t border-border-subtle max-h-[calc(100vh-5rem)] overflow-y-auto pb-space-md"><a class="block px-5 sm:px-8 py-3.5 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface" href="index.html">হোম</a><a class="block px-5 sm:px-8 py-3.5 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface" href="services.html">সার্ভিসসমূহ</a><a class="block px-5 sm:px-8 py-3.5 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface" href="portfolio.html">আমাদের কাজ</a><a class="block px-5 sm:px-8 py-3.5 font-label-lg text-label-lg text-primary-container font-semibold" href="pricing.html">প্যাকেজ ও মূল্য</a><a class="block px-5 sm:px-8 py-3.5 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface" href="blog.html">ব্লগ</a>
+    <div class="px-5 sm:px-8 pt-3 flex flex-col gap-3"><a class="flex items-center justify-center h-12 rounded-lg bg-primary-container text-text-inverse font-label-lg text-label-lg font-semibold" href="contact.html">ফ্রি পরামর্শ নিন</a><a class="flex items-center justify-center gap-2 h-12 rounded-lg bg-surface-card text-text-primary font-label-lg text-label-lg" href="tel:01335198859"><span class="material-symbols-outlined text-[18px] text-primary-container">call</span>০১৩৩৫-১৯৮৮৫৯</a></div>
+  </div>
+</header>
+<main class="w-full relative overflow-x-clip">
+
+<section class="w-full relative pt-32 md:pt-40 pb-12 md:pb-16"><div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10"><div class="flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-2 text-xs font-mono tracking-wider uppercase text-slate-400">
+<span class="text-[#c5f331] font-semibold">WHEXSOFT</span>
+<span>/</span>
+<span class="text-slate-300">PRICING ARCHITECTURE</span>
+<span>/</span>
+<span class="text-white">২০২৬ রেট কার্ড</span>
+</div>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#111822] border border-white/10 text-slate-300 text-xs">
+<span class="w-2 h-2 rounded-full bg-[#c5f331] animate-pulse"></span>
+<span>১০০% ফিক্সড বাজেট • কোনো অতিরিক্ত হিডেন ফি নেই</span>
+</div>
+</div><div class="text-center max-w-4xl mx-auto">
+<div class="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-white/5 border border-[#c5f331]/30 text-[#c5f331] text-xs font-mono font-medium tracking-wide">
+<span>⚡</span>
+<span>১০০% ফিক্সড বাজেট • কোনো লুকানো চার্জ নেই</span>
+</div>
+<h1 class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+          স্বচ্ছ ও সাশ্রয়ী <span class="text-[#c5f331]">ওয়েব ডেভেলপমেন্ট প্যাকেজ</span>
+</h1>
+<p class="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          আপনার বাজেটের মধ্যেই পান হাই-কনভার্টিং প্রফেশনাল ওয়েবসাইট যা ব্যবসার সেলস সরাসরি বৃদ্ধি করবে।
+        </p>
+<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0d1410] border border-[#c5f331]/30 text-white text-xs sm:text-sm font-medium">
+<span class="material-symbols-outlined text-[#c5f331] text-[18px]">bolt</span>
+<span>৩-৫ কর্মদিবসে ডেলিভারি</span>
+</div>
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0d1410] border border-[#c5f331]/30 text-white text-xs sm:text-sm font-medium">
+<span class="material-symbols-outlined text-[#c5f331] text-[18px]">verified</span>
+<span>ফুল কোড ও ডোমেন ওনারশিপ</span>
+</div>
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0d1410] border border-[#c5f331]/30 text-white text-xs sm:text-sm font-medium">
+<span class="material-symbols-outlined text-[#25D366] text-[18px]">support_agent</span>
+<span>২৪/৭ ডেডিকেটেড টেক সাপোর্ট</span>
+</div>
+</div>
+</div></div></section><section class="w-full relative py-12 md:py-16"><div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10"><div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+<div class="relative rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 bg-[#0d131a] border border-white/10 hover:border-[#c5f331]/40 shadow-xl">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-xs font-mono uppercase tracking-wider text-slate-300 px-3 py-1 rounded-md bg-white/5 border border-white/10 font-semibold">টাইয়ার ০১</span>
+<span class="material-symbols-outlined text-slate-400">rocket_launch</span>
+</div>
+<h3 class="font-display text-2xl font-bold text-white">বেসিক ল্যান্ডিং পেজ</h3>
+<p class="text-sm text-[#c5f331] mt-1 font-medium">ফেসবুক পেজ সেলার ও বিজ্ঞাপনদাতাদের জন্য</p>
+<div class="my-6 p-5 rounded-xl bg-[#070b10] border border-white/5">
+<span class="text-xs uppercase tracking-wider text-slate-400 block font-semibold">শুরু মাত্র</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="text-4xl font-extrabold text-white">৳ ৫,৯৯৯</span>
+<span class="text-xs text-slate-400">/এককালীন</span>
+</div>
+<span class="text-xs text-slate-300 mt-2 block font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-[#c5f331]">schedule</span>
+                ডেলিভারি সময়: ২ থেকে ৩ দিন
+              </span>
+</div>
+<ul class="flex flex-col gap-3 my-6 text-sm text-slate-200">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>১টি হাই-কনভার্টিং ল্যান্ডিং পেজ আর্কিটেকচার</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>১০০% মোবাইল ও ট্যাব রেসপন্সিভ লেআউট</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>১-ক্লিক অর্ডার ফর্ম ও অটোমেটিক ইনভয়েস স্লিপ</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>ফেসবুক পিক্সেল ও Conversion API (CAPI) সেটআপ</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>সুপারফাস্ট লোডিং ও হাই-স্পিড অপটিমাইজেশন</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>ফ্রি এসইও মেটাডাটা ও স্পিড বেসিক সেটআপ</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>১ মাস ফ্রি টেকনিক্যাল সাপোর্ট ও মেইনটেন্যান্স</span>
+</li>
+</ul>
+</div>
+<div class="pt-4">
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-semibold transition-all border border-white/10" href="tel:01335198859">
+<span>এই প্যাকেজটি বেছে নিন</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="relative rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 lg:-translate-y-2 bg-gradient-to-b from-[#111e15] to-[#0c1510] border-2 border-[#c5f331] shadow-[0_0_36px_rgba(197,243,49,0.25)]">
+<div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#c5f331] text-[#070A0E] text-xs font-mono font-extrabold rounded-full uppercase tracking-wider shadow-[0_0_16px_rgba(197,243,49,0.6)] whitespace-nowrap">
+            সর্বাধিক জনপ্রিয় • RECOMMENDED
+          </div>
+<div>
+<div class="flex items-center justify-between mb-4 pt-1">
+<span class="text-xs font-mono uppercase tracking-wider text-[#c5f331] px-3 py-1 rounded-md bg-[#c5f331]/15 border border-[#c5f331]/40 font-bold">টাইয়ার ০২</span>
+<span class="material-symbols-outlined text-[#c5f331]">domain</span>
+</div>
+<h3 class="font-display text-2xl font-bold text-white">স্ট্যান্ডার্ড বিজনেস সাইট</h3>
+<p class="text-sm text-[#c5f331] mt-1 font-medium">কর্পোরেট প্রতিষ্ঠান, এজেন্সি ও ক্লিনিক</p>
+<div class="my-6 p-5 rounded-xl bg-[#070e0a] border border-[#c5f331]/30">
+<span class="text-xs uppercase tracking-wider text-slate-400 block font-semibold">শুরু মাত্র</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="text-4xl font-extrabold text-[#c5f331]">৳ ১২,৪৯৯</span>
+<span class="text-xs text-slate-400">/এককালীন</span>
+</div>
+<span class="text-xs text-slate-200 mt-2 block font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-[#c5f331]">schedule</span>
+                ডেলিভারি সময়: ৩ থেকে ৫ দিন
+              </span>
+</div>
+<ul class="flex flex-col gap-3 my-6 text-sm text-slate-100">
+<li class="flex items-start gap-2.5 font-medium">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>৫-৭টি আধুনিক ডায়নামিক পেজ (হোম, সার্ভিস, ইত্যাদি)</span>
+</li>
+<li class="flex items-start gap-2.5 font-medium">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>সহজ ইউজার-ফ্রেন্ডলি অ্যাডমিন প্যানেল</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>কন্টেন্ট ও ছবি নিজে যেকোনো সময় পরিবর্তন করার পূর্ণ স্বাধীনতা</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>অন-পেজ এসইও ও গুগল সার্চ কনসোল ইনডেক্সিং সেটআপ</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>প্রফেশনাল বিজনেস কাস্টম ইমেইল সেটআপ (info@yourdomain)</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>অ্যাপয়েন্টমেন্ট শিডিউলিং / কন্টাক্ট ফর্ম ও গুগল ম্যাপ</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>৩ মাস ফ্রি টেকনিক্যাল সাপোর্ট ও সিকিউরিটি ব্যাকআপ</span>
+</li>
+</ul>
+</div>
+<div class="pt-4">
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-[#c5f331] hover:bg-[#b0dc2b] text-[#070A0E] text-sm font-bold transition-all shadow-[0_0_24px_rgba(197,243,49,0.35)]" href="https://wa.me/8801335198859?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%A1%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A1%20%E0%A6%AC%E0%A6%BF%E0%A6%9C%E0%A6%A8%E0%A7%87%E0%A6%B8%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%AA%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%95%E0%A7%87%E0%A6%9C%E0%A6%9F%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%86%E0%A6%97%E0%A7%8D%E0%A6%B0%E0%A6%B9%E0%A7%80" rel="noopener noreferrer" target="_blank">
+<span>এই প্যাকেজটি বেছে নিন</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="relative rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 bg-[#0d131a] border border-white/10 hover:border-[#c5f331]/40 shadow-xl">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-xs font-mono uppercase tracking-wider text-slate-300 px-3 py-1 rounded-md bg-white/5 border border-white/10 font-semibold">টাইয়ার ০৩ • এন্টারপ্রাইজ</span>
+<span class="material-symbols-outlined text-slate-400">shopping_cart_checkout</span>
+</div>
+<h3 class="font-display text-2xl font-bold text-white">প্রিমিয়াম ই-কমার্স</h3>
+<p class="text-sm text-[#c5f331] mt-1 font-medium">ব্র্যান্ড শপ, ফ্যাশন ও গ্যাজেট স্টোর</p>
+<div class="my-6 p-5 rounded-xl bg-[#070b10] border border-white/5">
+<span class="text-xs uppercase tracking-wider text-slate-400 block font-semibold">শুরু মাত্র</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="text-4xl font-extrabold text-white">৳ ১৯,৯৯৯</span>
+<span class="text-xs text-slate-400">/এককালীন</span>
+</div>
+<span class="text-xs text-slate-300 mt-2 block font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-[#c5f331]">schedule</span>
+                ডেলিভারি সময়: ৫ থেকে ৭ দিন
+              </span>
+</div>
+<ul class="flex flex-col gap-3 my-6 text-sm text-slate-200">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>আনলিমিটেড প্রোডাক্ট ও ক্যাটাগরি আপলোড সিস্টেম</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>bKash, Nagad, কার্ড ও অনলাইন পেমেন্ট গেটওয়ে</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>পাঠাও ও স্টিডফাস্ট কুরিয়ার অটোমেশন ও ট্র্যাকিং</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>ইনভেন্টরি, ডিসকাউন্ট কুপন ও অটো ইনভয়েস জেনারেটর</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>কাস্টমার ড্যাশবোর্ড ও ইনস্ট্যান্ট SMS নোটিফিকেশন</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>অ্যাডভান্সড স্পিড অপটিমাইজেশন ও সিকিউরিটি</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331] shrink-0 mt-0.5">check_circle</span>
+<span>৬ মাস ফ্রি ডেডিকেটেড সাপোর্ট ও ম্যানেজার অ্যাসিস্ট্যান্স</span>
+</li>
+</ul>
+</div>
+<div class="pt-4">
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-semibold transition-all border border-white/10" href="https://wa.me/8801335198859?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%AE%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%AE%20%E0%A6%87-%E0%A6%95%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B8%20%E0%A6%AA%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%95%E0%A7%87%E0%A6%9C%20%E0%A6%B8%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%B0%E0%A7%8D%E0%A6%95%E0%A7%87%20%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87" rel="noopener noreferrer" target="_blank">
+<span>এই প্যাকেজটি বেছে নিন</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div></div></section><section class="w-full relative py-12 md:py-16"><div class="max-w-6xl mx-auto w-full relative px-5 sm:px-8 lg:px-10">
+<div class="mb-10 text-center max-w-2xl mx-auto">
+<span class="text-xs font-mono font-semibold text-[#c5f331] uppercase tracking-wider px-3.5 py-1 rounded-full bg-white/5 border border-[#c5f331]/20 inline-block mb-3">তুলনামূলক পর্যালোচনা</span>
+<h2 class="font-display text-3xl font-extrabold text-white">ফিচার সমূহের বিস্তারিত তুলনা</h2>
+<p class="text-slate-300 text-sm mt-2">আপনার প্রয়োজনীয় ফিচার ও ফাংশনালিটিগুলো পাশাপাশি যাচাই করে সঠিক সিদ্ধান্ত নিন।</p>
+</div>
+<div class="w-full overflow-x-auto rounded-2xl bg-[#0c131a] border border-white/10 shadow-2xl">
+<table class="w-full text-left border-collapse min-w-[700px]">
+<thead>
+<tr class="bg-white/5 border-b border-white/10">
+<th class="p-4 sm:p-5 text-sm sm:text-base font-bold text-white w-1/4">ফিচার সমূহ</th>
+<th class="p-4 sm:p-5 text-sm sm:text-base font-semibold text-slate-300 text-center w-1/4">বেসিক ল্যান্ডিং পেজ</th>
+<th class="p-4 sm:p-5 text-sm sm:text-base font-bold text-[#c5f331] text-center w-1/4 bg-[#c5f331]/10 border-x border-[#c5f331]/20">স্ট্যান্ডার্ড বিজনেস সাইট</th>
+<th class="p-4 sm:p-5 text-sm sm:text-base font-semibold text-slate-300 text-center w-1/4">প্রিমিয়াম ই-কমার্স</th>
+</tr>
+</thead>
+<tbody class="text-sm divide-y divide-white/5">
+<tr class="hover:bg-white/[0.02] transition-colors">
+<td class="p-4 font-medium text-white flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331]">layers</span>
+<span>পেজ সংখ্যা</span>
+</td>
+<td class="p-4 text-center text-slate-300">১টি কাস্টম পেজ</td>
+<td class="p-4 text-center font-bold text-white bg-[#c5f331]/5 border-x border-[#c5f331]/20">৫ - ৭টি ডাইনামিক পেজ</td>
+<td class="p-4 text-center text-slate-300">আনলিমিটেড প্রোডাক্ট পেজ</td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition-colors">
+<td class="p-4 font-medium text-white flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331]">devices</span>
+<span>মোবাইল রেসপন্সিভ</span>
+</td>
+<td class="p-4 text-center text-white"><span class="text-[#c5f331] font-medium">✓ ফুল রেসপন্সিভ</span></td>
+<td class="p-4 text-center font-bold text-white bg-[#c5f331]/5 border-x border-[#c5f331]/20"><span class="text-[#c5f331]">✓ পিক্সেল পারফেক্ট</span></td>
+<td class="p-4 text-center text-white"><span class="text-[#c5f331] font-medium">✓ অ্যাপ-লাইক এক্সপেরিয়েন্স</span></td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition-colors">
+<td class="p-4 font-medium text-white flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331]">dashboard_customize</span>
+<span>অ্যাডমিন প্যানেল</span>
+</td>
+<td class="p-4 text-center text-slate-500">—</td>
+<td class="p-4 text-center font-bold text-white bg-[#c5f331]/5 border-x border-[#c5f331]/20"><span class="text-[#c5f331]">✓ সহজ কন্টেন্ট ম্যানেজার</span></td>
+<td class="p-4 text-center text-white"><span class="text-[#c5f331] font-medium">✓ কমপ্লিট ই-কম ড্যাশবোর্ড</span></td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition-colors">
+<td class="p-4 font-medium text-white flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331]">payments</span>
+<span>পেমেন্ট গেটওয়ে</span>
+</td>
+<td class="p-4 text-center text-slate-400">ম্যানুয়াল COD</td>
+<td class="p-4 text-center text-slate-300 bg-[#c5f331]/5 border-x border-[#c5f331]/20">কাস্টম ইন্টিগ্রেশন</td>
+<td class="p-4 text-center font-bold text-white"><span class="text-[#c5f331]">✓ বিকাশ, নগদ ও কার্ড</span></td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition-colors">
+<td class="p-4 font-medium text-white flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331]">local_shipping</span>
+<span>কুরিয়ার ট্র্যাকিং</span>
+</td>
+<td class="p-4 text-center text-slate-500">—</td>
+<td class="p-4 text-center text-slate-500 bg-[#c5f331]/5 border-x border-[#c5f331]/20">—</td>
+<td class="p-4 text-center font-bold text-white"><span class="text-[#c5f331]">✓ পাঠাও ও স্টিডফাস্ট API</span></td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition-colors">
+<td class="p-4 font-medium text-white flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331]">search</span>
+<span>এসইও সেটআপ</span>
+</td>
+<td class="p-4 text-center text-slate-300">বেসিক মেটা ট্যাগ</td>
+<td class="p-4 text-center font-bold text-white bg-[#c5f331]/5 border-x border-[#c5f331]/20">অন-পেজ + সার্চ কনসোল</td>
+<td class="p-4 text-center text-slate-300">ফুল টেকনিক্যাল + স্কিমা</td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition-colors">
+<td class="p-4 font-medium text-white flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#c5f331]">headset_mic</span>
+<span>টেকনিক্যাল সাপোর্ট সময়কাল</span>
+</td>
+<td class="p-4 text-center text-slate-300">১ মাস ফ্রি সাপোর্ট</td>
+<td class="p-4 text-center font-bold text-[#c5f331] bg-[#c5f331]/5 border-x border-[#c5f331]/20">৩ মাস ফ্রি সাপোর্ট</td>
+<td class="p-4 text-center text-slate-300">৬ মাস ডেডিকেটেড সাপোর্ট</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></section><section class="w-full relative py-12 md:py-16"><div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10"><div class="relative rounded-2xl bg-gradient-to-r from-[#0d1612] via-[#122218] to-[#0d1612] p-6 sm:p-10 overflow-hidden shadow-2xl border border-[#c5f331]/30">
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-7 flex flex-col gap-3">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-[#c5f331]/30 rounded-full w-fit text-[#c5f331] font-mono text-xs uppercase tracking-widest font-semibold">
+<span>ENTERPRISE &amp; BESPOKE</span>
+</div>
+<h3 class="font-display text-2xl sm:text-4xl font-extrabold text-white">
+              বিশেষ কাস্টম রিকোয়ারমেন্ট প্রয়োজন?
+            </h3>
+<p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              আপনার ব্যবসার জন্য বিশেষ কাস্টম পোর্টাল, SaaS প্ল্যাটফর্ম বা যেকোনো জটিল ফিচার প্রয়োজন হলে আমাদের সিনিয়র আর্কিটেক্টদের সাথে সরাসরি কথা বলে কাস্টম কোটেশন নিন।
+            </p>
+<div class="mt-4 flex flex-wrap items-center gap-3">
+<a class="inline-flex items-center gap-2 text-white hover:text-[#c5f331] transition-colors bg-[#08100c] border border-white/10 hover:border-[#c5f331]/40 px-4 py-2.5 rounded-xl text-sm font-semibold" href="tel:01335198859">
+<span class="material-symbols-outlined text-[#c5f331] text-[20px]">phone_in_talk</span>
+<span>কল করুন: ০১৩৩৫-১৯৮৮৫৯</span>
+</a>
+<a class="inline-flex items-center gap-2 text-[#070A0E] bg-[#25D366] hover:bg-[#1fae53] transition-colors px-4 py-2.5 rounded-xl text-sm font-bold shadow-[0_0_18px_rgba(37,211,102,0.3)]" href="https://wa.me/8801335198859?text=%E0%A6%86%E0%A6%AE%E0%A6%BE%E0%A6%B0%20%E0%A6%8F%E0%A6%95%E0%A6%9F%E0%A6%BF%20%E0%A6%95%E0%A6%BE%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%AE%20%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%9C%E0%A7%87%E0%A6%95%E0%A7%8D%E0%A6%9F%20%E0%A6%A8%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A7%87%20%E0%A6%86%E0%A6%B2%E0%A7%8B%E0%A6%9A%E0%A6%A8%E0%A6%BE%20%E0%A6%95%E0%A6%B0%E0%A6%BE%E0%A6%B0%20%E0%A6%9B%E0%A6%BF%E0%A6%B2" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+<span>WhatsApp-এ সরাসরি কথা বলুন</span>
+</a>
+</div>
+</div>
+<div class="lg:col-span-5 bg-[#070C09]/95 border border-white/10 p-6 rounded-2xl shadow-xl">
+<h4 class="text-lg font-bold text-white">তাৎক্ষণিক কোটেশন রিকোয়েস্ট</h4>
+<p class="text-xs text-slate-400 mt-1 mb-4">আপনার প্রজেক্টের তথ্য দিন, আমরা ১ ঘণ্টার মধ্যে যোগাযোগ করব।</p>
+<form class="flex flex-col gap-3" onsubmit="event.preventDefault(); alert('ধন্যবাদ! আপনার অনুরোধটি গৃহীত হয়েছে। শীঘ্রই আমাদের প্রতিনিধি যোগাযোগ করবে।');">
+<input class="w-full bg-white/5 border border-white/10 text-white px-4 py-3 rounded-xl text-sm placeholder:text-slate-400 outline-none focus:border-[#c5f331] focus:ring-1 focus:ring-[#c5f331] transition-all" placeholder="আপনার নাম ও মোবাইল নাম্বার" required="" type="text"/>
+<select class="w-full bg-[#0a140f] border border-white/10 text-white px-4 py-3 rounded-xl text-sm outline-none focus:border-[#c5f331] focus:ring-1 focus:ring-[#c5f331] transition-all">
+<option class="bg-[#0a140f] text-white">প্রজেক্ট টাইপ: কাস্টম ওয়েব পোর্টাল</option>
+<option class="bg-[#0a140f] text-white">প্রজেক্ট টাইপ: মাল্টি-ভেন্ডর মার্কেটপ্লেস</option>
+<option class="bg-[#0a140f] text-white">প্রজেক্ট টাইপ: লার্নিং ম্যানেজমেন্ট (LMS)</option>
+<option class="bg-[#0a140f] text-white">প্রজেক্ট টাইপ: মোবাইল অ্যাপ বা SaaS</option>
+</select>
+<button class="w-full py-3 bg-[#c5f331] hover:bg-[#b0dc2b] text-[#070A0E] font-sans text-sm font-extrabold rounded-xl transition-all shadow-[0_0_20px_rgba(197,243,49,0.35)] mt-1" type="submit">
+                ফ্রি কোটেশন রিকোয়েস্ট পাঠান
+              </button>
+</form>
+</div>
+</div>
+</div></div></section><section class="w-full relative py-12 md:py-16"><div class="max-w-4xl mx-auto w-full relative px-5 sm:px-8 lg:px-10">
+<div class="text-center mb-10">
+<span class="text-xs font-mono font-semibold text-[#c5f331] uppercase tracking-wider px-3.5 py-1 rounded-full bg-white/5 border border-[#c5f331]/20 inline-block mb-3">সাধারণ প্রশ্নাবলী</span>
+<h2 class="font-display text-3xl font-extrabold text-white">সচরাচর জিজ্ঞাসিত প্রশ্নাবলী</h2>
+<p class="text-slate-300 text-sm mt-2">প্যাকেজ ও পেমেন্ট সংক্রান্ত সব স্বচ্ছ উত্তর এক নজরে</p>
+</div>
+<div class="flex flex-col gap-3.5" id="faq-container">
+<div class="bg-[#0d131a] border border-white/10 rounded-2xl p-5 shadow-lg transition-all">
+<button class="faq-toggle w-full flex items-center justify-between text-left gap-4 group" type="button">
+<span class="text-base font-bold text-white group-hover:text-[#c5f331] transition-colors">ওয়েবসাইট বানাতে কত সময় লাগে?</span>
+<span class="material-symbols-outlined text-[#c5f331] transition-transform duration-300">expand_less</span>
+</button>
+<div class="faq-content mt-3 pt-3 text-slate-300 text-sm leading-relaxed border-t border-white/5">
+<p>সাধারণত ল্যান্ডিং পেজ মাত্র <span class="text-[#c5f331] font-semibold">২ থেকে ৩ দিনের</span> মধ্যে ডেলিভারি দেওয়া হয়। প্রফেশনাল বিজনেস সাইট ৩-৫ দিন এবং ফুল ফিচারড ই-কমার্স ওয়েবসাইট তৈরি করতে ৫ থেকে ৭ কর্মদিবস সময় প্রয়োজন হয়। বিশেষ কাস্টম ফিচারের ক্ষেত্রে পরিধি বিবেচনায় সময় নির্ধারিত হয়।</p>
+</div>
+</div>
+<div class="bg-[#0d131a] border border-white/10 rounded-2xl p-5 shadow-lg transition-all">
+<button class="faq-toggle w-full flex items-center justify-between text-left gap-4 group" type="button">
+<span class="text-base font-bold text-white group-hover:text-[#c5f331] transition-colors">ডোমেইন ও হোস্টিং কি আপনারা প্রদান করেন?</span>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300">expand_more</span>
+</button>
+<div class="faq-content hidden mt-3 pt-3 text-slate-300 text-sm leading-relaxed border-t border-white/5">
+<p>হ্যাঁ, আপনার পছন্দমত .com বা যেকোনো এক্সটেনশন ডোমেইন এবং হাই-স্পিড SSD NVMe ক্লাউড হোস্টিং আমরা সেটআপ করে সরাসরি লাইভ করে দেই। আপনার আগে থেকে ডোমেইন বা হোস্টিং নেওয়া থাকলে আমরা বিনামূল্যে সাইট কানেক্ট করে দিব।</p>
+</div>
+</div>
+<div class="bg-[#0d131a] border border-white/10 rounded-2xl p-5 shadow-lg transition-all">
+<button class="faq-toggle w-full flex items-center justify-between text-left gap-4 group" type="button">
+<span class="text-base font-bold text-white group-hover:text-[#c5f331] transition-colors">আমি কি নিজে কনটেন্ট, ছবি ও প্রোডাক্ট পরিবর্তন করতে পারব?</span>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300">expand_more</span>
+</button>
+<div class="faq-content hidden mt-3 pt-3 text-slate-300 text-sm leading-relaxed border-t border-white/5">
+<p>হ্যাঁ, একশ ভাগ পারবেন! প্রজেক্ট ডেলিভারির সাথে আমরা আপনাকে সম্পূর্ণ অ্যাডমিন প্যানেল অ্যাক্সেস দিব এবং সাথে একটি সহজ <span class="text-[#c5f331] font-semibold">বাংলা ভিডিও টিউটোরিয়াল</span> প্রদান করব—যার মাধ্যমে আপনি নিজে সহজেই ছবি, দাম ও টেক্সট পরিবর্তন করতে পারবেন। কোনো কোডিং জানার প্রয়োজন নেই।</p>
+</div>
+</div>
+<div class="bg-[#0d131a] border border-white/10 rounded-2xl p-5 shadow-lg transition-all">
+<button class="faq-toggle w-full flex items-center justify-between text-left gap-4 group" type="button">
+<span class="text-base font-bold text-white group-hover:text-[#c5f331] transition-colors">পেমেন্টের নিয়ম ও নিরাপত্তা কেমন?</span>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300">expand_more</span>
+</button>
+<div class="faq-content hidden mt-3 pt-3 text-slate-300 text-sm leading-relaxed border-t border-white/5">
+<p>আমাদের প্রক্রিয়া ১০০% নিরাপদ ও স্বচ্ছ। কাজ শুরুর পূর্বে <span class="text-white font-semibold">৫০% অ্যাডভান্স</span> প্রদান করতে হয় এবং ওয়েবসাইটের সম্পূর্ণ কাজ সম্পন্ন করে আপনার রিভিউ ও টেস্টিং শেষে সন্তুষ্ট হলে বাকি <span class="text-[#c5f331] font-semibold">৫০% পেমেন্ট</span> পরিশোধ করে ফাইনাল হ্যান্ডওভার নিতে পারবেন।</p>
+</div>
+</div>
+</div>
+</div></section></main>
+<footer class="w-full bg-surface-default pt-space-3xl pb-space-xl shadow-[0_-1px_12px_rgba(0,0,0,0.5)]"><div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter mb-space-2xl"><div class="lg:col-span-4 space-y-space-md"><div class="flex items-center gap-3"><img alt="logo.jpg" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrB-xA2T7kXBYgfQN956FLr1QuzAEH4HCasCdY1knbCZaRqIozJd-IUeyM_y9u_bLVJA1cAL_u2g51td7YnYP61h0ugcUT7ZO68D53XrUwBTczcY0aul1s4JOHarLk1uRyoYk2Hu0AB_bkTmZo9ylKXl4CcVM2VSO3STJvzZdQmNnG1wB0JaHTRZfKvm73XEBITaBuPQZwMbfPJgHsoj2cPej53CLANarvYJxNJBpeYR7m6Oy9SjR9SEaXM"/><span class="font-title-md text-title-md text-text-primary">WhexSoft</span></div><p class="font-body-sm text-body-sm text-text-secondary leading-relaxed pr-space-lg">আপনার ব্যবসার জন্য এমন ওয়েবসাইট, যা ফলাফল এনে দেয়। আমরা আধুনিক টেকনোলজি এবং কনভার্সন অপ্টিমাইজড ডিজাইনের মাধ্যমে ব্র্যান্ড তৈরি করি।</p><div class="flex items-center gap-space-sm pt-space-xs"><a class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-text-secondary hover:text-primary-container hover:bg-surface-card-elevated transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">public</span></a><a class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-text-secondary hover:text-primary-container hover:bg-surface-card-elevated transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">share</span></a><a class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-text-secondary hover:text-primary-container hover:bg-surface-card-elevated transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">forum</span></a></div></div><div class="lg:col-span-2 space-y-space-md"><h4 class="font-title-md text-title-md text-text-primary">কুইক লিংক</h4><ul class="space-y-space-xs"><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="index.html">হোম</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="about.html">আমাদের সম্পর্কে</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="portfolio.html">আমাদের কাজ</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="pricing.html">প্যাকেজ ও মূল্য</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="process.html">কাজের ধাপ</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="blog.html">ব্লগ</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="faq.html">এফএকিউ</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="contact.html">যোগাযোগ</a></li></ul></div><div class="lg:col-span-3 space-y-space-md"><h4 class="font-title-md text-title-md text-text-primary">সার্ভিসসমূহ</h4><ul class="space-y-space-xs"><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="service-ecommerce.html">ই-কমার্স সলিউশন</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="service-landing-page.html">কনভার্সন ল্যান্ডিং পেজ</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="service-corporate.html">কর্পোরেট ওয়েবসাইট</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="service-web-app.html">কাস্টম ওয়েব অ্যাপ</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="service-ui-ux.html">UI/UX ডিজাইন</a></li><li class="leading-none"><a class="font-body-sm text-body-sm text-text-secondary hover:text-primary-container transition-colors" href="service-maintenance.html">ওয়েবসাইট মেইনটেন্যান্স</a></li></ul></div><div class="lg:col-span-3 space-y-space-md"><h4 class="font-title-md text-title-md text-text-primary">যোগাযোগের ঠিকানা</h4><div class="space-y-space-sm font-body-sm text-body-sm text-text-secondary"><div class="flex items-start gap-space-xs"><span class="material-symbols-outlined text-[18px] text-primary-container shrink-0 mt-0.5">location_on</span><span>সোনির আখড়া, যাত্রাবাড়ী, ঢাকা-১২৩৬</span></div><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-primary-container shrink-0">call</span><a class="hover:text-primary-container transition-colors" href="tel:01335198859">০১৩৩৫-১৯৮৮৫৯</a></div><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-primary-container shrink-0">mail</span><a class="hover:text-primary-container transition-colors" href="mailto:contact.whexsoft@gmail.com">contact.whexsoft@gmail.com</a></div><div class="flex items-start gap-space-xs"><span class="material-symbols-outlined text-[18px] text-primary-container shrink-0 mt-0.5">schedule</span><span>শনি - বৃহস্পতি: সকাল ১০টা - রাত ৮টা</span></div></div></div></div><div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md font-caption text-caption text-text-muted"><p>© ২০২৬ WhexSoft। সর্বস্বত্ব সংরক্ষিত।</p><div class="flex items-center gap-space-lg"><a class="hover:text-text-primary transition-colors" href="privacy-policy.html">গোপনীয়তা নীতি</a><a class="hover:text-text-primary transition-colors" href="terms.html">শর্তাবলী</a><a class="hover:text-text-primary transition-colors" href="index.html">সাইটম্যাপ</a></div></div></div></footer>
+<div class="fixed bottom-6 right-6 z-50 flex items-center gap-3"><a class="hidden sm:flex items-center gap-2 h-12 px-space-md rounded-full bg-surface-card-elevated text-text-primary font-label-md text-label-md shadow-[0_4px_24px_rgba(0,0,0,0.6)] hover:bg-surface-bright transition-all" href="tel:01335198859"><span class="material-symbols-outlined text-[18px] text-primary-container">call</span><span>সরাসরি কথা বলুন: ০১৩৩৫-১৯৮৮৫৯</span></a><a class="w-14 h-14 rounded-full bg-success-whatsapp text-white flex items-center justify-center shadow-[0_4px_24px_rgba(37,211,102,0.4)] hover:scale-105 transition-transform" href="https://wa.me/8801335198859" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[28px]">chat</span></a></div>
+<script src="js/main.js" defer></script>
+<script src="js/pricing.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Base ---------- */
+@layer base {
+  html, body { margin: 0; padding: 0; }
+  body {
+    overscroll-behavior-y: none;
+    -webkit-font-smoothing: antialiased;
+    background-color: #070A0E;
+    overflow-x: hidden;
+  }
+  html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #070A0E; }
+::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #c5f331; }
+
+/* ---------- Page background variants (apply on <body>) ---------- */
+.bg-ambient {
+  background-color: #070A0E;
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(35, 75, 25, 0.4) 0%, transparent 55%),
+    radial-gradient(circle at 90% 40%, rgba(20, 60, 30, 0.25) 0%, transparent 45%),
+    radial-gradient(circle at 10% 70%, rgba(30, 70, 20, 0.2) 0%, transparent 45%);
+  background-attachment: fixed;
+}
+.bg-ambient-lime {
+  background: radial-gradient(circle at 50% 0%, rgba(197, 243, 49, 0.08) 0%, transparent 60%) fixed, #070A0E;
+}
+.bg-ambient-pricing {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(197, 243, 49, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 80% 35%, rgba(37, 211, 102, 0.06) 0%, transparent 40%),
+    #070a0e;
+}
+
+/* ---------- Components ---------- */
+.filter-btn.active-tab {
+  background-color: #c5f331 !important;
+  color: #070A0E !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 20px rgba(197, 243, 49, 0.35) !important;
+  border-color: #c5f331 !important;
+}
+
+/* ---------- Mobile / touch ---------- */
+.filter-btn, .faq-toggle, summary { min-height: 44px; }
+.faq-toggle { padding-top: .25rem; padding-bottom: .25rem; }
+@media (max-width: 639px) {
+  html { -webkit-text-size-adjust: 100%; }
+  img, video { max-width: 100%; }
+  /* long Bangla/English words and URLs must never push the layout wider */
+  h1, h2, h3, p, li, a, span { overflow-wrap: anywhere; }
+}
+/* horizontally scrollable chip rows on phones instead of wrapping into tall blocks */
+.scroll-row { display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.scroll-row::-webkit-scrollbar { display: none; }
+
+input, select, textarea { min-width: 0; max-width: 100%; }
+html { scroll-padding-top: 8rem; }
+@media (max-width: 639px) {
+  /* keep the floating call/WhatsApp buttons from covering page content or the footer */
+  .fixed.bottom-6 { bottom: 1rem; right: 1rem; }
+}
