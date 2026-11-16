@@ -26,6 +26,7 @@ class ProjectFactory extends Factory
             'summary' => fake()->sentence(),
             'description' => fake()->paragraphs(3, true),
             'live_url' => fake()->optional()->url(),
+            'project_walkthrough_url' => null,
             'is_real_client' => true,
             'is_featured' => false,
             'is_published' => true,

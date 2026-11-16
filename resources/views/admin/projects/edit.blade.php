@@ -40,6 +40,9 @@
                                 :value="$project->description" class="col-12" rows="5" />
                             <x-admin.form-fields.input name="live_url" label="Live URL" type="url"
                                 :value="$project->live_url" class="col-md-6" />
+                            <x-admin.form-fields.input name="project_walkthrough_url"
+                                label="Project Walkthrough (YouTube URL)" type="url"
+                                :value="$project->project_walkthrough_url" class="col-md-6" />
                             <x-admin.form-fields.input name="sort_order" label="Sort Order" type="number"
                                 :value="$project->sort_order" class="col-md-6" min="0" max="65535" required />
                             <x-admin.form-fields.image name="image" label="Project Image"

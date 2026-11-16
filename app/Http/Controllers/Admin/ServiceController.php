@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\ServiceCategory;
+use App\Support\WebpImage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -49,7 +50,7 @@ class ServiceController extends Controller
         $service = Service::create($validated);
 
         if ($image !== null) {
-            $service->addMedia($image)->toMediaCollection('service-image');
+            $service->addMedia(WebpImage::convert($image))->toMediaCollection('service-image');
         }
 
         return redirect()
@@ -96,7 +97,7 @@ class ServiceController extends Controller
         $service->update($validated);
 
         if ($image !== null) {
-            $service->addMedia($image)->toMediaCollection('service-image');
+            $service->addMedia(WebpImage::convert($image))->toMediaCollection('service-image');
         } elseif ($removeImage) {
             $service->clearMediaCollection('service-image');
         }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\Testimonial;
+use App\Support\WebpImage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -47,7 +48,7 @@ class TestimonialController extends Controller
         $testimonial = Testimonial::create($validated);
 
         if ($photo !== null) {
-            $testimonial->addMedia($photo)->toMediaCollection('photo');
+            $testimonial->addMedia(WebpImage::convert($photo))->toMediaCollection('photo');
         }
 
         return redirect()
@@ -88,7 +89,7 @@ class TestimonialController extends Controller
         $testimonial->update($validated);
 
         if ($photo !== null) {
-            $testimonial->addMedia($photo)->toMediaCollection('photo');
+            $testimonial->addMedia(WebpImage::convert($photo))->toMediaCollection('photo');
         } elseif ($removePhoto) {
             $testimonial->clearMediaCollection('photo');
         }

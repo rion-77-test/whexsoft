@@ -9,10 +9,15 @@ use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 uses(LazilyRefreshDatabase::class);
 
-it('uses light mode as the default frontend theme', function () {
+it('uses one frontend theme and no longer serves a pricing page', function () {
     $this->get(route('home'))
         ->assertOk()
-        ->assertSee('<html lang="bn" data-theme="light">', false);
+        ->assertSee('<html lang="bn">', false)
+        ->assertDontSee('data-theme=')
+        ->assertDontSee('theme-toggle');
+
+    $this->get('/pricing')
+        ->assertNotFound();
 });
 
 it('lists and renders every service detail page from the template', function () {
@@ -69,6 +74,32 @@ it('renders service listing details from stored service data', function () {
         ->assertDontSee('project-ecommerce.jpg');
 });
 
+it('shows five services and translated fallback descriptions on the public pages', function () {
+    foreach (range(1, 6) as $position) {
+        Service::factory()->create([
+            'title' => 'Homepage service '.$position,
+            'slug' => $position === 1 ? 'ecommerce-website' : 'homepage-service-'.$position,
+            'short_description' => $position === 1 ? null : 'Stored service summary.',
+            'intro' => $position === 1 ? null : 'Stored service introduction.',
+            'content' => null,
+            'features' => [],
+            'sort_order' => $position,
+        ]);
+    }
+
+    $this->get(route('home'))
+        ->assertOk()
+        ->assertViewHas('services', fn ($services): bool => $services->count() === 5)
+        ->assertSeeText('আধুনিক প্রবৃদ্ধির জন্য ডিজিটাল সমাধান')
+        ->assertSeeText('Homepage service 1')
+        ->assertSeeText('Homepage service 5')
+        ->assertSeeText('বিক্রয় বাড়াতে আগ্রহী অনলাইন বিক্রেতাদের জন্য দ্রুত ও ব্যবহারবান্ধব ই-কমার্স স্টোর।');
+
+    $this->get(route('services.index'))
+        ->assertOk()
+        ->assertSeeText('বিক্রয় বাড়াতে আগ্রহী অনলাইন বিক্রেতাদের জন্য দ্রুত ও ব্যবহারবান্ধব ই-কমার্স স্টোর।');
+});
+
 it('renders only stored features steps and faqs on a service detail page', function () {
     $service = Service::factory()->create([
         'slug' => 'ecommerce-website',
@@ -90,7 +121,7 @@ it('renders only stored features steps and faqs on a service detail page', funct
         ->assertDontSee('project-ecommerce.jpg');
 });
 
-it('shows the lowest active package price in Bengali on the home and services banners', function () {
+it('shows the lowest active package price in Bengali on the services banner', function () {
     Package::factory()->create([
         'service_id' => null,
         'price_label' => 'Starts at $120',
@@ -109,13 +140,11 @@ it('shows the lowest active package price in Bengali on the home and services ba
         'is_active' => false,
     ]);
 
-    foreach ([route('home'), route('services.index')] as $url) {
-        $this->get($url)
-            ->assertOk()
-            ->assertSeeText('প্যাকেজের মূল্য শুরু $99 থেকে')
-            ->assertDontSeeText('Starts at $99')
-            ->assertDontSeeText('$10');
-    }
+    $this->get(route('services.index'))
+        ->assertOk()
+        ->assertSeeText('প্যাকেজের মূল্য শুরু $99 থেকে')
+        ->assertDontSeeText('Starts at $99')
+        ->assertDontSeeText('$10');
 });
 
 it('omits the starting-price line when active packages have no numeric price', function () {
@@ -129,14 +158,12 @@ it('omits the starting-price line when active packages have no numeric price', f
         'is_active' => false,
     ]);
 
-    foreach ([route('home'), route('services.index')] as $url) {
-        $this->get($url)
-            ->assertOk()
-            ->assertDontSeeText('প্যাকেজের মূল্য শুরু');
-    }
+    $this->get(route('services.index'))
+        ->assertOk()
+        ->assertDontSeeText('প্যাকেজের মূল্য শুরু');
 });
 
-it('shows only active general packages on the home page', function () {
+it('does not render a package section on the home page', function () {
     Package::factory()->create([
         'service_id' => null,
         'name' => 'General Starter',
@@ -158,10 +185,10 @@ it('shows only active general packages on the home page', function () {
 
     $this->get(route('home'))
         ->assertOk()
-        ->assertSeeText('আমাদের প্যাকেজসমূহ')
-        ->assertSeeText('General Starter')
-        ->assertSeeText('$250')
-        ->assertSeeText('Five pages')
+        ->assertDontSeeText('আমাদের প্যাকেজসমূহ')
+        ->assertDontSeeText('General Starter')
+        ->assertDontSeeText('$250')
+        ->assertDontSeeText('Five pages')
         ->assertDontSeeText('Service Package')
         ->assertDontSeeText('Inactive General');
 });
@@ -223,6 +250,29 @@ it('shows a single published project page and hides unpublished projects', funct
 
     $this->get(route('portfolio.show', $unpublishedProject))
         ->assertNotFound();
+});
+
+it('shows the project walkthrough section only when a YouTube link is set', function () {
+    $withWalkthrough = Project::factory()->create([
+        'slug' => 'walkthrough-project',
+        'project_walkthrough_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        'is_published' => true,
+    ]);
+
+    $this->get(route('portfolio.show', $withWalkthrough))
+        ->assertOk()
+        ->assertSeeText('প্রজেক্ট ওয়াকথ্রু')
+        ->assertSee('https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ', false);
+
+    $withoutWalkthrough = Project::factory()->create([
+        'slug' => 'no-walkthrough-project',
+        'project_walkthrough_url' => null,
+        'is_published' => true,
+    ]);
+
+    $this->get(route('portfolio.show', $withoutWalkthrough))
+        ->assertOk()
+        ->assertDontSeeText('প্রজেক্ট ওয়াকথ্রু');
 });
 
 it('shows the lowest active package price for the selected service', function () {

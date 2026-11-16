@@ -39,7 +39,9 @@ class ServiceCategory extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('category-image')->singleFile();
+        $this->addMediaCollection('category-image')
+            ->singleFile()
+            ->useFallbackUrl(asset('assets/admin/images/default-fallback-image.png'));
     }
 
     public function getImageUrlAttribute(): string

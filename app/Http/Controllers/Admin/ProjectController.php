@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\ProjectCategory;
 use App\Models\Service;
+use App\Support\WebpImage;
+use App\Support\YouTubeVideo;
+use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -50,7 +53,7 @@ class ProjectController extends Controller
         $project = Project::create($validated);
 
         if ($image !== null) {
-            $project->addMedia($image)->toMediaCollection('project-image');
+            $project->addMedia(WebpImage::convert($image))->toMediaCollection('project-image');
         }
 
         return redirect()
@@ -92,7 +95,7 @@ class ProjectController extends Controller
         $project->update($validated);
 
         if ($image !== null) {
-            $project->addMedia($image)->toMediaCollection('project-image');
+            $project->addMedia(WebpImage::convert($image))->toMediaCollection('project-image');
         } elseif ($removeImage) {
             $project->clearMediaCollection('project-image');
         }
@@ -132,6 +135,16 @@ class ProjectController extends Controller
             'summary' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'live_url' => ['nullable', 'url:http,https', 'max:255'],
+            'project_walkthrough_url' => [
+                'nullable',
+                'url:http,https',
+                'max:255',
+                function (string $attribute, mixed $value, Closure $fail): void {
+                    if (filled($value) && YouTubeVideo::videoId($value) === null) {
+                        $fail('The project walkthrough must be a valid YouTube video link.');
+                    }
+                },
+            ],
             'is_real_client' => ['required', 'boolean'],
             'is_featured' => ['required', 'boolean'],
             'is_published' => ['required', 'boolean'],

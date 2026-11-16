@@ -36,7 +36,9 @@ class Testimonial extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('photo')->singleFile();
+        $this->addMediaCollection('photo')
+            ->singleFile()
+            ->useFallbackUrl(asset('assets/admin/images/default-fallback-image.png'));
     }
 
     public function service(): BelongsTo

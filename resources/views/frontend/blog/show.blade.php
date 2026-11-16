@@ -1,279 +1,205 @@
-@extends('frontend.layouts.app')
-
-@section('title', $post->meta_title ?: $post->title.' | WhexSoft ব্লগ')
+@extends('frontend.layouts.app') @section('title', $post->meta_title ?: $post->title.' | WhexSoft ব্লগ')
 @section('description', $post->meta_description ?: ($post->excerpt ?: \Illuminate\Support\Str::limit(strip_tags((string) $post->content), 160)))
 @section('page', 'blog')
-@section('og_image', $post->getFirstMediaUrl('featured-image') ?: ($post->featured_image ?: asset('assets/frontend/images/blog-featured.jpg')))
-
-@push('scripts')
-    <script src="{{ asset('assets/frontend/js/blog-post.js') }}" defer></script>
-@endpush
-
-@section('content')
-@php
-    $blogImages = [
-        asset('assets/frontend/images/blog-featured.jpg'),
-        asset('assets/frontend/images/blog-1.jpg'),
-        asset('assets/frontend/images/blog-2.jpg'),
-        asset('assets/frontend/images/blog-3.jpg'),
-        asset('assets/frontend/images/blog-4.jpg'),
-        asset('assets/frontend/images/blog-5.jpg'),
-        asset('assets/frontend/images/blog-6.jpg'),
-        asset('assets/frontend/images/blog-cost.jpg'),
-        asset('assets/frontend/images/blog-comparison.jpg'),
-        asset('assets/frontend/images/blog-speed.jpg'),
-    ];
-
-    $content = (string) $post->content;
-    $toc = [];
-    if (preg_match_all('/<h2\b[^>]*>(.*?)<\/h2>/is', $content, $matches)) {
-        foreach ($matches[1] as $index => $heading) {
-            $toc[] = ['id' => 'section-'.($index + 1), 'title' => trim(strip_tags($heading))];
-        }
-        $counter = 0;
-        $content = preg_replace_callback('/<h2\b[^>]*>(.*?)<\/h2>/is', function ($match) use (&$counter) {
-            $counter++;
-            return '<h2 id="section-'.$counter.'" class="scroll-mt-28">'.$match[1].'</h2>';
-        }, $content);
-    }
-    $heroImage = $post->getFirstMediaUrl('featured-image') ?: ($post->featured_image ?: $blogImages[0]);
+@section('og_image', $post->getFirstMediaUrl('featured-image') ?: ($post->featured_image ?: asset('assets/frontend/images/blog-featured.jpg'))) @push('scripts')
+<script src="{{ asset('assets/frontend/js/blog-post.js') }}" defer></script>
+@endpush @section('content')
+@php $blogImages = [ asset('assets/frontend/images/blog-featured.jpg'), asset('assets/frontend/images/blog-1.jpg'), asset('assets/frontend/images/blog-2.jpg'), asset('assets/frontend/images/blog-3.jpg'), asset('assets/frontend/images/blog-4.jpg'), asset('assets/frontend/images/blog-5.jpg'), asset('assets/frontend/images/blog-6.jpg'), asset('assets/frontend/images/blog-cost.jpg'), asset('assets/frontend/images/blog-comparison.jpg'), asset('assets/frontend/images/blog-speed.jpg'), ]; $content = (string) $post->content; $toc = []; if (preg_match_all('/<h2\b[^ class="site-heading">]*>(.*?)<\/h2>/is', $content, $matches)) { foreach ($matches[1] as $index => $heading) { $toc[] = ['id' => 'section-'.($index + 1), 'title' => trim(strip_tags($heading))]; } $counter = 0; $content = preg_replace_callback('/<h2\b[^ class="site-heading">]*>(.*?)<\/h2>/is', function ($match) use (&$counter) { $counter++; return '<h2 id="section-'.$counter.'" class="site-style-scroll-mt-28 site-heading">'.$match[1].'</h2>'; }, $content); } $heroImage = $post->getFirstMediaUrl('featured-image') ?: ($post->featured_image ?: $blogImages[0]);
 @endphp
-
-<main class="w-full relative overflow-x-clip">
-    <div class="fixed top-20 left-0 w-full h-[3px] bg-surface-container z-40">
-        <div class="h-full bg-primary-container transition-all duration-150 w-0" id="readProgress"></div>
+<main class="w-100 position-relative site-effect-overflow-x-clip">
+    <div class="position-fixed site-position-top-20 start-0 w-100 site-dimension-h-arbitrary-3px site-surface-bg-surface-container site-position-z-40 bg-white">
+        <div class="h-100 bg-primary site-motion-transition-all site-motion-duration-150 site-dimension-w-0" id="readProgress"></div>
     </div>
-
-    <section class="relative w-full overflow-hidden bg-canvas-base pt-32 md:pt-40 pb-12 md:pb-16">
-        <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-primary-container/10 blur-[130px] rounded-full pointer-events-none -z-10"></div>
-        <div class="absolute top-1/3 -right-32 w-[420px] h-[420px] bg-primary-fixed-dim/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
-        <div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10">
-            <nav class="flex flex-wrap items-center gap-2 font-label-md text-label-md text-text-muted mb-space-md">
-                <a class="hover:text-primary-container transition-colors" href="{{ route('home') }}">হোম</a>
-                <span class="text-text-muted/60">/</span>
-                <a class="hover:text-primary-container transition-colors" href="{{ route('blog.index') }}">ব্লগ</a>
-                <span class="text-text-muted/60">/</span>
-                <span class="text-primary-container font-semibold">{{ $post->category ?: 'আর্টিকেল' }}</span>
+    <section class="position-relative w-100 overflow-hidden site-surface-bg-canvas-base site-spacing-pt-32 site-responsive-md-spacing-pt-40 pb-5 site-responsive-md-spacing-pb-16 site-section site-section--dark">
+        <div class="position-absolute site-style-top-40 start-50 translate-middle-x site-dimension-w-arbitrary-700px site-dimension-h-arbitrary-500px bg-primary bg-opacity-10 site-effect-blur-arbitrary-130px rounded-pill pe-none site-style-z-10"></div>
+        <div class="position-absolute site-position-top-1-opacity-3 site-style-right-32 site-dimension-w-arbitrary-420px site-dimension-h-arbitrary-420px site-surface-bg-primary-fixed-dim-opacity-5 site-effect-blur-arbitrary-120px rounded-pill pe-none site-style-z-10"></div>
+        <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
+            <nav class="d-flex flex-wrap align-items-center gap-2 site-type-font-label-md site-type-text-label-md text-body-secondary mb-3 text-secondary small fw-medium">
+                <a class="site-state-hover-color-text-primary-container site-motion-transition-colors site-accent-hover" href="{{ route('home') }}">হোম</a>
+                <span class="site-color-text-text-muted-opacity-60">/</span>
+                <a class="site-state-hover-color-text-primary-container site-motion-transition-colors site-accent-hover" href="{{ route('blog.index') }}">ব্লগ</a>
+                <span class="site-color-text-text-muted-opacity-60">/</span>
+                <span class="text-primary fw-semibold text-dark">{{ $post->category ?: 'আর্টিকেল' }}</span>
             </nav>
-            <div class="flex flex-wrap items-center gap-space-sm mb-space-md">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container/15 text-primary-container font-label-md text-label-md tracking-wider">
-                    <span class="material-symbols-outlined text-[16px]">article</span> আর্টিকেল
-                </span>
-                @if ($post->category)
-                    <span class="px-2.5 py-1 rounded-full bg-surface-card text-text-secondary font-label-md text-label-md">{{ $post->category }}</span>
-                @endif
-                <span class="text-text-muted text-caption font-caption hidden sm:inline-block">•</span>
-                <span class="text-text-muted font-caption text-caption flex items-center gap-1">
-                    <span class="material-symbols-outlined text-[15px]">schedule</span> পড়ার সময়: {{ $post->read_time }} মিনিট
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                <span class="d-inline-flex align-items-center gap-1-5 site-spacing-px-3 py-1 rounded-pill site-surface-bg-primary-container-opacity-15 text-primary site-type-font-label-md site-type-text-label-md site-type-tracking-wider text-dark small fw-medium site-accent-component">
+                    <span class="material-symbols-outlined fs-6">article</span> আর্টিকেল
+                </span> @if ($post->category)
+                <span class="site-spacing-px-2-5 py-1 rounded-pill site-surface-bg-surface-card text-body-secondary site-type-font-label-md site-type-text-label-md bg-white text-secondary small fw-medium">{{ $post->category }}</span> @endif
+                <span class="text-body-secondary site-type-text-caption site-type-font-caption d-none d-sm-inline-block text-secondary small fw-medium">•</span>
+                <span class="text-body-secondary site-type-font-caption site-type-text-caption d-flex align-items-center gap-1 text-secondary small fw-medium">
+                    <span class="material-symbols-outlined site-type-text-arbitrary-15px">schedule</span> পড়ার সময়: {{ $post->read_time }} মিনিট
                 </span>
             </div>
-            <h1 class="font-display-xl text-display-xl text-primary max-w-5xl tracking-tight mb-space-md leading-[1.15]">{{ $post->title }}</h1>
-            @if ($post->excerpt)
-                <p class="font-body-lg text-body-lg text-text-secondary max-w-4xl leading-relaxed mb-space-lg">{{ $post->excerpt }}</p>
-            @endif
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md py-space-md bg-surface-card/60 backdrop-blur-md px-space-md rounded-xl shadow-sm">
-                <div class="flex items-center gap-3">
-                    <div class="relative w-11 h-11 rounded-full overflow-hidden bg-primary-container/20 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-primary-container text-[24px]">terminal</span>
-                        <div class="absolute bottom-0 right-0 w-3 h-3 bg-success-whatsapp rounded-full ring-2 ring-surface-card"></div>
+            <h1 class="site-type-font-display-xl site-type-text-display-xl site-color-text-primary site-dimension-max-w-5xl site-type-tracking-tight mb-3 site-type-leading-arbitrary-1-15 site-heading text-white">{{ $post->title }}</h1> @if ($post->excerpt)
+            <p class="site-type-font-body-lg site-type-text-body-lg text-body-secondary site-dimension-max-w-4xl site-type-leading-relaxed mb-4 site-copy text-secondary">{{ $post->excerpt }}</p> @endif
+            <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 py-3 site-surface-bg-surface-card-opacity-60 site-effect-backdrop-blur-md px-3 rounded-4 site-elevation-shadow-sm bg-white">
+                <div class="d-flex align-items-center site-spacing-gap-3">
+                    <div class="position-relative site-dimension-w-11 site-dimension-h-11 rounded-pill overflow-hidden site-surface-bg-primary-container-opacity-20 d-flex align-items-center justify-content-center flex-shrink-0 site-accent-component">
+                        <span class="material-symbols-outlined text-primary fs-4 text-dark">terminal</span>
+                        <div class="position-absolute bottom-0 end-0 site-dimension-w-3 site-dimension-h-3 site-surface-bg-success-whatsapp rounded-pill site-border-ring-2 site-border-ring-surface-card"></div>
                     </div>
                     <div>
-                        <div class="flex items-center gap-2">
-                            <span class="font-title-md text-title-md text-primary leading-tight">WhexSoft টেক ও বিজনেস টিম</span>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="site-type-font-title-md site-type-text-title-md site-color-text-primary lh-sm text-white">WhexSoft টেক ও বিজনেস টিম</span>
                         </div>
-                        <p class="font-caption text-caption text-text-muted mt-0.5">প্রকাশিত: {{ optional($post->published_at)->format('d M Y') ?: '—' }}</p>
+                        <p class="site-type-font-caption site-type-text-caption text-body-secondary site-spacing-mt-0-5 site-copy text-secondary small fw-medium">প্রকাশিত: {{ optional($post->published_at)->format('d M Y') ?: '—' }}</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-2 shrink-0">
-                    <button class="h-9 px-3 rounded-lg bg-surface-container-high hover:bg-surface-bright text-text-primary font-label-md text-label-md flex items-center gap-1.5 transition-all shadow-sm" type="button" onclick="shareOnFB()">
-                        <span class="material-symbols-outlined text-[17px] text-[#1877F2]">share</span>
-                        <span class="hidden md:inline">ফেসবুক</span>
+                <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                    <button class="site-dimension-h-9 site-spacing-px-3 rounded-3 site-surface-bg-surface-container-high site-state-hover-surface-bg-surface-bright text-light site-type-font-label-md site-type-text-label-md d-flex align-items-center gap-1-5 site-motion-transition-all site-elevation-shadow-sm bg-white text-white small fw-medium" type="button" onclick="shareOnFB()">
+                        <span class="material-symbols-outlined site-type-text-arbitrary-17px site-color-text-arbitrary-hex-1877f2">share</span>
+                        <span class="d-none site-responsive-md-layout-inline">ফেসবুক</span>
                     </button>
-                    <a class="h-9 px-3 rounded-lg bg-surface-container-high hover:bg-surface-bright text-text-primary font-label-md text-label-md flex items-center gap-1.5 transition-all shadow-sm" href="https://wa.me/?text={{ urlencode($post->title.' — '.request()->url()) }}" rel="noopener noreferrer" target="_blank">
-                        <span class="material-symbols-outlined text-[17px] text-success-whatsapp">chat</span>
-                        <span class="hidden md:inline">হোয়াটসঅ্যাপ</span>
+                    <a class="site-dimension-h-9 site-spacing-px-3 rounded-3 site-surface-bg-surface-container-high site-state-hover-surface-bg-surface-bright text-light site-type-font-label-md site-type-text-label-md d-flex align-items-center gap-1-5 site-motion-transition-all site-elevation-shadow-sm bg-white text-white small fw-medium" href="https://wa.me/?text={{ urlencode($post->title.' — '.request()->url()) }}" rel="noopener noreferrer" target="_blank">
+                        <span class="material-symbols-outlined site-type-text-arbitrary-17px site-color-text-success-whatsapp">chat</span>
+                        <span class="d-none site-responsive-md-layout-inline">হোয়াটসঅ্যাপ</span>
                     </a>
-                    <button class="h-9 px-3 rounded-lg bg-surface-container-high hover:bg-surface-bright text-text-primary font-label-md text-label-md flex items-center gap-1.5 transition-all shadow-sm" id="copyBtn" type="button" onclick="copyArticleUrl()">
-                        <span class="material-symbols-outlined text-[17px] text-primary-container">link</span>
+                    <button class="site-dimension-h-9 site-spacing-px-3 rounded-3 site-surface-bg-surface-container-high site-state-hover-surface-bg-surface-bright text-light site-type-font-label-md site-type-text-label-md d-flex align-items-center gap-1-5 site-motion-transition-all site-elevation-shadow-sm bg-white text-white small fw-medium" id="copyBtn" type="button" onclick="copyArticleUrl()">
+                        <span class="material-symbols-outlined site-type-text-arbitrary-17px text-primary text-dark">link</span>
                         <span id="copyText">লিঙ্ক কপি</span>
                     </button>
                 </div>
             </div>
         </div>
     </section>
-
-    <section class="w-full bg-canvas-base relative py-8 md:py-12">
-        <div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10">
-            <div class="relative w-full rounded-2xl overflow-hidden shadow-2xl bg-surface-card">
-                <div class="absolute inset-0 bg-gradient-to-t from-canvas-base via-transparent to-transparent z-10"></div>
-                <img class="w-full h-[280px] md:h-[440px] lg:h-[500px] object-cover object-center" alt="{{ $post->title }}" src="{{ $heroImage }}" />
+    <section class="w-100 site-surface-bg-canvas-base position-relative site-spacing-py-8 py-md-5 site-section site-section--light">
+        <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
+            <div class="position-relative w-100 rounded-4 overflow-hidden site-elevation-shadow-2xl site-surface-bg-surface-card bg-white">
+                <div class="position-absolute top-0 end-0 bottom-0 start-0 site-surface-bg-gradient-to-t site-surface-from-canvas-base site-surface-via-transparent site-surface-to-transparent site-position-z-10 site-gradient-background"></div>
+                <img class="w-100 site-dimension-h-arbitrary-280px site-responsive-md-dimension-h-arbitrary-440px site-responsive-lg-dimension-h-arbitrary-500px object-fit-cover site-media-object-center" alt="{{ $post->title }}" src="{{ $heroImage }}" />
             </div>
         </div>
     </section>
-
-    <section class="w-full bg-canvas-base relative py-12 md:py-16">
-        <div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-                <article class="lg:col-span-8 flex flex-col space-y-space-xl">
-                    <div class="rounded-2xl bg-surface-card/90 shadow-xl p-space-lg relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-2 h-full bg-primary-container"></div>
-                        <div class="flex items-center gap-2.5 mb-space-sm">
-                            <span class="material-symbols-outlined text-primary-container text-[24px]">lightbulb</span>
-                            <h2 class="font-headline-sm text-headline-sm text-primary">এক নজরে</h2>
+    <section class="w-100 site-surface-bg-canvas-base position-relative py-5 site-responsive-md-spacing-py-16 site-section site-section--dark">
+        <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
+            <div class="d-grid site-layout-grid-cols-1 site-responsive-lg-layout-grid-cols-12 gap-4">
+                <article class="site-responsive-lg-layout-col-span-8 d-flex flex-column site-spacing-space-y-space-xl">
+                    <div class="rounded-4 site-surface-bg-surface-card-opacity-90 site-elevation-shadow-xl p-4 position-relative overflow-hidden bg-white">
+                        <div class="position-absolute top-0 start-0 site-dimension-w-2 h-100 bg-primary"></div>
+                        <div class="d-flex align-items-center gap-2-5 mb-2">
+                            <span class="material-symbols-outlined text-primary fs-4 text-dark">lightbulb</span>
+                            <h2 class="site-type-font-headline-sm site-type-text-headline-sm site-color-text-primary site-heading text-white">এক নজরে</h2>
                         </div>
-                        <p class="font-body-md text-body-md text-text-secondary leading-relaxed">{{ $post->excerpt ?: \Illuminate\Support\Str::limit(strip_tags($content), 220) }}</p>
+                        <p class="site-type-font-body-md site-type-text-body-md text-body-secondary site-type-leading-relaxed site-copy text-secondary">{{ $post->excerpt ?: \Illuminate\Support\Str::limit(strip_tags($content), 220) }}</p>
                     </div>
-
-                    <div class="article-content text-text-secondary leading-relaxed space-y-5 [&_h2]:font-headline-md [&_h2]:text-headline-md [&_h2]:text-primary [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-3 [&_h3]:font-headline-sm [&_h3]:text-headline-sm [&_h3]:text-primary [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-2 [&_p]:font-body-md [&_p]:text-body-md [&_p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-2 [&_a]:text-primary-container [&_a]:underline [&_blockquote]:border-l-2 [&_blockquote]:border-primary-container [&_blockquote]:pl-4 [&_blockquote]:italic [&_img]:rounded-xl [&_img]:my-6">
-                        @if (filled($content))
-                            {!! $content !!}
-                        @else
-                            <p>এই আর্টিকেলের বিস্তারিত অংশ এখনো যোগ করা হয়নি।</p>
-                        @endif
+                    <div class="article-content text-body-secondary site-type-leading-relaxed site-spacing-space-y-5 site-state-arbitrary-h2-type-font-headline-md site-state-arbitrary-h2-type-text-headline-md site-state-arbitrary-h2-color-text-primary site-state-arbitrary-h2-type-font-bold site-state-arbitrary-h2-spacing-mt-10 site-state-arbitrary-h2-spacing-mb-3 site-state-arbitrary-h3-type-font-headline-sm site-state-arbitrary-h3-type-text-headline-sm site-state-arbitrary-h3-color-text-primary site-state-arbitrary-h3-type-font-semibold site-state-arbitrary-h3-spacing-mt-8 site-state-arbitrary-h3-spacing-mb-2 site-state-arbitrary-p-type-font-body-md site-state-arbitrary-p-type-text-body-md site-state-arbitrary-p-type-leading-relaxed site-state-arbitrary-ul-type-list-disc site-state-arbitrary-ul-spacing-pl-6 site-state-arbitrary-ul-spacing-space-y-2 site-state-arbitrary-ol-type-list-decimal site-state-arbitrary-ol-spacing-pl-6 site-state-arbitrary-ol-spacing-space-y-2 site-state-arbitrary-a-color-text-primary-container site-state-arbitrary-a-type-underline site-state-arbitrary-blockquote-border-border-l-2 site-state-arbitrary-blockquote-border-border-primary-container site-state-arbitrary-blockquote-spacing-pl-4 site-state-arbitrary-blockquote-type-italic site-state-arbitrary-img-shape-rounded-xl site-state-arbitrary-img-spacing-my-6 text-secondary"> @if (filled($content)) {!! $content !!} @else
+                        <p class="site-copy">এই আর্টিকেলের বিস্তারিত অংশ এখনো যোগ করা হয়নি।</p> @endif
                     </div>
-
-                    <div class="p-space-lg rounded-2xl bg-surface-card/70 backdrop-blur-md shadow-md space-y-space-sm">
-                        <h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
-                            <span class="material-symbols-outlined text-primary-container">format_quote</span> শেষ কথা
+                    <div class="p-4 rounded-4 site-surface-bg-surface-card-opacity-70 site-effect-backdrop-blur-md site-elevation-shadow-md site-spacing-space-y-space-sm bg-white">
+                        <h3 class="site-type-font-headline-sm site-type-text-headline-sm site-color-text-primary d-flex align-items-center gap-2 site-heading text-white">
+                            <span class="material-symbols-outlined text-primary text-dark">format_quote</span> শেষ কথা
                         </h3>
-                        <p class="font-body-md text-body-md text-text-secondary leading-relaxed">আপনার প্রজেক্ট নিয়ে প্রশ্ন থাকলে যোগাযোগ করুন। কাজের পরিধি ও সম্ভাব্য খরচ নিয়ে কথা বলতে পারি।</p>
-                        <div class="pt-space-xs flex flex-wrap items-center justify-between gap-space-sm">
-                            <span class="font-label-md text-label-md text-primary-container">প্রজেক্ট নিয়ে কথা বলতে চান?</span>
-                            <a class="inline-flex items-center gap-2 font-label-md text-label-md text-primary hover:text-primary-container transition-colors" href="https://wa.me/8801335198859" rel="noopener noreferrer" target="_blank">
+                        <p class="site-type-font-body-md site-type-text-body-md text-body-secondary site-type-leading-relaxed site-copy text-secondary">আপনার প্রজেক্ট নিয়ে প্রশ্ন থাকলে যোগাযোগ করুন। কাজের পরিধি ও সম্ভাব্য খরচ নিয়ে কথা বলতে পারি।</p>
+                        <div class="site-spacing-pt-space-xs d-flex flex-wrap align-items-center justify-content-between gap-2">
+                            <span class="site-type-font-label-md site-type-text-label-md text-primary text-dark small fw-medium">প্রজেক্ট নিয়ে কথা বলতে চান?</span>
+                            <a class="d-inline-flex align-items-center gap-2 site-type-font-label-md site-type-text-label-md site-color-text-primary site-state-hover-color-text-primary-container site-motion-transition-colors text-white small fw-medium site-accent-hover site-content-action" href="https://wa.me/8801335198859" rel="noopener noreferrer" target="_blank">
                                 <span>মেসেজ দিন সরাসরি</span>
-                                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                                <span class="material-symbols-outlined fs-6">arrow_forward</span>
                             </a>
                         </div>
                     </div>
-
-                    <div class="flex flex-wrap items-center gap-2 pt-space-xs">
-                        <span class="font-label-md text-label-md text-text-muted">ট্যাগসমূহ:</span>
-                        @if ($post->category)
-                            <a class="px-3 py-1 rounded-full bg-surface-card text-text-secondary font-label-md text-label-md hover:bg-surface-card-elevated hover:text-primary-container transition-colors" href="{{ route('blog.index', ['category' => $post->category]) }}">#{{ $post->category }}</a>
-                        @endif
+                    <div class="d-flex flex-wrap align-items-center gap-2 site-spacing-pt-space-xs">
+                        <span class="site-type-font-label-md site-type-text-label-md text-body-secondary text-secondary small fw-medium">ট্যাগসমূহ:</span> @if ($post->category)
+                        <a class="site-spacing-px-3 py-1 rounded-pill site-surface-bg-surface-card text-body-secondary site-type-font-label-md site-type-text-label-md site-state-hover-surface-bg-surface-card-elevated site-state-hover-color-text-primary-container site-motion-transition-colors bg-white text-secondary small fw-medium site-accent-hover" href="{{ route('blog.index', ['category' => $post->category]) }}">#{{ $post->category }}</a> @endif
                     </div>
                 </article>
-
-                <aside class="lg:col-span-4 space-y-space-lg">
-                    <div class="sticky top-28 space-y-space-lg">
-                        @if (! empty($toc))
-                            <div class="p-space-lg rounded-2xl bg-surface-card shadow-xl space-y-space-md">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="font-title-md text-title-md text-primary flex items-center gap-2">
-                                        <span class="material-symbols-outlined text-primary-container text-[20px]">menu_book</span> আর্টিকেলের সূচিপত্র
-                                    </h3>
-                                    <span class="text-caption font-caption text-text-muted">{{ count($toc) }}টি অধ্যায়</span>
-                                </div>
-                                <ul class="space-y-space-sm font-body-sm text-body-sm text-text-secondary">
-                                    @foreach ($toc as $item)
-                                        <li>
-                                            <a class="toc-link group flex items-start gap-2.5 hover:text-primary-container transition-colors" href="#{{ $item['id'] }}">
-                                                <span class="font-label-md text-label-md text-primary-container/80 mt-0.5">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                                                <span class="leading-snug">{{ $item['title'] }}</span>
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                <aside class="site-responsive-lg-layout-col-span-4 site-spacing-space-y-space-lg">
+                    <div class="position-sticky site-position-top-28 site-spacing-space-y-space-lg"> @if (! empty($toc))
+                        <div class="p-4 rounded-4 site-surface-bg-surface-card site-elevation-shadow-xl site-spacing-space-y-space-md bg-white">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h3 class="site-type-font-title-md site-type-text-title-md site-color-text-primary d-flex align-items-center gap-2 site-heading text-white">
+                                    <span class="material-symbols-outlined text-primary fs-5 text-dark">menu_book</span> আর্টিকেলের সূচিপত্র
+                                </h3>
+                                <span class="site-type-text-caption site-type-font-caption text-body-secondary text-secondary small fw-medium">{{ count($toc) }}টি অধ্যায়</span>
                             </div>
-                        @endif
-
-                        <div class="relative p-space-lg rounded-2xl bg-gradient-to-b from-surface-card-elevated to-surface-card shadow-2xl overflow-hidden">
-                            <div class="absolute -top-12 -right-12 w-32 h-32 bg-primary-container/20 rounded-full blur-2xl"></div>
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse"></span>
-                                <span class="font-label-md text-label-md text-primary-container font-semibold uppercase tracking-wider">আপনার প্রজেক্ট</span>
+                            <ul class="site-spacing-space-y-space-sm site-type-font-body-sm site-type-text-body-sm text-body-secondary text-secondary fs-6 fw-medium"> @foreach ($toc as $item)
+                                <li class="site-body-text">
+                                    <a class="toc-link site-style-group d-flex align-items-start gap-2-5 site-state-hover-color-text-primary-container site-motion-transition-colors site-accent-hover" href="#{{ $item['id'] }}">
+                                        <span class="site-type-font-label-md site-type-text-label-md site-color-text-primary-container-opacity-80 site-spacing-mt-0-5 small fw-medium">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                                        <span class="site-type-leading-snug">{{ $item['title'] }}</span>
+                                    </a>
+                                </li> @endforeach
+                            </ul>
+                        </div> @endif
+                        <div class="position-relative p-4 rounded-4 site-surface-bg-gradient-to-b site-surface-from-surface-card-elevated site-surface-to-surface-card site-elevation-shadow-2xl overflow-hidden site-gradient-background">
+                            <div class="position-absolute site-style-top-12 site-style-right-12 site-dimension-w-32 site-dimension-h-32 site-surface-bg-primary-container-opacity-20 rounded-pill site-effect-blur-2xl"></div>
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <span class="site-dimension-w-2-5 site-dimension-h-2-5 rounded-pill bg-primary site-motion-animate-pulse"></span>
+                                <span class="site-type-font-label-md site-type-text-label-md text-primary fw-semibold text-uppercase site-type-tracking-wider text-dark small">আপনার প্রজেক্ট</span>
                             </div>
-                            <h3 class="font-headline-sm text-headline-sm text-primary mb-2">আপনার ব্যবসার জন্য এমন ওয়েবসাইট চান?</h3>
-                            <p class="font-body-sm text-body-sm text-text-secondary mb-space-md leading-relaxed">ওয়েবসাইট বা অনলাইন স্টোর নিয়ে আপনার প্রয়োজন জানালে কাজের পরিধি অনুযায়ী প্রস্তাব দেব।</p>
-                            <div class="space-y-space-xs">
-                                <a class="w-full h-12 rounded-xl bg-primary-container text-text-inverse font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 hover:bg-primary-fixed-dim transition-all shadow-[0_0_20px_rgba(198,244,50,0.3)]" href="https://wa.me/8801335198859" rel="noopener noreferrer" target="_blank">
-                                    <span class="material-symbols-outlined text-[20px]">chat</span>
+                            <h3 class="site-type-font-headline-sm site-type-text-headline-sm site-color-text-primary mb-2 site-heading text-white">আপনার ব্যবসার জন্য এমন ওয়েবসাইট চান?</h3>
+                            <p class="site-type-font-body-sm site-type-text-body-sm text-body-secondary mb-3 site-type-leading-relaxed site-copy text-secondary fs-6 fw-medium">ওয়েবসাইট বা অনলাইন স্টোর নিয়ে আপনার প্রয়োজন জানালে কাজের পরিধি অনুযায়ী প্রস্তাব দেব।</p>
+                            <div class="site-spacing-space-y-space-xs">
+                                <a class="w-100 site-dimension-h-12 rounded-4 bg-primary site-color-text-text-inverse site-type-font-label-lg site-type-text-label-lg fw-bold d-flex align-items-center justify-content-center gap-2 site-state-hover-surface-bg-primary-fixed-dim site-motion-transition-all site-elevation-shadow-arbitrary-0-0-20px-rgba-198-244-50-0-3 text-black fs-6" href="https://wa.me/8801335198859" rel="noopener noreferrer" target="_blank">
+                                    <span class="material-symbols-outlined fs-5">chat</span>
                                     <span>কথা বলুন ০১৩৩৫-১৯৮৮৫৯</span>
                                 </a>
-                                <a class="w-full h-11 rounded-xl bg-surface-container-high hover:bg-surface-bright text-text-primary font-label-md text-label-md flex items-center justify-center gap-2 transition-colors" href="{{ route('contact') }}">
-                                    <span class="material-symbols-outlined text-[18px] text-primary-container">calculate</span>
+                                <a class="w-100 site-dimension-h-11 rounded-4 site-surface-bg-surface-container-high site-state-hover-surface-bg-surface-bright text-light site-type-font-label-md site-type-text-label-md d-flex align-items-center justify-content-center gap-2 site-motion-transition-colors bg-white text-white small fw-medium" href="{{ route('contact') }}">
+                                    <span class="material-symbols-outlined site-type-text-arbitrary-18px text-primary text-dark">calculate</span>
                                     <span>ফ্রি কোটেশন নিন</span>
                                 </a>
                             </div>
-                        </div>
-
-                        @if ($recentPosts->isNotEmpty())
-                            <div class="p-space-lg rounded-2xl bg-surface-card shadow-xl space-y-space-md">
-                                <h3 class="font-title-md text-title-md text-primary flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-primary-container text-[20px]">local_fire_department</span> জনপ্রিয় গাইডসমূহ
-                                </h3>
-                                <div class="space-y-space-md">
-                                    @foreach ($recentPosts as $recent)
-                                        @php
-                                            $recentImage = $recent->getFirstMediaUrl('featured-image') ?: ($recent->featured_image ?: $blogImages[($loop->index + 1) % count($blogImages)]);
-                                        @endphp
-                                        <a class="group flex gap-3 items-center" href="{{ route('blog.show', $recent) }}">
-                                            <div class="w-16 h-16 rounded-xl overflow-hidden bg-surface-default shrink-0">
-                                                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" alt="{{ $recent->title }}" src="{{ $recentImage }}" />
-                                            </div>
-                                            <div>
-                                                <span class="text-caption font-caption text-primary-container block">{{ $recent->category ?: 'ব্লগ' }}</span>
-                                                <h4 class="font-body-sm text-body-sm text-text-primary group-hover:text-primary-container transition-colors line-clamp-2 font-medium">{{ $recent->title }}</h4>
-                                            </div>
-                                        </a>
-                                    @endforeach
-                                </div>
+                        </div> @if ($recentPosts->isNotEmpty())
+                        <div class="p-4 rounded-4 site-surface-bg-surface-card site-elevation-shadow-xl site-spacing-space-y-space-md bg-white">
+                            <h3 class="site-type-font-title-md site-type-text-title-md site-color-text-primary d-flex align-items-center gap-2 site-heading text-white">
+                                <span class="material-symbols-outlined text-primary fs-5 text-dark">local_fire_department</span> জনপ্রিয় গাইডসমূহ
+                            </h3>
+                            <div class="site-spacing-space-y-space-md"> @foreach ($recentPosts as $recent) @php $recentImage = $recent->getFirstMediaUrl('featured-image') ?: ($recent->featured_image ?: $blogImages[($loop->index + 1) % count($blogImages)]); @endphp
+                                <a class="site-style-group d-flex site-spacing-gap-3 align-items-center" href="{{ route('blog.show', $recent) }}">
+                                    <div class="site-dimension-w-16 site-dimension-h-16 rounded-4 overflow-hidden site-surface-bg-surface-default flex-shrink-0">
+                                        <img class="w-100 h-100 object-fit-cover site-state-group-hover-motion-scale-110 site-motion-transition-transform site-motion-duration-300" alt="{{ $recent->title }}" src="{{ $recentImage }}" />
+                                    </div>
+                                    <div>
+                                        <span class="site-type-text-caption site-type-font-caption text-primary d-block text-dark small fw-medium">{{ $recent->category ?: 'ব্লগ' }}</span>
+                                        <h4 class="site-type-font-body-sm site-type-text-body-sm text-light site-state-group-hover-color-text-primary-container site-motion-transition-colors site-type-line-clamp-2 fw-medium site-heading text-white fs-6 ">{{ $recent->title }}</h4>
+                                    </div>
+                                </a> @endforeach
                             </div>
-                        @endif
-
-                        <div class="p-space-md rounded-xl bg-surface-default text-text-secondary font-body-sm text-body-sm space-y-2">
-                            <div class="flex items-center gap-2 text-primary font-medium">
-                                <span class="material-symbols-outlined text-primary-container text-[18px]">support_agent</span>
+                        </div> @endif
+                        <div class="p-3 rounded-4 site-surface-bg-surface-default text-body-secondary site-type-font-body-sm site-type-text-body-sm site-spacing-space-y-2 text-secondary fs-6 fw-medium">
+                            <div class="d-flex align-items-center gap-2 site-color-text-primary fw-medium text-white">
+                                <span class="material-symbols-outlined text-primary site-type-text-arbitrary-18px text-dark">support_agent</span>
                                 <span>সরাসরি অফিস ভিজিট করুন:</span>
                             </div>
-                            <p class="font-caption text-caption text-text-muted leading-relaxed">সোনির আখড়া, যাত্রাবাড়ী, ঢাকা-১২৩৬।<br />শনিবার থেকে বৃহস্পতিবার, সকাল ১০টা - রাত ৮টা।</p>
+                            <p class="site-type-font-caption site-type-text-caption text-body-secondary site-type-leading-relaxed site-copy text-secondary small fw-medium">সোনির আখড়া, যাত্রাবাড়ী, ঢাকা-১২৩৬।<br />শনিবার থেকে বৃহস্পতিবার, সকাল ১০টা - রাত ৮টা।</p>
                         </div>
                     </div>
                 </aside>
             </div>
         </div>
-    </section>
-
-    @if ($relatedPosts->isNotEmpty())
-        <section class="w-full bg-surface-default relative py-16 md:py-24">
-            <div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10">
-                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-sm mb-space-xl">
-                    <div>
-                        <span class="font-label-md text-label-md text-primary-container uppercase tracking-wider block mb-1">পরবর্তী পাঠ</span>
-                        <h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">সম্পর্কিত প্রয়োজনীয় আর্টিকেলসমূহ</h2>
-                    </div>
-                    <a class="inline-flex items-center gap-1.5 font-label-lg text-label-lg text-primary-container hover:underline" href="{{ route('blog.index') }}">
-                        <span>সব ব্লগ দেখুন</span>
-                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                    </a>
+    </section> @if ($relatedPosts->isNotEmpty())
+    <section class="w-100 site-surface-bg-surface-default position-relative site-spacing-py-16 site-responsive-md-spacing-py-24 site-section site-section--light">
+        <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
+            <div class="d-flex flex-column flex-sm-row align-items-sm-end justify-content-between gap-2 site-spacing-mb-space-xl">
+                <div>
+                    <span class="site-type-font-label-md site-type-text-label-md text-primary text-uppercase site-type-tracking-wider d-block mb-1 text-dark small fw-medium">পরবর্তী পাঠ</span>
+                    <h2 class="site-type-font-headline-lg site-type-text-headline-lg site-color-text-primary site-type-tracking-tight site-heading text-white">সম্পর্কিত প্রয়োজনীয় আর্টিকেলসমূহ</h2>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-                    @foreach ($relatedPosts as $related)
-                        @php
-                            $relatedImage = $related->getFirstMediaUrl('featured-image') ?: ($related->featured_image ?: $blogImages[($loop->index + 2) % count($blogImages)]);
-                        @endphp
-                        <article class="rounded-2xl bg-surface-card overflow-hidden shadow-lg group hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
-                            <a class="block relative aspect-[16/10] overflow-hidden" href="{{ route('blog.show', $related) }}">
-                                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ $related->title }}" src="{{ $relatedImage }}" />
-                                @if ($related->category)
-                                    <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-surface-card-elevated/90 backdrop-blur-md text-primary-container text-xs">{{ $related->category }}</span>
-                                @endif
-                            </a>
-                            <div class="p-space-lg">
-                                <a class="block group-hover:text-primary-container transition-colors" href="{{ route('blog.show', $related) }}">
-                                    <h3 class="font-headline-sm text-headline-sm text-primary tracking-tight leading-snug">{{ $related->title }}</h3>
-                                </a>
-                                <p class="font-body-sm text-body-sm text-text-secondary mt-2 leading-relaxed">{{ \Illuminate\Support\Str::limit($related->excerpt ?: strip_tags((string) $related->content), 120) }}</p>
-                                <div class="mt-4 flex items-center justify-between font-caption text-caption text-text-muted">
-                                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">schedule</span> {{ $related->read_time }} মিনিট</span>
-                                    <span>{{ optional($related->published_at)->format('d M Y') }}</span>
-                                </div>
-                            </div>
-                        </article>
-                    @endforeach
-                </div>
+                <a class="d-inline-flex align-items-center gap-1-5 site-type-font-label-lg site-type-text-label-lg text-primary site-state-hover-type-underline text-dark fs-6 site-content-action" href="{{ route('blog.index') }}">
+                    <span>সব ব্লগ দেখুন</span>
+                    <span class="material-symbols-outlined site-type-text-arbitrary-18px">arrow_forward</span>
+                </a>
             </div>
-        </section>
-    @endif
+            <div class="d-grid site-layout-grid-cols-1 site-responsive-md-layout-grid-cols-3 gap-4"> @foreach ($relatedPosts as $related) @php $relatedImage = $related->getFirstMediaUrl('featured-image') ?: ($related->featured_image ?: $blogImages[($loop->index + 2) % count($blogImages)]); @endphp
+                <article class="rounded-4 site-surface-bg-surface-card overflow-hidden site-elevation-shadow-lg site-style-group site-state-hover-style-translate-y-1 site-motion-transition-all site-motion-duration-300 d-flex flex-column justify-content-between bg-white">
+                    <a class="d-block position-relative site-media-aspect-arbitrary-16-opacity-10 overflow-hidden" href="{{ route('blog.show', $related) }}">
+                        <img class="w-100 h-100 object-fit-cover site-state-group-hover-motion-scale-105 site-motion-transition-transform site-motion-duration-500" alt="{{ $related->title }}" src="{{ $relatedImage }}" /> @if ($related->category)
+                        <span class="position-absolute site-position-top-3 site-position-left-3 site-spacing-px-2-5 py-1 rounded-pill site-surface-bg-surface-card-elevated-opacity-90 site-effect-backdrop-blur-md text-primary site-type-text-xs bg-white text-dark small fw-medium">{{ $related->category }}</span> @endif
+                    </a>
+                    <div class="p-4">
+                        <a class="d-block site-state-group-hover-color-text-primary-container site-motion-transition-colors" href="{{ route('blog.show', $related) }}">
+                            <h3 class="site-type-font-headline-sm site-type-text-headline-sm site-color-text-primary site-type-tracking-tight site-type-leading-snug site-heading text-white">{{ $related->title }}</h3>
+                        </a>
+                        <p class="site-type-font-body-sm site-type-text-body-sm text-body-secondary mt-2 site-type-leading-relaxed site-copy text-secondary fs-6 fw-medium">{{ \Illuminate\Support\Str::limit($related->excerpt ?: strip_tags((string) $related->content), 120) }}</p>
+                        <div class="mt-3 d-flex align-items-center justify-content-between site-type-font-caption site-type-text-caption text-body-secondary text-secondary small fw-medium">
+                            <span class="d-flex align-items-center gap-1"><span class="material-symbols-outlined fs-6">schedule</span> {{ $related->read_time }} মিনিট</span>
+                            <span>{{ optional($related->published_at)->format('d M Y') }}</span>
+                        </div>
+                    </div>
+                </article> @endforeach
+            </div>
+        </div>
+    </section> @endif
 </main>
 @endsection

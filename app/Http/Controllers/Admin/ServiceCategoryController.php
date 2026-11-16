@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ServiceCategory;
+use App\Support\WebpImage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -46,7 +47,7 @@ class ServiceCategoryController extends Controller
         $category = ServiceCategory::create($validated);
 
         if ($image !== null) {
-            $category->addMedia($image)->toMediaCollection('category-image');
+            $category->addMedia(WebpImage::convert($image))->toMediaCollection('category-image');
         }
 
         return redirect()
@@ -89,7 +90,7 @@ class ServiceCategoryController extends Controller
         $serviceCategory->update($validated);
 
         if ($image !== null) {
-            $serviceCategory->addMedia($image)->toMediaCollection('category-image');
+            $serviceCategory->addMedia(WebpImage::convert($image))->toMediaCollection('category-image');
         } elseif ($removeImage) {
             $serviceCategory->clearMediaCollection('category-image');
         }

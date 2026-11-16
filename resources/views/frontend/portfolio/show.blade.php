@@ -1,177 +1,138 @@
-@extends('frontend.layouts.app')
-
-@section('title', $project->title.' | WhexSoft')
+@extends('frontend.layouts.app') @section('title', $project->title.' | WhexSoft')
 @section('description', $project->summary ?: $project->title.' প্রজেক্টের বিস্তারিত দেখুন।')
 @section('page', 'portfolio')
-@section('og_image', $project->getFirstMediaUrl('project-image') ?: asset('assets/frontend/images/project-ecommerce.jpg'))
-
-@section('content')
-@php
-    $projectImages = [
-        asset('assets/frontend/images/project-ecommerce.jpg'),
-        asset('assets/frontend/images/project-landing.jpg'),
-        asset('assets/frontend/images/project-corporate.jpg'),
-        asset('assets/frontend/images/project-webapp.jpg'),
-        asset('assets/frontend/images/project-uiux.jpg'),
-        asset('assets/frontend/images/project-maintenance.jpg'),
-    ];
-    $image = $project->getFirstMediaUrl('project-image') ?: $projectImages[0];
-    $description = (string) $project->description;
-    $isHtml = strip_tags($description) !== $description;
+@section('og_image', $project->getFirstMediaUrl('project-image') ?: asset('assets/frontend/images/project-ecommerce.jpg')) @section('content')
+@php $projectImages = [ asset('assets/frontend/images/project-ecommerce.jpg'), asset('assets/frontend/images/project-landing.jpg'), asset('assets/frontend/images/project-corporate.jpg'), asset('assets/frontend/images/project-webapp.jpg'), asset('assets/frontend/images/project-uiux.jpg'), asset('assets/frontend/images/project-maintenance.jpg'), ]; $image = $project->getFirstMediaUrl('project-image') ?: $projectImages[0]; $description = (string) $project->description; $isHtml = strip_tags($description) !== $description;
 @endphp
-
-<main class="w-full relative overflow-x-clip">
-    <section class="w-full relative overflow-hidden pt-32 md:pt-40 pb-10 md:pb-14">
-        <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-primary-fixed/10 blur-[120px] rounded-full pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10">
-            <nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-2 text-sm text-slate-400 mb-6">
-                <a class="hover:text-white" href="{{ route('home') }}">হোম</a>
-                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
-                <a class="hover:text-white" href="{{ route('portfolio.index') }}">আমাদের কাজ</a>
-                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
-                <span class="text-primary-fixed">{{ $project->title }}</span>
+<main class="w-100 position-relative site-effect-overflow-x-clip">
+    <section class="w-100 position-relative overflow-hidden site-spacing-pt-32 site-responsive-md-spacing-pt-40 site-spacing-pb-10 site-responsive-md-spacing-pb-14 site-section site-section--dark">
+        <div class="position-absolute site-style-top-32 start-50 translate-middle-x site-dimension-w-arbitrary-700px site-dimension-h-arbitrary-400px bg-primary bg-opacity-10 site-effect-blur-arbitrary-120px rounded-pill pe-none"></div>
+        <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
+            <nav aria-label="Breadcrumb" class="d-flex flex-wrap align-items-center gap-2 site-type-text-sm site-color-text-slate-400 mb-4 text-secondary fs-6 fw-medium">
+                <a class="site-state-hover-color-text-white" href="{{ route('home') }}">হোম</a>
+                <span class="material-symbols-outlined fs-6">chevron_right</span>
+                <a class="site-state-hover-color-text-white" href="{{ route('portfolio.index') }}">আমাদের কাজ</a>
+                <span class="material-symbols-outlined fs-6">chevron_right</span>
+                <span class="text-primary text-dark">{{ $project->title }}</span>
             </nav>
-            <div class="flex flex-wrap items-center gap-2 mb-5">
-                @if ($project->projectCategory)
-                    <span class="px-3 py-1 rounded-full bg-primary-fixed/15 text-primary-fixed border border-primary-fixed/30 text-xs font-mono">#{{ $project->projectCategory->name }}</span>
-                @endif
-                @if ($project->is_real_client)
-                    <span class="px-3 py-1 rounded-full bg-success-whatsapp/15 text-success-whatsapp border border-success-whatsapp/30 text-xs font-mono">রিয়েল ক্লায়েন্ট</span>
-                @endif
-                @if ($project->service)
-                    <a class="px-3 py-1 rounded-full bg-white/5 text-slate-200 border border-white/10 text-xs font-mono hover:border-primary-fixed/40 transition-colors" href="{{ route('services.show', $project->service) }}">{{ $project->service->title }}</a>
-                @endif
+            <div class="d-flex flex-wrap align-items-center gap-2 site-spacing-mb-5"> @if ($project->projectCategory)
+                <span class="site-spacing-px-3 py-1 rounded-pill site-surface-bg-primary-fixed-opacity-15 text-primary border site-border-border-primary-fixed-opacity-30 site-type-text-xs site-type-font-mono site-accent-component text-dark small fw-medium">#{{ $project->projectCategory->name }}</span> @endif @if ($project->is_real_client)
+                <span class="site-spacing-px-3 py-1 rounded-pill site-surface-bg-success-whatsapp-opacity-15 site-color-text-success-whatsapp border site-border-border-success-whatsapp-opacity-30 site-type-text-xs site-type-font-mono small fw-medium">রিয়েল ক্লায়েন্ট</span> @endif @if ($project->service)
+                <a class="site-spacing-px-3 py-1 rounded-pill site-surface-bg-white-opacity-5 site-color-text-slate-200 border border-white border-opacity-10 site-type-text-xs site-type-font-mono site-state-hover-border-border-primary-fixed-opacity-40 site-motion-transition-colors site-white-tint site-soft-border text-secondary small fw-medium" href="{{ route('services.show', $project->service) }}">{{ $project->service->title }}</a> @endif
             </div>
-            <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-4xl">{{ $project->title }}</h1>
-            <p class="text-slate-300 text-base sm:text-lg mt-4 max-w-3xl leading-relaxed">{{ $project->summary }}</p>
-            <div class="flex flex-wrap gap-3 mt-8">
-                @if ($project->live_url)
-                    <a class="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full bg-primary-fixed text-[#070A0E] font-heading font-bold hover:bg-primary-fixed-dim transition-all shadow-[0_0_30px_rgba(197,243,49,0.25)]" href="{{ $project->live_url }}" rel="noopener noreferrer" target="_blank">লাইভ সাইট দেখুন<span class="material-symbols-outlined text-[20px]">open_in_new</span></a>
-                @endif
-                <a class="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full bg-white/5 border border-white/20 text-white font-heading font-semibold hover:bg-white/10 transition-all" href="{{ route('contact') }}">এমন প্রজেক্ট নিয়ে কথা বলুন<span class="material-symbols-outlined text-[20px] text-primary-fixed">arrow_forward</span></a>
+            <h1 class="site-type-font-display site-type-text-3xl site-responsive-sm-type-text-4xl site-responsive-lg-type-text-5xl site-type-font-extrabold text-white site-type-tracking-tight lh-sm site-dimension-max-w-4xl site-heading text-white">{{ $project->title }}</h1>
+            <p class="site-color-text-slate-300 fs-6 site-responsive-sm-type-text-lg mt-3 site-dimension-max-w-3xl site-type-leading-relaxed site-copy text-secondary">{{ $project->summary }}</p>
+            <div class="d-flex flex-wrap site-spacing-gap-3 site-spacing-mt-8"> @if ($project->live_url)
+                <a class="d-inline-flex align-items-center justify-content-center gap-2 site-dimension-h-12 site-spacing-px-7 rounded-pill bg-primary site-color-text-arbitrary-hex-070a0e site-type-font-heading fw-bold site-state-hover-surface-bg-primary-fixed-dim site-motion-transition-all site-elevation-shadow-arbitrary-0-0-30px-rgba-197-243-49-0-25" href="{{ $project->live_url }}" rel="noopener noreferrer" target="_blank">লাইভ সাইট দেখুন<span class="material-symbols-outlined fs-5">open_in_new</span></a> @endif
+                <a class="d-inline-flex align-items-center justify-content-center gap-2 site-dimension-h-12 site-spacing-px-7 rounded-pill site-surface-bg-white-opacity-5 border site-border-border-white-opacity-20 text-white site-type-font-heading fw-semibold site-state-hover-surface-bg-white-opacity-10 site-motion-transition-all site-white-tint site-soft-border text-white" href="{{ route('contact') }}">এমন প্রজেক্ট নিয়ে কথা বলুন<span class="material-symbols-outlined fs-5 text-primary text-dark">arrow_forward</span></a>
             </div>
         </div>
     </section>
-
-    <section class="w-full relative py-8 md:py-12">
-        <div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10">
-            <div class="relative rounded-3xl overflow-hidden border border-white/10 bg-[#111722] shadow-2xl">
-                <img alt="{{ $project->title }}" class="w-full max-h-[620px] object-cover object-top" src="{{ $image }}" />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#070A0E]/60 via-transparent to-transparent pointer-events-none"></div>
+    <section class="w-100 position-relative site-spacing-py-8 py-md-5 site-section site-section--light">
+        <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
+            <div class="position-relative site-shape-rounded-3xl overflow-hidden border border-white border-opacity-10 site-surface-bg-arbitrary-hex-111722 site-elevation-shadow-2xl bg-white site-soft-border">
+                <img alt="{{ $project->title }}" class="w-100 site-dimension-max-h-arbitrary-620px object-fit-cover site-media-object-top" src="{{ $image }}" />
+                <div class="position-absolute top-0 end-0 bottom-0 start-0 site-surface-bg-gradient-to-t site-surface-from-arbitrary-hex-070a0e-opacity-60 site-surface-via-transparent site-surface-to-transparent pe-none site-gradient-background"></div>
             </div>
         </div>
-    </section>
-
-    <section class="w-full relative py-12 md:py-16">
-        <div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-                <div class="lg:col-span-8 space-y-8">
-                    <div class="rounded-2xl bg-[#111722] border border-white/10 p-6 sm:p-8">
-                        <h2 class="font-heading text-2xl font-bold text-white mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed">description</span> প্রজেক্টের বিবরণ</h2>
-                        @if (filled($description))
-                            <div class="text-slate-300 leading-relaxed space-y-4 [&_h2]:text-white [&_h3]:text-white [&_h2]:font-heading [&_h3]:font-heading [&_a]:text-primary-fixed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5">
-                                @if ($isHtml)
-                                    {!! $description !!}
-                                @else
-                                    {!! nl2br(e($description)) !!}
-                                @endif
-                            </div>
-                        @else
-                            <p class="text-slate-300 leading-relaxed">{{ $project->summary ?: 'এই প্রজেক্টের বিস্তারিত এখনো যোগ করা হয়নি।' }}</p>
-                        @endif
+    </section> @if ($project->walkthrough_embed_url)
+    <section class="w-100 position-relative site-spacing-py-8 py-md-5 site-section site-section--dark">
+        <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
+            <div class="site-shape-rounded-3xl site-surface-bg-arbitrary-hex-111722 border border-white border-opacity-10 site-spacing-p-5 site-responsive-sm-spacing-p-7 site-elevation-shadow-2xl bg-white site-soft-border">
+                <div class="d-flex flex-wrap align-items-start justify-content-between gap-3 site-spacing-mb-5">
+                    <div>
+                        <span class="d-inline-flex align-items-center gap-2 site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium"><span class="material-symbols-outlined fs-6">play_circle</span>প্রজেক্ট ওয়াকথ্রু</span>
+                        <h2 class="site-type-font-heading fs-4 lh-lg site-responsive-md-type-text-3xl site-type-font-extrabold text-white site-spacing-mt-3 site-heading text-white">প্রজেক্টটি ভিডিওতে দেখুন</h2>
+                        <p class="site-type-text-sm site-color-text-slate-300 mt-2 site-dimension-max-w-2xl site-copy text-secondary fs-6 fw-medium">প্রজেক্টের মূল ফিচার ও কার্যপ্রবাহের সংক্ষিপ্ত ভিডিও ওয়াকথ্রু।</p>
                     </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        @foreach ([
-                            ['bolt', 'প্রজেক্টভিত্তিক', 'প্রয়োজনীয় ফিচার'],
-                            ['devices', 'বিভিন্ন স্ক্রিনে', 'ব্যবহার উপযোগী লেআউট'],
-                            ['tune', 'ব্যবসা অনুযায়ী', 'ডিজাইন ও কার্যপ্রবাহ'],
-                        ] as [$icon, $title, $text])
-                            <div class="rounded-2xl bg-[#111722] border border-white/10 p-5">
-                                <span class="material-symbols-outlined text-primary-fixed text-[26px]">{{ $icon }}</span>
-                                <h3 class="font-heading text-base font-bold text-white mt-3">{{ $title }}</h3>
-                                <p class="text-xs text-slate-300 mt-1">{{ $text }}</p>
-                            </div>
-                        @endforeach
+                    <a class="d-inline-flex align-items-center gap-1-5 text-primary site-state-hover-color-text-white site-type-text-sm fw-semibold site-motion-transition-colors text-dark fs-6 site-content-action" href="{{ $project->project_walkthrough_url }}" rel="noopener noreferrer" target="_blank">ইউটিউবে দেখুন<span class="material-symbols-outlined fs-6">north_east</span></a>
+                </div>
+                <div class="position-relative w-100 site-media-aspect-video rounded-4 overflow-hidden border border-white border-opacity-10 site-surface-bg-arbitrary-hex-0a0e13 bg-white site-soft-border">
+                    <iframe class="position-absolute top-0 end-0 bottom-0 start-0 w-100 h-100" src="{{ $project->walkthrough_embed_url }}" title="{{ $project->title }} — প্রজেক্ট ওয়াকথ্রু" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section> @endif
+    <section class="w-100 position-relative py-5 site-responsive-md-spacing-py-16 site-section site-section--light">
+        <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
+            <div class="d-grid site-layout-grid-cols-1 site-responsive-lg-layout-grid-cols-12 site-spacing-gap-8 gap-lg-5 align-items-start">
+                <div class="site-responsive-lg-layout-col-span-8 site-spacing-space-y-8">
+                    <div class="rounded-4 site-surface-bg-arbitrary-hex-111722 border border-white border-opacity-10 p-4 site-responsive-sm-spacing-p-8 bg-white site-soft-border">
+                        <h2 class="site-type-font-heading fs-4 lh-lg fw-bold text-white mb-3 d-flex align-items-center gap-2 site-heading text-white"><span class="material-symbols-outlined text-primary text-dark">description</span> প্রজেক্টের বিবরণ</h2> @if (filled($description))
+                        <div class="site-color-text-slate-300 site-type-leading-relaxed site-spacing-space-y-4 site-state-arbitrary-h2-color-text-white site-state-arbitrary-h3-color-text-white site-state-arbitrary-h2-type-font-heading site-state-arbitrary-h3-type-font-heading site-state-arbitrary-a-color-text-primary-fixed site-state-arbitrary-ul-type-list-disc site-state-arbitrary-ul-spacing-pl-5 site-state-arbitrary-ol-type-list-decimal site-state-arbitrary-ol-spacing-pl-5 text-secondary"> @if ($isHtml) {!! $description !!} @else {!! nl2br(e($description)) !!} @endif
+                        </div> @else
+                        <p class="site-color-text-slate-300 site-type-leading-relaxed site-copy text-secondary">{{ $project->summary ?: 'এই প্রজেক্টের বিস্তারিত এখনো যোগ করা হয়নি।' }}</p> @endif
+                    </div>
+                    <div class="d-grid site-layout-grid-cols-1 site-responsive-sm-layout-grid-cols-3 gap-3"> @foreach ([ ['bolt', 'প্রজেক্টভিত্তিক', 'প্রয়োজনীয় ফিচার'], ['devices', 'বিভিন্ন স্ক্রিনে', 'ব্যবহার উপযোগী লেআউট'], ['tune', 'ব্যবসা অনুযায়ী', 'ডিজাইন ও কার্যপ্রবাহ'], ] as [$icon, $title, $text])
+                        <div class="rounded-4 site-surface-bg-arbitrary-hex-111722 border border-white border-opacity-10 site-spacing-p-5 bg-white site-soft-border">
+                            <span class="material-symbols-outlined text-primary site-type-text-arbitrary-26px text-dark">{{ $icon }}</span>
+                            <h3 class="site-type-font-heading fs-6 fw-bold text-white site-spacing-mt-3 site-heading text-white">{{ $title }}</h3>
+                            <p class="site-type-text-xs site-color-text-slate-300 mt-1 site-copy text-secondary small fw-medium">{{ $text }}</p>
+                        </div> @endforeach
                     </div>
                 </div>
-
-                <aside class="lg:col-span-4 space-y-6">
-                    <div class="rounded-2xl bg-[#111722] border border-white/10 p-6">
-                        <h3 class="font-heading text-lg font-bold text-white mb-5">প্রজেক্ট তথ্য</h3>
-                        <dl class="space-y-4 text-sm">
-                            <div class="flex items-start justify-between gap-4 border-b border-white/10 pb-3">
-                                <dt class="text-slate-400">ক্যাটাগরি</dt>
-                                <dd class="text-slate-100 text-right">{{ $project->projectCategory?->name ?: '—' }}</dd>
+                <aside class="site-responsive-lg-layout-col-span-4 site-spacing-space-y-6">
+                    <div class="rounded-4 site-surface-bg-arbitrary-hex-111722 border border-white border-opacity-10 p-4 bg-white site-soft-border">
+                        <h3 class="site-type-font-heading site-type-text-lg fw-bold text-white site-spacing-mb-5 site-heading text-white">প্রজেক্ট তথ্য</h3>
+                        <dl class="site-spacing-space-y-4 site-type-text-sm fs-6 fw-medium">
+                            <div class="d-flex align-items-start justify-content-between gap-3 border-bottom border-white border-opacity-10 site-spacing-pb-3 site-soft-border">
+                                <dt class="site-color-text-slate-400 text-secondary">ক্যাটাগরি</dt>
+                                <dd class="site-color-text-slate-100 text-end text-white">{{ $project->projectCategory?->name ?: '—' }}</dd>
                             </div>
-                            <div class="flex items-start justify-between gap-4 border-b border-white/10 pb-3">
-                                <dt class="text-slate-400">সার্ভিস</dt>
-                                <dd class="text-slate-100 text-right">{{ $project->service?->title ?: '—' }}</dd>
+                            <div class="d-flex align-items-start justify-content-between gap-3 border-bottom border-white border-opacity-10 site-spacing-pb-3 site-soft-border">
+                                <dt class="site-color-text-slate-400 text-secondary">সার্ভিস</dt>
+                                <dd class="site-color-text-slate-100 text-end text-white">{{ $project->service?->title ?: '—' }}</dd>
                             </div>
-                            <div class="flex items-start justify-between gap-4 border-b border-white/10 pb-3">
-                                <dt class="text-slate-400">ক্লায়েন্ট</dt>
-                                <dd class="text-slate-100 text-right">{{ $project->is_real_client ? 'রিয়েল প্রজেক্ট' : 'ডেমো / কনসেপ্ট' }}</dd>
+                            <div class="d-flex align-items-start justify-content-between gap-3 border-bottom border-white border-opacity-10 site-spacing-pb-3 site-soft-border">
+                                <dt class="site-color-text-slate-400 text-secondary">ক্লায়েন্ট</dt>
+                                <dd class="site-color-text-slate-100 text-end text-white">{{ $project->is_real_client ? 'রিয়েল প্রজেক্ট' : 'ডেমো / কনসেপ্ট' }}</dd>
                             </div>
-                            <div class="flex items-start justify-between gap-4">
-                                <dt class="text-slate-400">লাইভ সাইট</dt>
-                                <dd class="text-right">
-                                    @if ($project->live_url)
-                                        <a class="text-primary-fixed hover:underline" href="{{ $project->live_url }}" rel="noopener noreferrer" target="_blank">ভিজিট করুন</a>
-                                    @else
-                                        <span class="text-slate-100">—</span>
-                                    @endif
+                            <div class="d-flex align-items-start justify-content-between gap-3">
+                                <dt class="site-color-text-slate-400 text-secondary">লাইভ সাইট</dt>
+                                <dd class="text-end"> @if ($project->live_url)
+                                    <a class="text-primary site-state-hover-type-underline text-dark" href="{{ $project->live_url }}" rel="noopener noreferrer" target="_blank">ভিজিট করুন</a> @else
+                                    <span class="site-color-text-slate-100 text-white">—</span> @endif
                                 </dd>
                             </div>
                         </dl>
                     </div>
-
-                    <div class="rounded-2xl bg-gradient-to-b from-[#122218] to-[#0c1510] border border-primary-fixed/30 p-6">
-                        <span class="inline-flex items-center gap-2 text-primary-fixed font-mono text-xs uppercase tracking-widest"><span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span> ফ্রি কোটেশন</span>
-                        <h3 class="font-heading text-xl font-bold text-white mt-3">একই রকম ওয়েবসাইট চান?</h3>
-                        <p class="text-sm text-slate-300 mt-2 leading-relaxed">আপনার প্রজেক্টের লক্ষ্য ও প্রয়োজনীয় ফিচার নিয়ে আমাদের সঙ্গে কথা বলুন।</p>
-                        <div class="flex flex-col gap-2 mt-5">
-                            <a class="inline-flex items-center justify-center gap-2 h-11 rounded-xl bg-primary-fixed text-[#070A0E] text-sm font-bold hover:bg-primary-fixed-dim transition-all" href="{{ route('contact') }}">কোটেশন নিন<span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
-                            <a class="inline-flex items-center justify-center gap-2 h-11 rounded-xl bg-[#25D366] text-[#070A0E] text-sm font-bold hover:brightness-110 transition-all" href="https://wa.me/8801335198859" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">chat</span>হোয়াটসঅ্যাপ</a>
+                    <div class="rounded-4 site-surface-bg-gradient-to-b site-surface-from-arbitrary-hex-122218 site-surface-to-arbitrary-hex-0c1510 border site-border-border-primary-fixed-opacity-30 p-4 site-gradient-background">
+                        <span class="d-inline-flex align-items-center gap-2 text-primary site-type-font-mono site-type-text-xs text-uppercase site-type-tracking-widest text-dark small fw-medium"><span class="site-dimension-w-2 site-dimension-h-2 rounded-pill bg-primary site-motion-animate-pulse"></span> ফ্রি কোটেশন</span>
+                        <h3 class="site-type-font-heading site-type-text-xl fw-bold text-white site-spacing-mt-3 site-heading text-white">একই রকম ওয়েবসাইট চান?</h3>
+                        <p class="site-type-text-sm site-color-text-slate-300 mt-2 site-type-leading-relaxed site-copy text-secondary fs-6 fw-medium">আপনার প্রজেক্টের লক্ষ্য ও প্রয়োজনীয় ফিচার নিয়ে আমাদের সঙ্গে কথা বলুন।</p>
+                        <div class="d-flex flex-column gap-2 site-spacing-mt-5">
+                            <a class="d-inline-flex align-items-center justify-content-center gap-2 site-dimension-h-11 rounded-4 bg-primary site-color-text-arbitrary-hex-070a0e site-type-text-sm fw-bold site-state-hover-surface-bg-primary-fixed-dim site-motion-transition-all fs-6" href="{{ route('contact') }}">কোটেশন নিন<span class="material-symbols-outlined site-type-text-arbitrary-18px">arrow_forward</span></a>
+                            <a class="d-inline-flex align-items-center justify-content-center gap-2 site-dimension-h-11 rounded-4 site-surface-bg-arbitrary-hex-25d366 site-color-text-arbitrary-hex-070a0e site-type-text-sm fw-bold site-state-hover-style-brightness-110 site-motion-transition-all fs-6" href="https://wa.me/8801335198859" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined site-type-text-arbitrary-18px">chat</span>হোয়াটসঅ্যাপ</a>
                         </div>
                     </div>
                 </aside>
             </div>
         </div>
-    </section>
-
-    @if ($relatedProjects->isNotEmpty())
-        <section class="w-full bg-[#0B0F14]/70 border-y border-white/10 relative py-16 md:py-24">
-            <div class="max-w-7xl mx-auto w-full relative px-5 sm:px-8 lg:px-10">
-                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-                    <div>
-                        <span class="inline-block text-xs font-mono uppercase tracking-widest text-primary-fixed bg-primary-fixed/10 border border-primary-fixed/30 px-3.5 py-1 rounded-full">সম্পর্কিত কাজ</span>
-                        <h2 class="font-heading text-3xl md:text-4xl font-extrabold text-white mt-4 tracking-tight">আরও কিছু প্রজেক্ট</h2>
-                    </div>
-                    <a class="inline-flex items-center gap-1.5 text-primary-fixed hover:text-white text-sm font-semibold transition-colors" href="{{ route('portfolio.index') }}">সকল প্রজেক্ট<span class="material-symbols-outlined text-[16px]">north_east</span></a>
+    </section> @if ($relatedProjects->isNotEmpty())
+    <section class="w-100 site-surface-bg-arbitrary-hex-0b0f14-opacity-70 border-top border-bottom border-white border-opacity-10 position-relative site-spacing-py-16 site-responsive-md-spacing-py-24 bg-white site-soft-border site-section site-section--dark">
+        <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
+            <div class="d-flex flex-column flex-sm-row align-items-sm-end justify-content-between gap-3 site-spacing-mb-10">
+                <div>
+                    <span class="d-inline-block site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">সম্পর্কিত কাজ</span>
+                    <h2 class="site-type-font-heading site-type-text-3xl site-responsive-md-type-text-4xl site-type-font-extrabold text-white mt-3 site-type-tracking-tight site-heading text-white">আরও কিছু প্রজেক্ট</h2>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    @foreach ($relatedProjects as $related)
-                        @php
-                            $relatedImage = $related->getFirstMediaUrl('project-image') ?: $projectImages[$loop->index % count($projectImages)];
-                        @endphp
-                        <article class="rounded-2xl bg-[#11171f] border border-white/10 hover:border-primary-fixed/40 overflow-hidden shadow-xl hover:-translate-y-1 transition-all group flex flex-col">
-                            <a class="relative aspect-[16/10] overflow-hidden bg-[#0A0E13]" href="{{ route('portfolio.show', $related) }}">
-                                <img alt="{{ $related->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="{{ $relatedImage }}" />
-                            </a>
-                            <div class="p-5">
-                                @if ($related->projectCategory)
-                                    <span class="text-[11px] px-2.5 py-0.5 rounded-md bg-primary-fixed/15 text-primary-fixed border border-primary-fixed/20">#{{ $related->projectCategory->name }}</span>
-                                @endif
-                                <h3 class="font-display text-lg font-bold text-white mt-2 group-hover:text-primary-fixed transition-colors">
-                                    <a href="{{ route('portfolio.show', $related) }}">{{ $related->title }}</a>
-                                </h3>
-                                <p class="text-xs text-slate-300 mt-1.5 line-clamp-2">{{ $related->summary }}</p>
-                            </div>
-                        </article>
-                    @endforeach
-                </div>
+                <a class="d-inline-flex align-items-center gap-1-5 text-primary site-state-hover-color-text-white site-type-text-sm fw-semibold site-motion-transition-colors text-dark fs-6 site-content-action" href="{{ route('portfolio.index') }}">সকল প্রজেক্ট<span class="material-symbols-outlined fs-6">north_east</span></a>
             </div>
-        </section>
-    @endif
+            <div class="d-grid site-layout-grid-cols-1 site-responsive-md-layout-grid-cols-3 gap-4"> @foreach ($relatedProjects as $related) @php $relatedImage = $related->getFirstMediaUrl('project-image') ?: $projectImages[$loop->index % count($projectImages)]; @endphp
+                <article class="rounded-4 site-surface-bg-arbitrary-hex-11171f border border-white border-opacity-10 site-state-hover-border-border-primary-fixed-opacity-40 overflow-hidden site-elevation-shadow-xl site-state-hover-style-translate-y-1 site-motion-transition-all site-style-group d-flex flex-column bg-white site-soft-border">
+                    <a class="position-relative site-media-aspect-arbitrary-16-opacity-10 overflow-hidden site-surface-bg-arbitrary-hex-0a0e13 bg-white" href="{{ route('portfolio.show', $related) }}">
+                        <img alt="{{ $related->title }}" class="w-100 h-100 object-fit-cover site-state-group-hover-motion-scale-105 site-motion-transition-transform site-motion-duration-500" src="{{ $relatedImage }}" />
+                    </a>
+                    <div class="site-spacing-p-5"> @if ($related->projectCategory)
+                        <span class="site-type-text-arbitrary-11px site-spacing-px-2-5 site-spacing-py-0-5 rounded-2 site-surface-bg-primary-fixed-opacity-15 text-primary border site-border-border-primary-fixed-opacity-20 site-accent-component text-dark small fw-medium">#{{ $related->projectCategory->name }}</span> @endif
+                        <h3 class="site-type-font-display site-type-text-lg fw-bold text-white mt-2 site-state-group-hover-color-text-primary-fixed site-motion-transition-colors site-heading text-white">
+                            <a href="{{ route('portfolio.show', $related) }}">{{ $related->title }}</a>
+                        </h3>
+                        <p class="site-type-text-xs site-color-text-slate-300 site-spacing-mt-1-5 site-type-line-clamp-2 site-copy text-secondary small fw-medium">{{ $related->summary }}</p>
+                    </div>
+                </article> @endforeach
+            </div>
+        </div>
+    </section> @endif
 </main>
 @endsection

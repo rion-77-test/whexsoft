@@ -21,6 +21,7 @@ test('projects can be created updated and deleted with media', function () {
         'summary' => 'A project summary',
         'description' => 'A project description',
         'live_url' => 'https://example.com',
+        'project_walkthrough_url' => 'https://youtu.be/dQw4w9WgXcQ',
         'is_real_client' => 1,
         'is_featured' => 0,
         'is_published' => 1,
@@ -31,6 +32,7 @@ test('projects can be created updated and deleted with media', function () {
     $project = Project::query()->where('slug', 'portfolio-project')->firstOrFail();
     $this->assertModelExists($project);
     expect($project->projectCategory->is($category))->toBeTrue();
+    expect($project->project_walkthrough_url)->toBe('https://youtu.be/dQw4w9WgXcQ');
     expect($project->getMedia('project-image'))->toHaveCount(1);
 
     $firstMediaId = $project->getFirstMedia('project-image')->id;
@@ -66,6 +68,36 @@ test('projects can be created updated and deleted with media', function () {
 
     $this->assertModelMissing($project);
     $this->assertDatabaseMissing('media', ['id' => $currentMediaId]);
+});
+
+test('the project walkthrough must be a youtube link', function () {
+    $this->actingAsAdmin();
+
+    $category = ProjectCategory::factory()->create();
+
+    $this->post(route('admin.projects.store'), [
+        'title' => 'Bad Walkthrough',
+        'slug' => 'bad-walkthrough',
+        'project_category_id' => $category->id,
+        'summary' => 'Summary',
+        'project_walkthrough_url' => 'https://vimeo.com/123456789',
+        'is_real_client' => 1,
+        'is_featured' => 0,
+        'is_published' => 1,
+        'sort_order' => 1,
+    ])->assertSessionHasErrors('project_walkthrough_url');
+
+    $this->post(route('admin.projects.store'), [
+        'title' => 'No Walkthrough',
+        'slug' => 'no-walkthrough',
+        'project_category_id' => $category->id,
+        'summary' => 'Summary',
+        'project_walkthrough_url' => null,
+        'is_real_client' => 1,
+        'is_featured' => 0,
+        'is_published' => 1,
+        'sort_order' => 1,
+    ])->assertSessionHasNoErrors();
 });
 
 test('project pages render the fallback image when no image has been uploaded', function () {

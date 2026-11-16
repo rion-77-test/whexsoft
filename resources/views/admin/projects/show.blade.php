@@ -55,6 +55,14 @@
                                         </a>
                                     </dd>
                                 @endif
+                                @if ($project->project_walkthrough_url)
+                                    <dt class="col-sm-4">Project Walkthrough</dt>
+                                    <dd class="col-sm-8">
+                                        <a href="{{ $project->project_walkthrough_url }}" target="_blank" rel="noopener noreferrer">
+                                            {{ $project->project_walkthrough_url }}
+                                        </a>
+                                    </dd>
+                                @endif
                             </dl>
                             @if ($project->description)
                                 <h3 class="h5 mt-4">Description</h3>

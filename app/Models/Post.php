@@ -60,8 +60,12 @@ class Post extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('featured-image')->singleFile();
-        $this->addMediaCollection('content-images');
+        $this->addMediaCollection('featured-image')
+            ->singleFile()
+            ->useFallbackUrl(asset('assets/admin/images/default-fallback-image.png'));
+
+        $this->addMediaCollection('content-images')
+            ->useFallbackUrl(asset('assets/admin/images/default-fallback-image.png'));
     }
 
     public function getFeaturedImageUrlAttribute(): string

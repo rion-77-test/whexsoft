@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\YouTubeVideo;
 use Database\Factories\ProjectFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,6 +26,7 @@ class Project extends Model implements HasMedia
         'summary',
         'description',
         'live_url',
+        'project_walkthrough_url',
         'is_real_client',
         'is_featured',
         'is_published',
@@ -58,12 +60,19 @@ class Project extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('project-image')->singleFile();
+        $this->addMediaCollection('project-image')
+            ->singleFile()
+            ->useFallbackUrl(asset('assets/admin/images/default-fallback-image.png'));
     }
 
     public function getImageUrlAttribute(): string
     {
         return $this->getFirstMediaUrl('project-image')
             ?: asset('assets/admin/images/default-fallback-image.png');
+    }
+
+    public function getWalkthroughEmbedUrlAttribute(): ?string
+    {
+        return YouTubeVideo::embedUrl($this->project_walkthrough_url);
     }
 }

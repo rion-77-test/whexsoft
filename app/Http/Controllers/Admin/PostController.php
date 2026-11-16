@@ -5,14 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\PostCategory;
+use App\Support\WebpImage;
 use DOMComment;
 use DOMDocument;
 use DOMElement;
 use DOMNode;
+use Illuminate\Http\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -77,7 +80,17 @@ class PostController extends Controller
         $validated = $request->validate([
             'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'extensions:jpg,jpeg,png,webp', 'max:5120'],
         ]);
-        $path = $validated['image']->store('posts/content/tmp', 'public');
+        $converted = WebpImage::convert($validated['image']);
+        $path = Storage::disk('public')->putFileAs(
+            'posts/content/tmp',
+            new File($converted),
+            Str::random(40).'.webp',
+        );
+
+        if (WebpImage::convert($path) !== $path) {
+            $path = WebpImage::convert($path);
+            Storage::disk('public')->assertExists($path);
+        }
 
         return response()->json([
             'url' => Storage::disk('public')->url($path),
@@ -99,7 +112,7 @@ class PostController extends Controller
         $post->save();
 
         if ($image !== null) {
-            $media = $post->addMedia($image)->toMediaCollection('featured-image');
+            $media = $post->addMedia(WebpImage::convert($image))->toMediaCollection('featured-image');
             $post->update(['featured_image' => $media->getUrl()]);
         }
 
@@ -147,7 +160,7 @@ class PostController extends Controller
         $this->deleteUnusedContentImages($post);
 
         if ($image !== null) {
-            $media = $post->addMedia($image)->toMediaCollection('featured-image');
+            $media = $post->addMedia(WebpImage::convert($image))->toMediaCollection('featured-image');
             $post->update(['featured_image' => $media->getUrl()]);
         } elseif ($removeImage) {
             $post->clearMediaCollection('featured-image');

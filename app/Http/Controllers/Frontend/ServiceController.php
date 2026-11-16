@@ -67,7 +67,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service): View
     {
-        abort_unless($service->is_active, 404);
+        // abort_unless($service->is_active, 404);
 
         $service->load([
             'serviceCategory',

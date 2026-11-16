@@ -72,8 +72,12 @@ class Service extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('service-image')->singleFile();
-        $this->addMediaCollection('content-images');
+        $this->addMediaCollection('service-image')
+            ->singleFile()
+            ->useFallbackUrl(asset('assets/admin/images/default-fallback-image.png'));
+
+        $this->addMediaCollection('content-images')
+            ->useFallbackUrl(asset('assets/admin/images/default-fallback-image.png'));
     }
 
     public function getImageUrlAttribute(): string

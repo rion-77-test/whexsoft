@@ -34,6 +34,8 @@
                                 class="col-12" rows="5" />
                             <x-admin.form-fields.input name="live_url" label="Live URL" type="url"
                                 class="col-md-6" />
+                            <x-admin.form-fields.input name="project_walkthrough_url" label="Project Walkthrough (YouTube URL)"
+                                type="url" class="col-md-6" />
                             <x-admin.form-fields.input name="sort_order" label="Sort Order" type="number"
                                 class="col-md-6" min="0" max="65535" value="0" required />
                             <x-admin.form-fields.image name="image" label="Project Image" class="col-md-6" />
