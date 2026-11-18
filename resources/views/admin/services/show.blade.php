@@ -63,9 +63,9 @@
                             <h2 class="h5">Intro</h2>
                             <p>{!! nl2br(e($service->intro)) !!}</p>
                         @endif
-                        @if ($service->content)
+                        @if (filled($safeContent))
                             <h2 class="h5 mt-4">Content</h2>
-                            <div class="service-content">{!! nl2br(e($service->content)) !!}</div>
+                            <div class="service-content">{!! $safeContent !!}</div>
                         @endif
                     </div>
                 </div>

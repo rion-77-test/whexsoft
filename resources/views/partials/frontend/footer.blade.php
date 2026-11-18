@@ -45,11 +45,11 @@
                 <div class="site-spacing-space-y-space-sm site-type-font-body-sm site-type-text-body-sm text-body-secondary text-secondary fs-6 fw-medium">
                     <div class="d-flex align-items-start gap-1">
                         <span class="material-symbols-outlined site-type-text-arbitrary-18px text-primary flex-shrink-0 site-spacing-mt-0-5 text-dark">location_on</span>
-                        <span>সোনির আখড়া, যাত্রাবাড়ী, ঢাকা-১২৩৬</span>
+                        <span>সোনির আখড়া, যাত্রাবাড়ী, ঢাকা-<span class='nubmer-1-fixer'>১</span>২৩৬</span>
                     </div>
                     <div class="d-flex align-items-center gap-1">
                         <span class="material-symbols-outlined site-type-text-arbitrary-18px text-primary flex-shrink-0 text-dark">call</span>
-                        <a class="site-state-hover-color-text-primary-container site-motion-transition-colors site-accent-hover" href="tel:01335198859">০১৩৩৫-১৯৮৮৫৯</a>
+                        <a class="site-state-hover-color-text-primary-container site-motion-transition-colors site-accent-hover" href="tel:01335198859">০<span class='nubmer-1-fixer'>১</span>৩৩৫-<span class='nubmer-1-fixer'>১</span>৯৮৮৫৯</a>
                     </div>
                     <div class="d-flex align-items-center gap-1">
                         <span class="material-symbols-outlined site-type-text-arbitrary-18px text-primary flex-shrink-0 text-dark">mail</span>

@@ -9,12 +9,12 @@
             <a class="{{ $navLink }} {{ request()->routeIs('home') ? $navActive : $navIdle }}" @if(request()->routeIs('home')) aria-current="page" @endif href="{{ route('home') }}">হোম</a>
             <a class="{{ $navLink }} {{ request()->routeIs('services.*') ? $navActive : $navIdle }}" @if(request()->routeIs('services.*')) aria-current="page" @endif href="{{ route('services.index') }}">সার্ভিসসমূহ</a>
             <a class="{{ $navLink }} {{ request()->routeIs('portfolio.*') ? $navActive : $navIdle }}" @if(request()->routeIs('portfolio.*')) aria-current="page" @endif href="{{ route('portfolio.index') }}">আমাদের কাজ</a>
-            <a class="{{ $navLink }} {{ request()->routeIs('blog.*') ? $navActive : $navIdle }}" @if(request()->routeIs('blog.*')) aria-current="page" @endif href="{{ route('blog.index') }}">ব্লগ</a>
+            <a class="{{ $navLink }} {{ request()->routeIs('blog.*') ? $navActive : $navIdle }}" @if(request()->routeIs('blog.*')) aria-current="page" @endif href="{{ route('contact') }}">যোগাযোগ</a>
         </nav>
         <div class="d-flex align-items-center gap-3 flex-shrink-0">
             <a class="d-none d-xl-flex align-items-center gap-2 site-type-font-label-lg site-type-text-label-lg text-body-secondary site-state-hover-color-text-primary-container site-motion-transition-colors text-secondary fs-6 site-accent-hover" href="tel:01335198859">
                 <span class="material-symbols-outlined site-type-text-arbitrary-18px">call</span>
-                <span>০১৩৩৫-১৯৮৮৫৯</span>
+                <span>০<span class='nubmer-1-fixer'>১</span>৩৩৫-<span class='nubmer-1-fixer'>১</span>৯৮৮৫৯</span>
             </a>
             <a class="d-none d-sm-inline-flex align-items-center justify-content-center site-dimension-h-10 px-3 rounded-3 bg-primary site-color-text-text-inverse site-type-font-label-lg site-type-text-label-lg fw-semibold site-state-hover-surface-bg-primary-fixed-dim site-motion-transition-all site-elevation-shadow-arbitrary-0-0-20px-rgba-198-244-50-0-25 text-black fs-6" href="{{ route('contact') }}">ফ্রি পরামর্শ নিন</a>
             <button id="menu-toggle" type="button" class="d-lg-none site-dimension-w-11 site-dimension-h-11 rounded-3 site-surface-bg-surface-card d-flex align-items-center justify-content-center text-light bg-white text-white" aria-expanded="false" aria-controls="mobile-menu" aria-label="মেনু খুলুন">

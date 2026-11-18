@@ -1,10 +1,10 @@
-@extends('frontend.layouts.app') @section('title', $project->title.' | WhexSoft')
+@extends('layouts.frontend') @section('title', $project->title.' | WhexSoft')
 @section('description', $project->summary ?: $project->title.' প্রজেক্টের বিস্তারিত দেখুন।')
 @section('page', 'portfolio')
 @section('og_image', $project->getFirstMediaUrl('project-image') ?: asset('assets/frontend/images/project-ecommerce.jpg')) @section('content')
 @php $projectImages = [ asset('assets/frontend/images/project-ecommerce.jpg'), asset('assets/frontend/images/project-landing.jpg'), asset('assets/frontend/images/project-corporate.jpg'), asset('assets/frontend/images/project-webapp.jpg'), asset('assets/frontend/images/project-uiux.jpg'), asset('assets/frontend/images/project-maintenance.jpg'), ]; $image = $project->getFirstMediaUrl('project-image') ?: $projectImages[0]; $description = (string) $project->description; $isHtml = strip_tags($description) !== $description;
 @endphp
-<main class="w-100 position-relative site-effect-overflow-x-clip">
+<x-frontend.page>
     <section class="w-100 position-relative overflow-hidden site-spacing-pt-32 site-responsive-md-spacing-pt-40 site-spacing-pb-10 site-responsive-md-spacing-pb-14 site-section site-section--dark">
         <div class="position-absolute site-style-top-32 start-50 translate-middle-x site-dimension-w-arbitrary-700px site-dimension-h-arbitrary-400px bg-primary bg-opacity-10 site-effect-blur-arbitrary-120px rounded-pill pe-none"></div>
         <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
@@ -45,7 +45,7 @@
                         <h2 class="site-type-font-heading fs-4 lh-lg site-responsive-md-type-text-3xl site-type-font-extrabold text-white site-spacing-mt-3 site-heading text-white">প্রজেক্টটি ভিডিওতে দেখুন</h2>
                         <p class="site-type-text-sm site-color-text-slate-300 mt-2 site-dimension-max-w-2xl site-copy text-secondary fs-6 fw-medium">প্রজেক্টের মূল ফিচার ও কার্যপ্রবাহের সংক্ষিপ্ত ভিডিও ওয়াকথ্রু।</p>
                     </div>
-                    <a class="d-inline-flex align-items-center gap-1-5 text-primary site-state-hover-color-text-white site-type-text-sm fw-semibold site-motion-transition-colors text-dark fs-6 site-content-action" href="{{ $project->project_walkthrough_url }}" rel="noopener noreferrer" target="_blank">ইউটিউবে দেখুন<span class="material-symbols-outlined fs-6">north_east</span></a>
+                    <x-frontend.buttons.section :href="$project->project_walkthrough_url" text="ইউটিউবে দেখুন" rel="noopener noreferrer" target="_blank" />
                 </div>
                 <div class="position-relative w-100 site-media-aspect-video rounded-4 overflow-hidden border border-white border-opacity-10 site-surface-bg-arbitrary-hex-0a0e13 bg-white site-soft-border">
                     <iframe class="position-absolute top-0 end-0 bottom-0 start-0 w-100 h-100" src="{{ $project->walkthrough_embed_url }}" title="{{ $project->title }} — প্রজেক্ট ওয়াকথ্রু" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -113,10 +113,10 @@
         <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
             <div class="d-flex flex-column flex-sm-row align-items-sm-end justify-content-between gap-3 site-spacing-mb-10">
                 <div>
-                    <span class="d-inline-block site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">সম্পর্কিত কাজ</span>
+                    <x-frontend.eyebrow class="d-inline-block">সম্পর্কিত কাজ</x-frontend.eyebrow>
                     <h2 class="site-type-font-heading site-type-text-3xl site-responsive-md-type-text-4xl site-type-font-extrabold text-white mt-3 site-type-tracking-tight site-heading text-white">আরও কিছু প্রজেক্ট</h2>
                 </div>
-                <a class="d-inline-flex align-items-center gap-1-5 text-primary site-state-hover-color-text-white site-type-text-sm fw-semibold site-motion-transition-colors text-dark fs-6 site-content-action" href="{{ route('portfolio.index') }}">সকল প্রজেক্ট<span class="material-symbols-outlined fs-6">north_east</span></a>
+                <x-frontend.buttons.section :href="route('portfolio.index')" text="সকল প্রজেক্ট" />
             </div>
             <div class="d-grid site-layout-grid-cols-1 site-responsive-md-layout-grid-cols-3 gap-4"> @foreach ($relatedProjects as $related) @php $relatedImage = $related->getFirstMediaUrl('project-image') ?: $projectImages[$loop->index % count($projectImages)]; @endphp
                 <article class="rounded-4 site-surface-bg-arbitrary-hex-11171f border border-white border-opacity-10 site-state-hover-border-border-primary-fixed-opacity-40 overflow-hidden site-elevation-shadow-xl site-state-hover-style-translate-y-1 site-motion-transition-all site-style-group d-flex flex-column bg-white site-soft-border">
@@ -134,5 +134,5 @@
             </div>
         </div>
     </section> @endif
-</main>
+</x-frontend.page>
 @endsection

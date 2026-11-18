@@ -152,6 +152,7 @@
     <!-- <script src="./js/adminlte.js"></script> -->
 
      @vite('resources/js/admin/adminlte.js')
+     @vite('resources/js/admin/filepond.js')
     <!--end::Required Plugin(AdminLTE)-->
     <!--begin::OverlayScrollbars Configure-->
     <script>

@@ -22,6 +22,9 @@
                     <form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row g-3">
+                            <x-admin.form-fields.image name="image" label="Featured Image" class="col-md-6" />
+                            <x-admin.form-fields.input name="published_at" label="Publish Date"
+                                type="datetime-local" class="col-md-6" />
                             <x-admin.form-fields.input name="title" label="Title" class="col-md-6" required />
                             <x-admin.form-fields.input name="slug" label="Slug" class="col-md-6" required />
                             <x-admin.form-fields.select name="category" label="Category"
@@ -30,11 +33,8 @@
                                 :options="$statusOptions" value="draft" class="col-md-6" required />
                             <x-admin.form-fields.textarea name="excerpt" label="Excerpt"
                                 class="col-12" rows="3" required />
-                            <x-admin.form-fields.wysiwyg name="content" label="Content"
+                            <x-admin.form-fields.wysiwyg name="content" label="Content" required
                                 :upload-url="route('admin.posts.content-images.store')" class="col-12" />
-                            <x-admin.form-fields.image name="image" label="Featured Image" class="col-md-6" />
-                            <x-admin.form-fields.input name="published_at" label="Publish Date"
-                                type="datetime-local" class="col-md-6" />
                             <x-admin.form-fields.input name="meta_title" label="Meta Title" class="col-md-6" />
                             <x-admin.form-fields.textarea name="meta_description" label="Meta Description"
                                 class="col-md-6" rows="3" />

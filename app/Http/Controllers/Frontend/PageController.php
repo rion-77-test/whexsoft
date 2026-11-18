@@ -9,26 +9,26 @@ class PageController extends Controller
 {
     public function about(): View
     {
-        return view('frontend.pages.about');
+        return view('frontend.about');
     }
 
     public function process(): View
     {
-        return view('frontend.pages.process');
+        return view('frontend.process');
     }
 
     public function faq(): View
     {
-        return view('frontend.pages.faq');
+        return view('frontend.faq');
     }
 
     public function privacy(): View
     {
-        return view('frontend.pages.privacy-policy');
+        return view('frontend.privacy-policy');
     }
 
     public function terms(): View
     {
-        return view('frontend.pages.terms');
+        return view('frontend.terms');
     }
 }

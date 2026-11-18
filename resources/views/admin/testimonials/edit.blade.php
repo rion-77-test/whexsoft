@@ -19,15 +19,6 @@
                         @csrf
                         @method('PUT')
                         <div class="row g-3">
-                            <x-admin.form-fields.input name="client_name" label="Client Name"
-                                :value="$testimonial->client_name" class="col-md-6" required />
-                            <x-admin.form-fields.input name="business_name" label="Business Name"
-                                :value="$testimonial->business_name" class="col-md-6" />
-                            <x-admin.form-fields.select name="service_id" label="Related Service"
-                                :options="$services" :value="$testimonial->service_id"
-                                placeholder="No related service" class="col-md-6" />
-                            <x-admin.form-fields.textarea name="quote" label="Quote" :value="$testimonial->quote"
-                                class="col-12" rows="5" required />
                             <x-admin.form-fields.image name="photo" label="Photo"
                                 :preview="$testimonial->photo_url" :can-remove="$testimonial->hasMedia('photo')"
                                 remove-name="remove_photo" class="col-md-6" />
@@ -37,6 +28,15 @@
                                 <x-admin.form-fields.checkbox name="is_published" label="Published"
                                     :checked="$testimonial->is_published" />
                             </div>
+                            <x-admin.form-fields.input name="client_name" label="Client Name"
+                                :value="$testimonial->client_name" class="col-md-6" required />
+                            <x-admin.form-fields.input name="business_name" label="Business Name"
+                                :value="$testimonial->business_name" class="col-md-6" />
+                            <x-admin.form-fields.select name="service_id" label="Related Service"
+                                :options="$services" :value="$testimonial->service_id"
+                                placeholder="No related service" class="col-md-6" />
+                            <x-admin.form-fields.textarea name="quote" label="Quote" :value="$testimonial->quote"
+                                class="col-12" rows="5" required />
                         </div>
 
                         <div class="d-flex gap-2 mt-4">

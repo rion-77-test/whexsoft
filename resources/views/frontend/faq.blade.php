@@ -1,7 +1,7 @@
-@extends('frontend.layouts.app') @section('title', 'সচরাচর জিজ্ঞাসা | WhexSoft')
+@extends('layouts.frontend') @section('title', 'সচরাচর জিজ্ঞাসা | WhexSoft')
 @section('description', 'ওয়েবসাইট ডিজাইন, ডেভেলপমেন্ট, মূল্য, পেমেন্ট ও সাপোর্ট নিয়ে সচরাচর জিজ্ঞাসার উত্তর।')
 @section('page', 'faq') @section('content')
-<main class="w-100 position-relative site-effect-overflow-x-clip"><div class="position-absolute site-position-top-10 start-50 translate-middle-x site-dimension-w-arbitrary-700px site-dimension-h-arbitrary-350px bg-primary bg-opacity-10 site-effect-blur-arbitrary-130px rounded-pill pe-none"></div><div class="position-absolute site-position-top-arbitrary-800px end-0 site-dimension-w-arbitrary-450px site-dimension-h-arbitrary-450px bg-glow-lime site-effect-blur-arbitrary-150px rounded-pill pe-none"></div><section class="position-relative w-100 site-spacing-pt-32 site-responsive-md-spacing-pt-40 pb-5 site-responsive-md-spacing-pb-16 site-section site-section--dark">
+<x-frontend.page><div class="position-absolute site-position-top-10 start-50 translate-middle-x site-dimension-w-arbitrary-700px site-dimension-h-arbitrary-350px bg-primary bg-opacity-10 site-effect-blur-arbitrary-130px rounded-pill pe-none"></div><div class="position-absolute site-position-top-arbitrary-800px end-0 site-dimension-w-arbitrary-450px site-dimension-h-arbitrary-450px bg-glow-lime site-effect-blur-arbitrary-150px rounded-pill pe-none"></div><section class="position-relative w-100 site-spacing-pt-32 site-responsive-md-spacing-pt-40 pb-5 site-responsive-md-spacing-pb-16 site-section site-section--dark">
         <div class="site-dimension-max-w-4xl mx-auto text-center site-spacing-space-y-space-md w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
             <div class="d-inline-flex align-items-center gap-2 px-3 site-spacing-py-1-5 rounded-pill site-surface-bg-surface-card-elevated text-primary site-type-font-label-md site-type-text-label-md site-elevation-shadow-arbitrary-0-0-20px-rgba-198-244-50-0-15 mx-auto bg-white text-dark small fw-medium">
                 <span class="material-symbols-outlined fs-6">help_center</span>
@@ -411,5 +411,5 @@
                 </div>
             </div></div>
     </section>
-</main>
+</x-frontend.page>
 @endsection

@@ -23,6 +23,11 @@
                         @csrf
                         @method('PUT')
                         <div class="row g-3">
+                            <x-admin.form-fields.image name="image" label="Featured Image"
+                                :preview="$post->featured_image_url" :can-remove="$post->hasMedia('featured-image')"
+                                class="col-md-6" />
+                            <x-admin.form-fields.input name="published_at" label="Publish Date" type="datetime-local"
+                                :value="$post->published_at?->format('Y-m-d\\TH:i')" class="col-md-6" />
                             <x-admin.form-fields.input name="title" label="Title" :value="$post->title"
                                 class="col-md-6" required />
                             <x-admin.form-fields.input name="slug" label="Slug" :value="$post->slug"
@@ -34,14 +39,9 @@
                                 :options="$statusOptions" :value="$post->status" class="col-md-6" required />
                             <x-admin.form-fields.textarea name="excerpt" label="Excerpt" :value="$post->excerpt"
                                 class="col-12" rows="3" required />
-                            <x-admin.form-fields.wysiwyg name="content" label="Content"
+                            <x-admin.form-fields.wysiwyg name="content" label="Content" required
                                 :value="$post->content" :upload-url="route('admin.posts.content-images.store')"
                                 class="col-12" />
-                            <x-admin.form-fields.image name="image" label="Featured Image"
-                                :preview="$post->featured_image_url" :can-remove="$post->hasMedia('featured-image')"
-                                class="col-md-6" />
-                            <x-admin.form-fields.input name="published_at" label="Publish Date" type="datetime-local"
-                                :value="$post->published_at?->format('Y-m-d\\TH:i')" class="col-md-6" />
                             <x-admin.form-fields.input name="meta_title" label="Meta Title"
                                 :value="$post->meta_title" class="col-md-6" />
                             <x-admin.form-fields.textarea name="meta_description" label="Meta Description"

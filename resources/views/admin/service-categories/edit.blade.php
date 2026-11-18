@@ -19,17 +19,19 @@
                         @csrf
                         @method('PUT')
                         <div class="row g-3">
+                            <x-admin.form-fields.image name="image" label="Category Image"
+                                :preview="$serviceCategory->image_url"
+                                :can-remove="$serviceCategory->hasMedia('category-image')" class="col-md-6" />
+                            <div class="col-md-6">
+                                <x-admin.form-fields.input name="sort_order" label="Sort Order" type="number"
+                                    :value="$serviceCategory->sort_order" min="0" max="65535" required />
+                            </div>
                             <x-admin.form-fields.input name="name" label="Name" :value="$serviceCategory->name"
                                 class="col-md-6" required />
                             <x-admin.form-fields.input name="slug" label="Slug" :value="$serviceCategory->slug"
                                 class="col-md-6" required />
                             <x-admin.form-fields.textarea name="description" label="Description"
                                 :value="$serviceCategory->description" class="col-12" rows="3" />
-                            <x-admin.form-fields.input name="sort_order" label="Sort Order" type="number"
-                                :value="$serviceCategory->sort_order" class="col-md-6" min="0" max="65535" required />
-                            <x-admin.form-fields.image name="image" label="Category Image"
-                                :preview="$serviceCategory->image_url"
-                                :can-remove="$serviceCategory->hasMedia('category-image')" class="col-md-6" />
                             <div class="col-12">
                                 <x-admin.form-fields.checkbox name="is_active" label="Active"
                                     :checked="$serviceCategory->is_active" />

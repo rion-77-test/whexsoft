@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\ServiceCategory;
+use App\Support\ContentImageUploader;
+use App\Support\RichTextSanitizer;
 use App\Support\WebpImage;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -13,6 +16,11 @@ use Illuminate\View\View;
 
 class ServiceController extends Controller
 {
+    public function __construct(
+        private readonly RichTextSanitizer $sanitizer,
+        private readonly ContentImageUploader $contentImages,
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -38,6 +46,17 @@ class ServiceController extends Controller
         return view('admin.services.create', compact('categories'));
     }
 
+    public function uploadContentImage(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'extensions:jpg,jpeg,png,webp', 'max:5120'],
+        ]);
+
+        return response()->json([
+            'url' => $this->contentImages->store($validated['image'], 'services/content/tmp'),
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -47,7 +66,14 @@ class ServiceController extends Controller
         $image = $request->file('image');
         unset($validated['image'], $validated['remove_image']);
 
+        $validated['content'] = $this->sanitizeServiceContent($validated['content'] ?? '') ?: null;
+
         $service = Service::create($validated);
+
+        if (filled($service->content)) {
+            $service->content = $this->sanitizeServiceContent((string) $service->content, $service);
+            $service->save();
+        }
 
         if ($image !== null) {
             $service->addMedia(WebpImage::convert($image))->toMediaCollection('service-image');
@@ -71,7 +97,9 @@ class ServiceController extends Controller
             'media',
         ]);
 
-        return view('admin.services.show', compact('service'));
+        $safeContent = $this->sanitizeServiceContent((string) ($service->content ?? ''));
+
+        return view('admin.services.show', compact('service', 'safeContent'));
     }
 
     /**
@@ -94,7 +122,16 @@ class ServiceController extends Controller
         $removeImage = $request->boolean('remove_image');
         unset($validated['image'], $validated['remove_image']);
 
+        $validated['content'] = $this->sanitizeServiceContent($validated['content'] ?? '') ?: null;
+
         $service->update($validated);
+
+        if (filled($service->content)) {
+            $service->content = $this->sanitizeServiceContent((string) $service->content, $service);
+            $service->save();
+        }
+
+        $this->sanitizer->deleteUnusedContentImages($service);
 
         if ($image !== null) {
             $service->addMedia(WebpImage::convert($image))->toMediaCollection('service-image');
@@ -123,6 +160,17 @@ class ServiceController extends Controller
         return redirect()
             ->route('admin.services.index')
             ->with('success', 'Service deleted successfully.');
+    }
+
+    private function sanitizeServiceContent(string $content, ?Service $service = null): string
+    {
+        return $this->sanitizer->sanitize(
+            content: $content,
+            model: $service,
+            requireContent: false,
+            temporaryDirectory: 'services/content/tmp',
+            label: 'service',
+        );
     }
 
     /**

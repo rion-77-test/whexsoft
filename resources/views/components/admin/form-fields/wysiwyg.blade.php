@@ -3,6 +3,7 @@
     'label',
     'value' => null,
     'uploadUrl',
+    'required' => false,
 ])
 
 @php
@@ -28,7 +29,8 @@
 <div {{ $attributes }}>
     <label for="{{ $editorId }}" class="form-label">{{ $label }}</label>
     <div id="{{ $editorId }}" data-wysiwyg-editor data-value-id="{{ $valueId }}"
-        data-image-input-id="{{ $imageInputId }}" data-upload-url="{{ $uploadUrl }}"></div>
+        data-image-input-id="{{ $imageInputId }}" data-upload-url="{{ $uploadUrl }}"
+        data-required="{{ $required ? 'true' : 'false' }}"></div>
     <textarea id="{{ $valueId }}" name="{{ $name }}" class="d-none">{{ old($name, $value) }}</textarea>
     <input id="{{ $imageInputId }}" type="file" accept=".jpg,.jpeg,.png,.webp" class="d-none">
     <div id="{{ $errorId }}" class="text-danger mt-2" role="alert" aria-live="polite" hidden></div>
@@ -50,6 +52,7 @@
                 const imageInput = document.getElementById(editorElement.dataset.imageInputId);
                 const uploadError = editorElement.parentElement.querySelector('[role="alert"]');
                 const csrfToken = form.querySelector('input[name="_token"]').value;
+                const isRequired = editorElement.dataset.required === 'true';
                 let uploadInProgress = false;
 
                 const editor = new Quill(editorElement, {
@@ -131,7 +134,7 @@
 
                     contentField.value = editor.getSemanticHTML();
 
-                    if (editor.getText().trim() === '' && editor.root.querySelector('img') === null) {
+                    if (isRequired && editor.getText().trim() === '' && editor.root.querySelector('img') === null) {
                         event.preventDefault();
                         uploadError.textContent = 'The content field is required.';
                         uploadError.hidden = false;

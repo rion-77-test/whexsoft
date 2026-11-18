@@ -17,7 +17,7 @@ class ServiceController extends Controller
         $startingPackage = Package::lowestPricedActive();
 
         $services = Service::query()
-            // ->active()
+            ->active()
             ->with(['serviceCategory', 'media'])
             ->orderBy('sort_order')
             ->orderBy('title')
@@ -33,32 +33,12 @@ class ServiceController extends Controller
             ->take(4)
             ->values();
 
-        $serviceSteps = $services->flatMap(fn (Service $service) => collect($service->steps ?? [])
-            ->filter(fn (array $step): bool => filled($step['title'] ?? null) || filled($step['text'] ?? null))
-            ->map(fn (array $step): array => [
-                'title' => $step['title'] ?? '',
-                'text' => $step['text'] ?? '',
-                'service_title' => $service->title,
-            ]))
-            ->take(4)
-            ->values();
-
-        $serviceFaqs = $services->flatMap(fn (Service $service) => collect($service->faqs ?? [])
-            ->filter(fn (array $faq): bool => filled($faq['question'] ?? null) && filled($faq['answer'] ?? null))
-            ->map(fn (array $faq): array => [
-                'question' => $faq['question'],
-                'answer' => $faq['answer'],
-                'service_title' => $service->title,
-            ]))
-            ->take(4)
-            ->values();
 
         return view('frontend.services.index', compact(
             'services',
             'startingPackage',
             'serviceFeatures',
-            'serviceSteps',
-            'serviceFaqs',
+            
         ));
     }
 

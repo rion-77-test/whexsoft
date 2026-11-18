@@ -1,7 +1,7 @@
-@extends('frontend.layouts.app') @section('title', 'আমাদের সম্পর্কে | WhexSoft')
+@extends('layouts.frontend') @section('title', 'আমাদের সম্পর্কে | WhexSoft')
 @section('description', 'WhexSoft ঢাকাভিত্তিক একটি ওয়েব ডিজাইন ও ডেভেলপমেন্ট স্টুডিও। আমাদের কাজের ধরন, মূল্যবোধ এবং যোগাযোগের তথ্য জানুন।')
 @section('page', 'about') @section('content')
-<main class="w-100 position-relative site-effect-overflow-x-clip"><section class="position-relative w-100 overflow-hidden site-responsive-md-spacing-px-margin site-responsive-md-spacing-pb-space-3xl site-spacing-pt-32 site-responsive-md-spacing-pt-40 pb-5 site-responsive-md-spacing-pb-16 site-section site-section--dark">
+<x-frontend.page><section class="position-relative w-100 overflow-hidden site-responsive-md-spacing-px-margin site-responsive-md-spacing-pb-space-3xl site-spacing-pt-32 site-responsive-md-spacing-pt-40 pb-5 site-responsive-md-spacing-pb-16 site-section site-section--dark">
         <div class="position-absolute site-position-top-1-opacity-4 start-50 translate-middle-x translate-middle-y site-dimension-w-arbitrary-550px site-dimension-h-arbitrary-350px site-surface-bg-tertiary-container-opacity-10 site-effect-blur-arbitrary-130px rounded-pill pe-none"></div>
         <div class="site-dimension-max-w-7xl mx-auto d-flex flex-column align-items-center text-center position-relative site-position-z-10 w-100 site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
             <div class="d-inline-flex align-items-center gap-2 px-3 site-spacing-py-1-5 rounded-pill site-surface-bg-surface-card-elevated border site-border-border-tertiary-container-opacity-30 site-color-text-tertiary-container site-elevation-shadow-arbitrary-0-0-20px-rgba-197-243-49-0-15 mb-4 bg-white text-dark">
@@ -272,5 +272,5 @@
                     </div>
                 </div>
             </div></div>
-    </section></main>
+    </section></x-frontend.page>
 @endsection

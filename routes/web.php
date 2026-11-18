@@ -49,6 +49,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('post-categories', PostCategoryController::class);
     Route::resource('projects', ProjectController::class);
     Route::resource('project-categories', ProjectCategoryController::class);
+    Route::post('services/content-images', [AdminServiceController::class, 'uploadContentImage'])
+        ->name('services.content-images.store');
     Route::resource('services', AdminServiceController::class);
     Route::resource('service-categories', ServiceCategoryController::class);
     Route::resource('packages', PackageController::class);

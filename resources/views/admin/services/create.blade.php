@@ -37,6 +37,10 @@
                     <form method="POST" action="{{ route('admin.services.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row g-3">
+                            <x-admin.form-fields.image name="image" label="Service Image" class="col-md-6" />
+                            <div class="col-md-6 d-flex align-items-start">
+                                <x-admin.form-fields.checkbox name="is_active" label="Active" :checked="true" />
+                            </div>
                             <x-admin.form-fields.input name="title" label="Title" class="col-md-6" required />
                             <x-admin.form-fields.input name="slug" label="Slug" class="col-md-6" required />
                             <x-admin.form-fields.select name="service_category_id" label="Category"
@@ -47,11 +51,8 @@
                             <x-admin.form-fields.textarea name="short_description" label="Short Description"
                                 class="col-12" rows="2" />
                             <x-admin.form-fields.textarea name="intro" label="Intro" class="col-12" rows="3" />
-                            <x-admin.form-fields.textarea name="content" label="Content" class="col-12" rows="10" />
-                            <x-admin.form-fields.image name="image" label="Service Image" class="col-md-6" />
-                            <div class="col-md-6 d-flex align-items-start">
-                                <x-admin.form-fields.checkbox name="is_active" label="Active" :checked="true" />
-                            </div>
+                            <x-admin.form-fields.wysiwyg name="content" label="Content"
+                                :upload-url="route('admin.services.content-images.store')" class="col-12" />
                         </div>
 
                         <hr class="my-4">

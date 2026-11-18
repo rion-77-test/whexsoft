@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('frontend.partials.footer', function ($view): void {
+        View::composer('partials.frontend.footer', function ($view): void {
             $view->with('navServices', Service::query()
                 ->where('is_active', true)
                 ->orderBy('sort_order')

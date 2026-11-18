@@ -24,6 +24,17 @@
                         @csrf
                         @method('PUT')
                         <div class="row g-3">
+                            <x-admin.form-fields.image name="image" label="Project Image"
+                                :preview="$project->image_url" :can-remove="$project->hasMedia('project-image')"
+                                class="col-md-6" />
+                            <div class="col-md-6">
+                                <x-admin.form-fields.checkbox name="is_real_client" label="Real client"
+                                    :checked="$project->is_real_client" class="mb-2" />
+                                <x-admin.form-fields.checkbox name="is_featured" label="Featured"
+                                    :checked="$project->is_featured" class="mb-2" />
+                                <x-admin.form-fields.checkbox name="is_published" label="Published"
+                                    :checked="$project->is_published" class="mb-2" />
+                            </div>
                             <x-admin.form-fields.input name="title" label="Title" :value="$project->title"
                                 class="col-md-6" required />
                             <x-admin.form-fields.input name="slug" label="Slug" :value="$project->slug"
@@ -45,17 +56,6 @@
                                 :value="$project->project_walkthrough_url" class="col-md-6" />
                             <x-admin.form-fields.input name="sort_order" label="Sort Order" type="number"
                                 :value="$project->sort_order" class="col-md-6" min="0" max="65535" required />
-                            <x-admin.form-fields.image name="image" label="Project Image"
-                                :preview="$project->image_url" :can-remove="$project->hasMedia('project-image')"
-                                class="col-md-6" />
-                            <div class="col-md-6">
-                                <x-admin.form-fields.checkbox name="is_real_client" label="Real client"
-                                    :checked="$project->is_real_client" class="mb-2" />
-                                <x-admin.form-fields.checkbox name="is_featured" label="Featured"
-                                    :checked="$project->is_featured" class="mb-2" />
-                                <x-admin.form-fields.checkbox name="is_published" label="Published"
-                                    :checked="$project->is_published" class="mb-2" />
-                            </div>
                         </div>
 
                         <div class="d-flex gap-2 mt-4">

@@ -20,7 +20,7 @@ class HomeController extends Controller
             ->active()
             ->with('media')
             ->orderBy('sort_order')
-            ->take(5)
+            ->take(6)
             ->get();
 
         $projects = Project::query()

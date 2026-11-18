@@ -39,6 +39,13 @@
                         @csrf
                         @method('PUT')
                         <div class="row g-3">
+                            <x-admin.form-fields.image name="image" label="Service Image"
+                                :preview="$service->image_url" :can-remove="$service->hasMedia('service-image')"
+                                class="col-md-6" />
+                            <div class="col-md-6 d-flex align-items-start">
+                                <x-admin.form-fields.checkbox name="is_active" label="Active"
+                                    :checked="$service->is_active" />
+                            </div>
                             <x-admin.form-fields.input name="title" label="Title" :value="$service->title"
                                 class="col-md-6" required />
                             <x-admin.form-fields.input name="slug" label="Slug" :value="$service->slug"
@@ -52,15 +59,9 @@
                                 :value="$service->short_description" class="col-12" rows="2" />
                             <x-admin.form-fields.textarea name="intro" label="Intro" :value="$service->intro"
                                 class="col-12" rows="3" />
-                            <x-admin.form-fields.textarea name="content" label="Content" :value="$service->content"
-                                class="col-12" rows="10" />
-                            <x-admin.form-fields.image name="image" label="Service Image"
-                                :preview="$service->image_url" :can-remove="$service->hasMedia('service-image')"
-                                class="col-md-6" />
-                            <div class="col-md-6 d-flex align-items-start">
-                                <x-admin.form-fields.checkbox name="is_active" label="Active"
-                                    :checked="$service->is_active" />
-                            </div>
+                            <x-admin.form-fields.wysiwyg name="content" label="Content"
+                                :value="$service->content" :upload-url="route('admin.services.content-images.store')"
+                                class="col-12" />
                         </div>
 
                         <hr class="my-4">

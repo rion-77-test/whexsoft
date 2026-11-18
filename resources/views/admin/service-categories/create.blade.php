@@ -18,13 +18,15 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row g-3">
+                            <x-admin.form-fields.image name="image" label="Category Image" class="col-md-6" />
+                            <div class="col-md-6">
+                                <x-admin.form-fields.input name="sort_order" label="Sort Order" type="number"
+                                    min="0" max="65535" value="0" required />
+                            </div>
                             <x-admin.form-fields.input name="name" label="Name" class="col-md-6" required />
                             <x-admin.form-fields.input name="slug" label="Slug" class="col-md-6" required />
                             <x-admin.form-fields.textarea name="description" label="Description"
                                 class="col-12" rows="3" />
-                            <x-admin.form-fields.input name="sort_order" label="Sort Order" type="number"
-                                class="col-md-6" min="0" max="65535" value="0" required />
-                            <x-admin.form-fields.image name="image" label="Category Image" class="col-md-6" />
                             <div class="col-12">
                                 <x-admin.form-fields.checkbox name="is_active" label="Active" :checked="true" />
                             </div>

@@ -86,6 +86,47 @@ test('services can be created updated and deleted with media and json sections',
     $this->assertModelMissing($service);
 });
 
+test('service content images are uploaded and attached to the service', function () {
+    $this->actingAsAdmin();
+
+    Storage::fake('public');
+    $category = ServiceCategory::factory()->create();
+
+    $uploadResponse = $this->postJson(route('admin.services.content-images.store'), [
+        'image' => UploadedFile::fake()->image('content.png'),
+    ])->assertOk()
+        ->assertJsonStructure(['url']);
+
+    $imageUrl = $uploadResponse->json('url');
+    expect(Storage::disk('public')->allFiles('services/content/tmp'))->toHaveCount(1);
+
+    $this->post(route('admin.services.store'), [
+        'title' => 'Formatted Service',
+        'slug' => 'formatted-service',
+        'service_category_id' => $category->id,
+        'content' => '<p>Safe <strong>formatted</strong> content</p><script>alert(1)</script><img src="'.$imageUrl.'" onerror="alert(1)">',
+        'features' => [],
+        'steps' => [],
+        'faqs' => [],
+        'sort_order' => 0,
+        'is_active' => 1,
+    ])->assertRedirect(route('admin.services.index'));
+
+    $service = Service::query()->where('slug', 'formatted-service')->firstOrFail();
+    $service->refresh();
+
+    expect($service->getMedia('content-images'))->toHaveCount(1)
+        ->and($service->content)->toContain('<strong>formatted</strong>')
+        ->and($service->content)->not->toContain('<script')
+        ->and($service->content)->not->toContain('onerror')
+        ->and($service->content)->not->toContain('services/content/tmp');
+
+    $this->get(route('admin.services.show', $service))
+        ->assertOk()
+        ->assertSee('<strong>formatted</strong>', false)
+        ->assertDontSee('<script');
+});
+
 test('service pages render the fallback image when no image has been uploaded', function () {
     $this->actingAsAdmin();
 

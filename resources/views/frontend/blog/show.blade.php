@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app') @section('title', $post->meta_title ?: $post->title.' | WhexSoft ব্লগ')
+@extends('layouts.frontend') @section('title', $post->meta_title ?: $post->title.' | WhexSoft ব্লগ')
 @section('description', $post->meta_description ?: ($post->excerpt ?: \Illuminate\Support\Str::limit(strip_tags((string) $post->content), 160)))
 @section('page', 'blog')
 @section('og_image', $post->getFirstMediaUrl('featured-image') ?: ($post->featured_image ?: asset('assets/frontend/images/blog-featured.jpg'))) @push('scripts')
@@ -6,7 +6,7 @@
 @endpush @section('content')
 @php $blogImages = [ asset('assets/frontend/images/blog-featured.jpg'), asset('assets/frontend/images/blog-1.jpg'), asset('assets/frontend/images/blog-2.jpg'), asset('assets/frontend/images/blog-3.jpg'), asset('assets/frontend/images/blog-4.jpg'), asset('assets/frontend/images/blog-5.jpg'), asset('assets/frontend/images/blog-6.jpg'), asset('assets/frontend/images/blog-cost.jpg'), asset('assets/frontend/images/blog-comparison.jpg'), asset('assets/frontend/images/blog-speed.jpg'), ]; $content = (string) $post->content; $toc = []; if (preg_match_all('/<h2\b[^ class="site-heading">]*>(.*?)<\/h2>/is', $content, $matches)) { foreach ($matches[1] as $index => $heading) { $toc[] = ['id' => 'section-'.($index + 1), 'title' => trim(strip_tags($heading))]; } $counter = 0; $content = preg_replace_callback('/<h2\b[^ class="site-heading">]*>(.*?)<\/h2>/is', function ($match) use (&$counter) { $counter++; return '<h2 id="section-'.$counter.'" class="site-style-scroll-mt-28 site-heading">'.$match[1].'</h2>'; }, $content); } $heroImage = $post->getFirstMediaUrl('featured-image') ?: ($post->featured_image ?: $blogImages[0]);
 @endphp
-<main class="w-100 position-relative site-effect-overflow-x-clip">
+<x-frontend.page>
     <div class="position-fixed site-position-top-20 start-0 w-100 site-dimension-h-arbitrary-3px site-surface-bg-surface-container site-position-z-40 bg-white">
         <div class="h-100 bg-primary site-motion-transition-all site-motion-duration-150 site-dimension-w-0" id="readProgress"></div>
     </div>
@@ -201,5 +201,5 @@
             </div>
         </div>
     </section> @endif
-</main>
+</x-frontend.page>
 @endsection

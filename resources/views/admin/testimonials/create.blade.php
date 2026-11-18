@@ -18,14 +18,6 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row g-3">
-                            <x-admin.form-fields.input name="client_name" label="Client Name"
-                                class="col-md-6" required />
-                            <x-admin.form-fields.input name="business_name" label="Business Name"
-                                class="col-md-6" />
-                            <x-admin.form-fields.select name="service_id" label="Related Service"
-                                :options="$services" placeholder="No related service" class="col-md-6" />
-                            <x-admin.form-fields.textarea name="quote" label="Quote" class="col-12"
-                                rows="5" required />
                             <x-admin.form-fields.image name="photo" label="Photo"
                                 remove-name="remove_photo" class="col-md-6" />
                             <div class="col-md-6">
@@ -34,6 +26,14 @@
                                 <x-admin.form-fields.checkbox name="is_published" label="Published"
                                     :checked="true" />
                             </div>
+                            <x-admin.form-fields.input name="client_name" label="Client Name"
+                                class="col-md-6" required />
+                            <x-admin.form-fields.input name="business_name" label="Business Name"
+                                class="col-md-6" />
+                            <x-admin.form-fields.select name="service_id" label="Related Service"
+                                :options="$services" placeholder="No related service" class="col-md-6" />
+                            <x-admin.form-fields.textarea name="quote" label="Quote" class="col-12"
+                                rows="5" required />
                         </div>
 
                         <div class="d-flex gap-2 mt-4">

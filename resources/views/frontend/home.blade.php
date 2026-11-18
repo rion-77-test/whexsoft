@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app') @section('title', 'WhexSoft | আপনার ব্যবসার জন্য ওয়েবসাইট ও ডিজিটাল সলিউশন')
+@extends('layouts.frontend') @section('title', 'WhexSoft | আপনার ব্যবসার জন্য ওয়েবসাইট ও ডিজিটাল সলিউশন')
 @section('description',
     'ই-কমার্স, ল্যান্ডিং পেজ ও কাস্টম ওয়েবসাইট নিয়ে কথা বলুন WhexSoft-এর সঙ্গে। আপনার লক্ষ্য ও
     কাজের পরিধি বুঝে আমরা সমাধানের প্রস্তাব দিই।')
@@ -9,26 +9,11 @@
             'corporate-portfolio-website' => 'corporate_fare',
             'dynamic-website' => 'terminal',
         ];
-        $serviceImages = [
-            'ecommerce-website' => asset('assets/frontend/images/project-ecommerce.jpg'),
-            'landing-page' => asset('assets/frontend/images/project-landing.jpg'),
-            'corporate-portfolio-website' => asset('assets/frontend/images/project-corporate.jpg'),
-            'dynamic-website' => asset('assets/frontend/images/project-webapp.jpg'),
-        ];
-        $serviceDescriptions = [
-            'ecommerce-website' =>
-                'বিক্রয় বাড়াতে আগ্রহী অনলাইন বিক্রেতাদের জন্য দ্রুত ও ব্যবহারবান্ধব ই-কমার্স স্টোর।',
-            'landing-page' => 'নতুন ফেসবুক বিক্রেতা ও ছোট ব্যবসার জন্য আকর্ষণীয়, ফলাফলমুখী ল্যান্ডিং পেজ।',
-            'corporate-portfolio-website' =>
-                'আপনার কাজ ও পরিচিতি তুলে ধরতে প্রিমিয়াম, মোবাইল-উপযোগী পোর্টফোলিও ওয়েবসাইট।',
-            'resort-website' =>
-                'রিয়েল-টাইম প্রাপ্যতা, আকর্ষণীয় গ্যালারি ও বুকিং সুবিধাসহ ভ্রমণ ও আতিথেয়তা প্ল্যাটফর্ম।',
-            'local-business-website' =>
-                'স্বয়ংক্রিয় অনলাইন বুকিং ও তাৎক্ষণিক তথ্যসহ স্থানীয় সেবা ব্যবসার স্মার্ট ওয়েবসাইট।',
-            'dynamic-website' => 'আপনার ব্যবসার প্রক্রিয়া ও গ্রাহকের চাহিদা অনুযায়ী তৈরি ডাইনামিক ওয়েবসাইট।',
-        ];
+       
+        
     @endphp
-    <main class="home-page container-fluid p-0 w-100 position-relative site-effect-overflow-x-clip"> {{-- Hero Section --}}
+    <x-frontend.page class="home-page container-fluid p-0">
+        {{-- Hero Section --}}
         <section
             class="home-hero position-relative w-100 site-dimension-min-h-arbitrary-100svh d-flex align-items-center overflow-hidden site-surface-bg-canvas-base site-section site-home-hero">
             <img alt="" aria-hidden="true"
@@ -72,6 +57,7 @@
                 </div>
             </div>
         </section>
+
         <section
             class="w-100 position-relative site-spacing-py-10 site-responsive-md-spacing-py-14 site-section site-section--dark"
             aria-label="আমাদের অর্জন">
@@ -88,7 +74,9 @@
                     @endforeach
                 </div>
             </div>
-        </section> {{-- Services Section --}}
+        </section>
+
+        {{-- Services Section --}}
         <section
             class="w-100 border-top border-bottom border-white border-opacity-10 site-surface-bg-arbitrary-hex-0b0f14-opacity-70 position-relative site-spacing-py-16 site-responsive-md-spacing-py-24 bg-white site-soft-border site-section site-section--light"
             id="services">
@@ -97,9 +85,8 @@
                 <div
                     class="d-flex flex-column flex-md-row align-items-md-end justify-content-between site-spacing-mb-14 gap-4">
                     <div>
-                        <span
-                            class="site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">মূল
-                            সেবাসমূহ</span>
+                        <x-frontend.eyebrow>মূল
+                            সেবাসমূহ</x-frontend.eyebrow>
                         <h2
                             class="site-type-font-heading fs-4 lh-lg site-responsive-sm-type-text-4xl site-type-font-extrabold text-white mt-3 site-heading text-white">
                             আপনার ব্যবসাকে অনলাইনে এগিয়ে নিতে আমাদের সার্ভিসসমূহ</h2>
@@ -107,11 +94,7 @@
                             class="site-color-text-slate-300 site-dimension-max-w-md site-type-text-sm site-responsive-sm-type-text-base site-copy text-secondary fs-6 fw-medium">
                             আপনার ব্যবসার ধরণ ও লক্ষ্য বুঝে উপযুক্ত ওয়েবসাইট তৈরি করতে আমরা সাহায্য করি।</p>
                     </div>
-                    <a class="d-inline-flex align-items-center gap-1-5 text-primary site-state-hover-color-text-white site-type-text-sm fw-semibold site-motion-transition-colors text-dark fs-6 site-content-action"
-                        href="{{ route('services.index') }}">
-                        <span>আমাদের সব সার্ভিস দেখুন</span>
-                        <span class="material-symbols-outlined fs-6">north_east</span>
-                    </a>
+                    <x-frontend.buttons.section :href="route('services.index')" text="আমাদের সব সার্ভিস দেখুন" />
                 </div>
                 @if ($services->isEmpty())
                     <div
@@ -120,68 +103,14 @@
                 @else
                     <div class="row row-cols-1 row-cols-md-3 g-4">
                         @foreach ($services as $service)
-                            @php
-                                $serviceImage =
-                                    $service->getFirstMediaUrl('service-image') ?:
-                                    $serviceImages[$service->slug] ?? asset('assets/frontend/images/brand-graphic.jpg');
-                                $serviceIcon = $serviceIcons[$service->slug] ?? 'language';
-                                $serviceDescription =
-                                    $service->short_description ?:
-                                    \Illuminate\Support\Str::limit(strip_tags($service->intro ?? ''), 140);
-                                $serviceDescription =
-                                    $serviceDescription ?:
-                                    $serviceDescriptions[$service->slug] ??
-                                        'আপনার ব্যবসার লক্ষ্য অনুযায়ী কাস্টম ডিজাইন ও ডেভেলপমেন্ট।';
-                                $features = collect($service->features ?? [])
-                                    ->pluck('title')
-                                    ->filter()
-                                    ->take(2);
-                            @endphp
-                            <div class="col home-card-column">
-                                <div
-                                    class="home-card rounded-4 site-surface-bg-arbitrary-hex-111722 border border-white border-opacity-10 site-state-hover-border-border-primary-fixed-opacity-50 p-4 d-flex flex-column justify-content-between site-elevation-shadow-xl site-state-hover-style-translate-y-1-5 site-motion-transition-all site-style-group bg-white site-soft-border">
-                                    <div>
-                                        <div
-                                            class="site-dimension-w-12 site-dimension-h-12 rounded-4 bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 d-flex align-items-center justify-content-center text-primary site-spacing-mb-5 site-state-group-hover-motion-scale-110 site-motion-transition-transform site-accent-component text-dark">
-                                            <span
-                                                class="material-symbols-outlined site-type-text-arbitrary-26px">{{ $serviceIcon }}</span>
-                                        </div>
-                                        <h3
-                                            class="site-type-font-heading site-type-text-xl fw-bold text-white mb-2 site-state-group-hover-color-text-primary-fixed site-motion-transition-colors site-heading text-white">
-                                            <a href="{{ route('services.show', $service) }}">{{ $service->title }}</a>
-                                        </h3>
-                                        <p
-                                            class="site-color-text-slate-300 site-type-text-sm mb-4 site-type-leading-relaxed site-copy text-secondary fs-6 fw-medium">
-                                            {{ $serviceDescription }}</p>
-                                        <div
-                                            class="site-spacing-space-y-2 mb-4 site-type-text-xs site-color-text-slate-300 text-secondary small fw-medium">
-                                            @foreach ($features as $feature)
-                                                <div class="d-flex align-items-center gap-2"><span
-                                                        class="material-symbols-outlined text-primary fs-6 text-dark">check_circle</span>
-                                                    {{ $feature }}</div>
-                                                @endforeach @if ($features->isEmpty())
-                                                    <div class="d-flex align-items-center gap-2"><span
-                                                            class="material-symbols-outlined text-primary fs-6 text-dark">check_circle</span>
-                                                        কাস্টম ব্র্যান্ড ডিজাইন</div>
-                                                    <div class="d-flex align-items-center gap-2"><span
-                                                            class="material-symbols-outlined text-primary fs-6 text-dark">check_circle</span>
-                                                        লাইভ-পরবর্তী সাপোর্ট</div>
-                                                @endif
-                                        </div>
-                                    </div>
-                                    <a class="pt-3 border-top border-white border-opacity-10 text-primary site-type-font-mono site-type-text-sm d-flex align-items-center justify-content-between site-state-hover-type-underline site-soft-border text-dark fs-6 fw-medium site-content-action"
-                                        href="{{ route('services.show', $service) }}">
-                                        <span>বিস্তারিত জানুন</span>
-                                        <span
-                                            class="material-symbols-outlined site-type-text-arbitrary-18px">arrow_forward</span>
-                                    </a>
-                                </div>
-                            </div>
+                            <x-frontend.card.service :service="$service" />
                         @endforeach
                     </div>
                 @endif
             </div>
-        </section> {{-- Latest Projects --}}
+        </section>
+
+        {{-- Latest Projects --}}
         <section
             class="w-100 border-top border-bottom border-white border-opacity-10 site-surface-bg-arbitrary-hex-0b0f14-opacity-80 position-relative site-spacing-py-16 site-responsive-md-spacing-py-24 bg-white site-soft-border site-section site-section--dark"
             id="portfolio">
@@ -190,62 +119,23 @@
                 <div
                     class="d-flex flex-column flex-md-row align-items-md-end justify-content-between site-spacing-mb-14 gap-4">
                     <div>
-                        <span
-                            class="site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">নির্বাচিত
-                            প্রজেক্ট</span>
+                        <x-frontend.eyebrow>নির্বাচিত
+                            প্রজেক্ট</x-frontend.eyebrow>
                         <h2
                             class="site-type-font-heading fs-4 lh-lg site-responsive-sm-type-text-4xl site-type-font-extrabold text-white mt-3 site-heading text-white">
                             আমাদের সাম্প্রতিক কাজ</h2>
                     </div>
-                    <a class="d-inline-flex align-items-center gap-1-5 text-primary site-state-hover-color-text-white site-type-text-sm fw-semibold site-motion-transition-colors text-dark fs-6 site-content-action"
-                        href="{{ route('portfolio.index') }}">
-                        <span>সকল প্রজেক্ট দেখুন</span>
-                        <span class="material-symbols-outlined fs-6">north_east</span>
-                    </a>
+                    <x-frontend.buttons.section :href="route('portfolio.index')" text="সকল প্রজেক্ট দেখুন" />
                 </div>
                 @if ($projects->isEmpty())
                     <div
                         class="rounded-4 border border-white border-opacity-10 site-surface-bg-arbitrary-hex-111722 site-spacing-p-8 text-center site-color-text-slate-300 bg-white site-soft-border text-secondary">
                         এখনো কোনো প্রজেক্ট প্রকাশ করা হয়নি।</div>
                 @else
-                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div
+                        class="d-grid site-layout-grid-cols-1 site-responsive-md-layout-grid-cols-2 site-responsive-lg-layout-grid-cols-3 site-spacing-gap-8">
                         @foreach ($projects as $project)
-                            @php $image = $project->getFirstMediaUrl('project-image') ?: $projectImages[$loop->index % count($projectImages)]; @endphp
-                            <div class="col home-card-column">
-                                <div
-                                    class="home-card rounded-4 site-surface-bg-arbitrary-hex-111722 border border-white border-opacity-10 site-state-hover-border-border-primary-fixed-opacity-40 overflow-hidden site-elevation-shadow-xl site-state-hover-style-translate-y-1-5 site-motion-transition-all site-style-group d-flex flex-column bg-white site-soft-border">
-                                    <div
-                                        class="position-relative site-media-aspect-square overflow-hidden site-surface-bg-arbitrary-hex-070a0e bg-white">
-                                        <img alt="{{ $project->title }}"
-                                            class="w-100 h-100 object-fit-cover site-state-group-hover-motion-scale-105 site-motion-transition-transform site-motion-duration-500"
-                                            src="{{ $image }}" />
-                                        @if ($project->projectCategory)
-                                            <div
-                                                class="position-absolute site-position-top-3 site-position-left-3 site-surface-bg-arbitrary-hex-0b0f14-opacity-85 site-effect-backdrop-blur-md site-spacing-px-3 py-1 rounded-pill border site-border-border-primary-fixed-opacity-30 text-primary site-type-text-xs site-type-font-mono fw-medium bg-white text-dark small ">
-                                                #{{ $project->projectCategory->name }}</div>
-                                        @endif
-                                    </div>
-                                    <div
-                                        class="site-spacing-p-5 site-layout-flex-1 d-flex flex-column justify-content-between">
-                                        <div>
-                                            <h3
-                                                class="site-type-font-heading fs-6 site-responsive-sm-type-text-lg fw-bold text-white mb-1 site-state-group-hover-color-text-primary-fixed site-motion-transition-colors site-heading text-white">
-                                                <a
-                                                    href="{{ route('portfolio.show', $project) }}">{{ $project->title }}</a>
-                                            </h3>
-                                            <p
-                                                class="site-type-text-xs site-color-text-slate-300 mb-3 site-copy text-secondary small fw-medium">
-                                                {{ $project->summary }}</p>
-                                        </div>
-                                        <a class="site-type-text-xs text-primary fw-semibold d-flex align-items-center gap-1 site-state-hover-type-underline text-dark small site-content-action"
-                                            href="{{ route('portfolio.show', $project) }}">
-                                            <span>প্রজেক্ট দেখুন</span>
-                                            <span
-                                                class="material-symbols-outlined site-type-text-arbitrary-14px">north_east</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                        <x-frontend.card.project :project="$project" />
                         @endforeach
                     </div>
                 @endif
@@ -257,9 +147,8 @@
                 class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
                 <div class="row g-4 align-items-center">
                     <div class="col-12 col-lg-7">
-                        <span
-                            class="site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">আমাদের
-                            পরিচিতি</span>
+                        <x-frontend.eyebrow>আমাদের
+                            পরিচিতি</x-frontend.eyebrow>
                         <h2
                             class="site-type-font-heading fs-4 lh-lg site-responsive-sm-type-text-4xl site-type-font-extrabold text-white mt-3 site-spacing-mb-8 site-heading text-white">
                             আমরা গড়ি CPA-কেন্দ্রিক ডিজিটাল অভিজ্ঞতা</h2>
@@ -308,21 +197,24 @@
                     </div>
                 </div>
             </div>
-        </section> {{-- Why Website Section --}}
+        </section>
+
+
+        {{-- Why Website Section --}}
         <section class="w-100 position-relative py-5 site-responsive-md-spacing-py-16 site-section site-section--dark"
             id="why-website">
             <div
                 class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
                 <div class="text-center site-dimension-max-w-3xl mx-auto site-spacing-mb-14">
-                    <span
-                        class="site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">শীর্ষস্থানীয়
-                        প্রতিষ্ঠানের আস্থায়</span>
+                    <x-frontend.eyebrow>শীর্ষস্থানীয়
+                        প্রতিষ্ঠানের আস্থায়</x-frontend.eyebrow>
                     <h2
                         class="site-type-font-heading fs-4 lh-lg site-responsive-sm-type-text-4xl site-type-font-extrabold text-white mt-3 site-spacing-mb-3 site-heading text-white">
                         কেন সোশ্যাল মিডিয়ার পাশাপাশি নিজের ওয়েবসাইট?</h2>
                     <p
                         class="site-color-text-slate-300 site-type-text-sm site-responsive-sm-type-text-base site-copy text-secondary fs-6 fw-medium">
-                        সোশ্যাল মিডিয়া নতুন মানুষের কাছে পৌঁছাতে সাহায্য করে। ওয়েবসাইটে আপনার সব তথ্য ও সেবা একসাথে</p>
+                        সোশ্যাল মিডিয়া নতুন মানুষের কাছে পৌঁছাতে সাহায্য করে। ওয়েবসাইটে আপনার সব তথ্য ও সেবা একসাথে থাকে।
+                    </p>
                 </div>
                 <div class="row row-cols-1 row-cols-md-2 g-4 align-items-stretch">
                     <div class="col home-card-column">
@@ -382,8 +274,7 @@
                             </div>
                             <div
                                 class="mt-4 site-spacing-p-3 rounded-4 site-surface-bg-red-950-opacity-30 border site-border-border-red-500-opacity-20 site-type-text-xs site-color-text-red-200 d-flex align-items-center gap-2 small fw-medium">
-                                <span
-                                    class="material-symbols-outlined site-type-text-arbitrary-18px ">warning</span>
+                                <span class="material-symbols-outlined site-type-text-arbitrary-18px ">warning</span>
                                 <span class="text-white">অ্যাকাউন্টে সমস্যা হলে আপনার কাস্টমার হারাতে পারেন</span>
                             </div>
                         </div>
@@ -445,23 +336,26 @@
                             <div
                                 class="mt-4 site-spacing-p-3 rounded-4 bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-type-text-xs site-color-text-slate-200 d-flex align-items-center justify-content-between site-accent-component text-secondary small fw-medium">
                                 <span class="d-flex align-items-center gap-1-5 fw-semibold text-primary text-dark"><span
-                                        class="material-symbols-outlined site-type-text-arbitrary-18px">verified_user</span><span>আপনার স্থায়ী ঠিকানা যেখানে আপানার কাস্টমাররা আপনাকে খুঁজে নিবে</span></span>
+                                        class="material-symbols-outlined site-type-text-arbitrary-18px">verified_user</span><span>আপনার
+                                        স্থায়ী ঠিকানা যেখানে আপানার কাস্টমাররা আপনাকে খুঁজে নিবে</span></span>
                                 <a class="text-white site-type-underline site-state-hover-color-text-primary-fixed fw-medium text-white"
                                     href="#consultation">বিস্তারিত জানুন →</a>
                             </div>
                         </div>
                     </div>
                 </div>
-        </section> {{-- Work Process --}} {{-- <section class="w-100 position-relative py-5 site-responsive-md-spacing-py-16" id="process"> <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10"> <div class="text-center site-dimension-max-w-2xl mx-auto site-spacing-mb-14"> <span class="site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">কাজের পদ্ধতি</span> <h2 class="site-type-font-heading fs-4 lh-lg site-responsive-sm-type-text-4xl site-type-font-extrabold text-white mt-3 mb-2 site-heading text-white">সহজ ৫টি ধাপে আপনার ওয়েবসাইট</h2> <p class="site-color-text-slate-300 site-type-text-sm site-responsive-sm-type-text-base site-copy text-secondary fs-6 fw-medium">প্রতিটি প্রজেক্টে কাজের পরিধি ও সময়সূচি আগে ঠিক করে ধাপে ধাপে এগোই।</p> </div> <div class="d-grid site-layout-grid-cols-1 site-responsive-sm-layout-grid-cols-2 site-responsive-md-layout-grid-cols-5 gap-3"> @foreach ([['প্ল্যানিং', 'ব্যবসায়িক লক্ষ্য ও দর্শক বিশ্লেষণ করে আর্কিটেকচার তৈরি।'], ['কাস্টম ডিজাইন', 'আপনার ব্র্যান্ড ও গ্রাহকের প্রয়োজন অনুযায়ী ইন্টারফেস তৈরি।'], ['ডেভেলপমেন্ট', 'সম্মত ফিচার ও প্রয়োজনীয় সংযোগগুলো তৈরি করা।'], ['টেস্টিং ও লঞ্চ', 'সাইট পরীক্ষা করে আপনার ডোমেইনে প্রকাশের প্রস্তুতি।'], ['হস্তান্তর ও সহায়তা', 'ব্যবহারবিধি বুঝিয়ে দেওয়া এবং সম্মত সাপোর্ট দেওয়া।']] as [$title, $text]) <div class="site-spacing-p-5 rounded-4 {{ $loop->last ? 'site-surface-bg-arbitrary-hex-161f2e border site-border-border-primary-fixed-opacity-40 site-elevation-shadow-arbitrary-0-0-20px-rgba-197-243-49-0-15 site-feature-card' : 'site-surface-bg-arbitrary-hex-111722 border border-white border-opacity-10' }} text-center d-flex flex-column align-items-center bg-white"> <div class="site-dimension-w-10 site-dimension-h-10 rounded-pill {{ $loop->last ? 'bg-primary site-color-text-arbitrary-hex-070a0e site-elevation-shadow-arbitrary-0-0-10px-rgba-197-243-49-0-4' : 'site-surface-bg-white-opacity-5 text-primary border site-border-border-primary-fixed-opacity-30' }} site-type-font-mono fs-6 fw-bold d-flex align-items-center justify-content-center site-spacing-mb-3">{{ $loop->iteration }}</div> <h3 class="site-type-font-heading fs-6 fw-bold {{ $loop- class="site-heading">last ? 'text-primary-fixed' : 'text-white' }} mb-1">{{ $title }}</h3> <p class="site-type-text-xs {{ $loop- class="site-copy">last ? 'text-slate-200' : 'text-slate-300' }}">{{ $text }}</p> </div> @endforeach </div> </div> </section> --}} {{-- Testimonials --}} @if ($testimonials->isNotEmpty())
+        </section>
+
+        {{-- Testimonials --}}
+        @if ($testimonials->isNotEmpty())
             <section
                 class="w-100 border-top border-bottom border-white border-opacity-10 site-surface-bg-arbitrary-hex-0b0f14-opacity-70 position-relative site-spacing-py-16 site-responsive-md-spacing-py-24 bg-white site-soft-border site-section site-section--light"
                 id="testimonials">
                 <div
                     class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
                     <div class="text-center site-dimension-max-w-2xl mx-auto site-spacing-mb-14">
-                        <span
-                            class="site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">ক্লায়েন্ট
-                            রিভিউ</span>
+                        <x-frontend.eyebrow>ক্লায়েন্ট
+                            রিভিউ</x-frontend.eyebrow>
                         <h2
                             class="site-type-font-heading fs-4 lh-lg site-responsive-sm-type-text-4xl site-type-font-extrabold text-white mt-3 site-heading text-white">
                             আমাদের কাজ সম্পর্কে ক্লায়েন্টদের অভিজ্ঞতা</h2>
@@ -472,10 +366,12 @@
                                 <figure
                                     class="home-card site-style-group rounded-4 site-surface-bg-arbitrary-hex-111722 border border-white border-opacity-10 site-state-hover-border-border-primary-fixed-opacity-40 p-4 d-flex flex-column justify-content-between site-elevation-shadow-xl site-motion-transition-colors bg-white site-soft-border">
                                     <div>
-                                        <p class="site-type-text-xs text-primary mb-3 site-copy text-dark small fw-medium">
+
+                                        <p
+                                            class="site-type-text-xs text-primary mb-3 site-copy text-black small fw-semibold">
                                             ক্লায়েন্টের অভিজ্ঞতা</p>
                                         <blockquote
-                                            class="site-color-text-slate-200 site-type-text-sm site-type-leading-relaxed site-body-text text-secondary fs-6 fw-medium">
+                                            class="site-color-text-slate-200 site-type-text-sm site-type-leading-relaxed site-body-text text-secondary fs-6 fw-medium mt-2">
                                             {{ \Illuminate\Support\Str::limit($testimonial->quote, 220) }}</blockquote>
                                     </div>
                                     <figcaption
@@ -499,6 +395,8 @@
                 </div>
             </section>
         @endif
+
+        {{-- Blog --}}
         <section
             class="w-100 border-top border-white border-opacity-10 site-surface-bg-arbitrary-hex-0b0f14-opacity-70 position-relative site-spacing-py-16 site-responsive-md-spacing-py-24 bg-white site-soft-border site-section site-section--dark"
             id="blog">
@@ -506,18 +404,12 @@
                 class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
                 <div class="d-flex flex-column flex-md-row align-items-md-end justify-content-md-between gap-4 mb-5">
                     <div>
-                        <span
-                            class="site-type-text-xs site-type-font-mono text-primary fw-semibold site-type-tracking-widest text-uppercase text-dark small">খবর
-                            ও নিবন্ধ</span>
+                        <x-frontend.eyebrow>খবর ও নিবন্ধ</x-frontend.eyebrow>
                         <h2
                             class="site-type-font-heading site-type-text-3xl site-responsive-md-type-text-4xl fw-bold text-white site-type-tracking-tight site-spacing-mt-3 site-heading text-white">
-                            ডিজিটাল দুনিয়ার নতুন ভাবনা</h2>
+                            আমাদের ব্লগ</h2>
                     </div>
-                    <a class="d-inline-flex align-items-center gap-2 text-primary fw-semibold site-state-hover-spacing-gap-3 site-motion-transition-all text-dark"
-                        href="{{ route('blog.index') }}">
-                        <span>সব ব্লগ দেখুন</span>
-                        <span class="material-symbols-outlined fs-5">arrow_forward</span>
-                    </a>
+                    <x-frontend.buttons.section :href="route('blog.index')" text="সব ব্লগ দেখুন" />
                 </div>
                 @if ($posts->isEmpty())
                     <div
@@ -538,7 +430,7 @@
                                             <div
                                                 class="position-absolute site-position-top-4 site-position-left-4 site-position-z-10">
                                                 <span
-                                                    class="site-spacing-px-3 py-1 rounded-pill site-surface-bg-surface-card-elevated-opacity-90 site-effect-backdrop-blur-md text-primary site-type-font-label-md site-type-text-label-md site-elevation-shadow-sm bg-white text-dark small fw-medium">{{ $post->category }}</span>
+                                                    class="site-spacing-px-3 py-1 rounded-pill site-surface-bg-surface-card-elevated-opacity-90 site-effect-backdrop-blur-md text-primary site-type-font-label-md site-type-text-label-md site-elevation-shadow-sm bg-white text-black small fw-medium">{{ $post->category }}</span>
                                             </div>
                                         @endif
                                     </div>
@@ -570,116 +462,8 @@
                 @endif
             </div>
         </section>
-        <section
-            class="w-100 border-top border-white border-opacity-10 site-surface-bg-gradient-to-b site-surface-from-arbitrary-hex-0b0f14 site-surface-to-arbitrary-hex-070a0e position-relative site-spacing-py-16 site-responsive-md-spacing-py-24 site-gradient-background site-soft-border site-section site-section--light"
-            id="consultation">
-            <div
-                class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
-                <div
-                    class="site-shape-rounded-3xl site-surface-bg-arbitrary-hex-111722 border site-border-border-white-opacity-15 site-spacing-p-8 p-sm-5 site-elevation-shadow-2xl bg-white site-soft-border">
-                    <div class="row g-4 align-items-center">
-                        <div class="col-12 col-lg-7 d-flex flex-column align-items-start">
-                            <div
-                                class="d-inline-flex align-items-center gap-2 site-spacing-px-3 py-1 rounded-pill site-surface-bg-primary-fixed-opacity-15 border site-border-border-primary-fixed-opacity-30 text-primary site-type-text-xs site-type-font-mono fw-semibold mb-3 site-accent-component text-dark small">
-                                <span
-                                    class="site-dimension-w-2 site-dimension-h-2 rounded-pill bg-primary site-motion-animate-ping"></span>
-                                <span>চলুন, অসাধারণ কিছু তৈরি করি</span>
-                            </div>
-                            <h2
-                                class="site-type-font-heading fs-4 lh-lg site-responsive-sm-type-text-4xl site-type-font-extrabold text-white mb-3 lh-sm site-heading text-white">
-                                আপনার ধারণাকে বাস্তবে রূপ দিতে আজই শুরু করুন</h2>
-                            <p
-                                class="site-color-text-slate-300 site-type-text-sm site-responsive-sm-type-text-base site-spacing-mb-8 site-type-leading-relaxed site-copy text-secondary fs-6 fw-medium">
-                                আপনার প্রজেক্টের কথা জানান। আমরা ২৪ ঘণ্টার মধ্যে আপনার সঙ্গে যোগাযোগ করব।</p>
-                            <div class="d-flex flex-wrap align-items-center gap-3 site-spacing-mb-8">
-                                <a class="px-4 site-spacing-py-3-5 rounded-pill bg-primary site-color-text-arbitrary-hex-070a0e site-type-font-heading site-type-text-sm fw-bold site-elevation-shadow-arbitrary-0-0-20px-rgba-197-243-49-0-3 site-state-hover-surface-bg-primary-fixed-dim site-state-hover-motion-scale-105 site-motion-transition-all d-flex align-items-center gap-2 fs-6"
-                                    href="tel:01335198859">
-                                    <span class="material-symbols-outlined fs-5">call</span>
-                                    <span>কল করুন: ০১৩৩৫-১৯৮৮৫৯</span>
-                                </a>
-                                <a class="px-4 site-spacing-py-3-5 rounded-pill site-surface-bg-arbitrary-hex-25d366 site-state-hover-surface-bg-arbitrary-hex-20ba5a site-color-text-arbitrary-hex-070a0e site-type-font-heading site-type-text-sm fw-bold site-elevation-shadow-arbitrary-0-0-20px-rgba-37-211-102-0-3 site-state-hover-motion-scale-105 site-motion-transition-all d-flex align-items-center gap-2 fs-6"
-                                    href="https://wa.me/8801335198859" rel="noopener noreferrer" target="_blank">
-                                    <span class="material-symbols-outlined fs-5">chat</span>
-                                    <span>হোয়াটসঅ্যাপে মেসেজ দিন</span>
-                                </a>
-                            </div>
-                            <div
-                                class="d-flex align-items-center gap-2 site-color-text-slate-400 site-type-text-xs fw-medium text-secondary small ">
-                                <span
-                                    class="material-symbols-outlined site-type-text-arbitrary-18px text-primary text-dark">location_on</span>
-                                <span>স্টুডিও অফিস: সোনির আখড়া, যাত্রাবাড়ী, ঢাকা-<span
-                                        class="nubmer-1-fixer">১</span>২৩৬</span>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-5">
-                            <div
-                                class="home-card site-surface-bg-arbitrary-hex-0b0f14 p-4 site-responsive-sm-spacing-p-8 rounded-4 border border-white border-opacity-10 site-elevation-shadow-xl bg-white site-soft-border">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <h3
-                                        class="site-type-font-heading site-type-text-lg fw-bold text-white site-heading text-white">
-                                        প্রজেক্ট নিয়ে কথা বলুন</h3>
-                                    <span
-                                        class="site-dimension-w-2-5 site-dimension-h-2-5 rounded-pill bg-primary site-motion-animate-ping"></span>
-                                </div>
-                                <p
-                                    class="site-type-text-xs site-color-text-slate-400 mb-4 site-copy text-secondary small fw-medium">
-                                    তথ্য পাঠালে আমরা প্রজেক্টের বিবরণ দেখে কর্মদিবসে যোগাযোগ করব।</p>
-                                <form class="d-flex flex-column gap-3" action="{{ route('contact.store') }}"
-                                    method="POST"> @csrf
-                                    <div>
-                                        <label
-                                            class="d-block site-type-text-xs site-color-text-slate-300 fw-medium site-spacing-mb-1-5 text-secondary small "
-                                            for="home-name">আপনার নাম *</label>
-                                        <input
-                                            class="form-control w-100 px-3 site-spacing-py-2-5 rounded-4 site-surface-bg-arbitrary-hex-182029 text-white site-color-placeholder-slate-400 border site-border-border-white-opacity-15 site-state-focus-style-outline-none site-state-focus-border-border-primary-fixed site-type-text-sm site-motion-transition-colors bg-white site-soft-border text-white fs-6 fw-medium"
-                                            id="home-name" name="name" value="{{ old('name') }}"
-                                            placeholder="উদাঃ সাকিব আহমেদ" required type="text" /> @error('name')
-                                            <p
-                                                class="mt-1 site-type-text-xs text-danger site-copy text-danger small fw-medium">
-                                                {{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                    <div>
-                                        <label
-                                            class="d-block site-type-text-xs site-color-text-slate-300 fw-medium site-spacing-mb-1-5 text-secondary small "
-                                            for="home-phone">মোবাইল নম্বর *</label>
-                                        <input
-                                            class="form-control w-100 px-3 site-spacing-py-2-5 rounded-4 site-surface-bg-arbitrary-hex-182029 text-white site-color-placeholder-slate-400 border site-border-border-white-opacity-15 site-state-focus-style-outline-none site-state-focus-border-border-primary-fixed site-type-text-sm site-motion-transition-colors bg-white site-soft-border text-white fs-6 fw-medium"
-                                            id="home-phone" name="phone" value="{{ old('phone') }}"
-                                            placeholder="০১XXXXXXXXX" required type="tel" /> @error('phone')
-                                            <p
-                                                class="mt-1 site-type-text-xs text-danger site-copy text-danger small fw-medium">
-                                                {{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                    <div>
-                                        <label
-                                            class="d-block site-type-text-xs site-color-text-slate-300 fw-medium site-spacing-mb-1-5 text-secondary small "
-                                            for="home-service">ওয়েবসাইটের ধরন</label>
-                                        <select
-                                            class="form-select w-100 px-3 site-spacing-py-2-5 rounded-4 site-surface-bg-arbitrary-hex-182029 text-white border site-border-border-white-opacity-15 site-state-focus-style-outline-none site-state-focus-border-border-primary-fixed site-type-text-sm site-motion-transition-colors bg-white site-soft-border text-white fs-6 fw-medium"
-                                            id="home-service" name="service_type">
-                                            @foreach ($services as $service)
-                                                <option class="site-surface-bg-arbitrary-hex-182029 bg-white"
-                                                    value="{{ $service->title }}" @selected(old('service_type') === $service->title)>
-                                                    {{ $service->title }}</option>
-                                            @endforeach
-                                            <option class="site-surface-bg-arbitrary-hex-182029 bg-white"
-                                                value="কাস্টম ওয়েব অ্যাপ্লিকেশন" @selected(old('service_type') === 'কাস্টম ওয়েব অ্যাপ্লিকেশন')>কাস্টম ওয়েব
-                                                অ্যাপ্লিকেশন</option>
-                                        </select>
-                                    </div>
-                                    <button
-                                        class="btn home-submit-btn w-100 mt-2 site-spacing-py-3-5 rounded-4 bg-primary site-color-text-arbitrary-hex-070a0e site-type-text-sm fw-bold site-type-font-heading site-state-hover-surface-bg-primary-fixed-dim site-motion-transition-all site-elevation-shadow-arbitrary-0-0-15px-rgba-197-243-49-0-3 d-flex align-items-center justify-content-center gap-1-5 fs-6"
-                                        type="submit">
-                                        <span>অনুরোধ পাঠান</span>
-                                        <span class="material-symbols-outlined site-type-text-arbitrary-18px">send</span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </section>
-    </main>
+        {{-- Contact Section --}}
+        @include('partials.frontend.contact-section')
+
+    </x-frontend.page>
 @endsection

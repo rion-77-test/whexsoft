@@ -1,9 +1,9 @@
-@extends('frontend.layouts.app') @section('title', 'ব্লগ | WhexSoft')
+@extends('layouts.frontend') @section('title', 'ব্লগ | WhexSoft')
 @section('description', 'ওয়েবসাইট, ই-কমার্স ও অনলাইন ব্যবসা নিয়ে WhexSoft-এর লেখা ও ব্যবহারিক পরামর্শ পড়ুন।')
 @section('page', 'blog') @section('content')
 @php $blogImages = [ asset('assets/frontend/images/blog-featured.jpg'), asset('assets/frontend/images/blog-1.jpg'), asset('assets/frontend/images/blog-2.jpg'), asset('assets/frontend/images/blog-3.jpg'), asset('assets/frontend/images/blog-4.jpg'), asset('assets/frontend/images/blog-5.jpg'), asset('assets/frontend/images/blog-6.jpg'), asset('assets/frontend/images/blog-cost.jpg'), asset('assets/frontend/images/blog-comparison.jpg'), asset('assets/frontend/images/blog-speed.jpg'), ]; $isFiltered = $search !== '' || $activeCategory !== ''; $featured = (! $isFiltered && $posts->currentPage() === 1) ? $posts->first() : null; $gridPosts = $featured ? $posts->getCollection()->slice(1) : $posts->getCollection();
 @endphp
-<main class="w-100 position-relative site-effect-overflow-x-clip">
+<x-frontend.page>
     <div class="position-absolute site-style-top-32 start-50 translate-middle-x site-dimension-w-arbitrary-850px site-dimension-h-arbitrary-450px bg-primary bg-opacity-10 site-effect-blur-arbitrary-130px rounded-pill pe-none site-style-z-10"></div>
     <div class="position-absolute site-position-top-arbitrary-35-percent site-style-right-48 site-dimension-w-arbitrary-600px site-dimension-h-arbitrary-500px site-surface-bg-tertiary-fixed-dim-opacity-5 site-effect-blur-arbitrary-150px rounded-pill pe-none site-style-z-10"></div>
     <div class="position-absolute site-position-bottom-20 site-style-left-48 site-dimension-w-arbitrary-650px site-dimension-h-arbitrary-550px site-surface-bg-primary-container-opacity-5 site-effect-blur-arbitrary-160px rounded-pill pe-none site-style-z-10"></div>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                 </article> @endforeach
-            </div> {{ $posts->links('frontend.partials.pagination') }} @endif
+            </div> {{ $posts->links('partials.frontend.pagination') }} @endif
         </div>
     </section>
     <section class="w-100 position-relative py-5 site-responsive-md-spacing-py-16 site-section site-section--light">
@@ -131,5 +131,5 @@
             </div>
         </div>
     </section>
-</main>
+</x-frontend.page>
 @endsection

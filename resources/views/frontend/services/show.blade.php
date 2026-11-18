@@ -1,10 +1,10 @@
-@extends('frontend.layouts.app') @section('title', $service->meta_title ?: $service->title.' | WhexSoft')
+@extends('layouts.frontend') @section('title', $service->meta_title ?: $service->title.' | WhexSoft')
 @section('description', $service->meta_description ?: ($service->short_description ?: \Illuminate\Support\Str::limit(strip_tags($service->intro ?: $service->content ?: ''), 180)))
 @section('page', 'services')
 @section('og_image', $service->getFirstMediaUrl('service-image')) @section('content')
 @php $heroImage = $service->getFirstMediaUrl('service-image'); $description = $service->short_description ?: \Illuminate\Support\Str::limit(strip_tags($service->intro ?: $service->content ?: ''), 180); $features = collect($service->features ?? []) ->filter(fn ($item) => filled($item['title'] ?? null) || filled($item['text'] ?? null)) ->values(); $steps = collect($service->steps ?? []) ->filter(fn ($item) => filled($item['title'] ?? null) || filled($item['text'] ?? null)) ->values(); $faqs = collect($service->faqs ?? []) ->filter(fn ($item) => filled($item['question'] ?? null) && filled($item['answer'] ?? null)) ->values();
 @endphp
-<main class="w-100 position-relative site-effect-overflow-x-clip">
+<x-frontend.page>
     <section class="w-100 position-relative overflow-hidden site-spacing-pt-32 site-responsive-md-spacing-pt-40 pb-5 site-responsive-md-spacing-pb-16 site-section site-section--dark">
         <div class="position-absolute site-style-top-32 end-0 site-dimension-w-arbitrary-600px site-dimension-h-arbitrary-400px bg-primary bg-opacity-10 site-effect-blur-arbitrary-120px rounded-pill pe-none"></div>
         <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
@@ -17,7 +17,7 @@
                         <span class="material-symbols-outlined fs-6">chevron_right</span>
                         <span class="text-primary text-dark">{{ $service->title }}</span>
                     </nav> @if ($service->serviceCategory)
-                    <span class="d-inline-block site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">{{ $service->serviceCategory->name }}</span> @endif
+                    <x-frontend.eyebrow class="d-inline-block">{{ $service->serviceCategory->name }}</x-frontend.eyebrow> @endif
                     <h1 class="site-type-font-heading site-type-text-4xl site-responsive-md-type-text-6xl site-type-font-extrabold text-white site-type-tracking-tight lh-sm site-spacing-mt-5 site-heading text-white">{{ $service->title }}</h1> @if ($description)
                     <p class="site-color-text-slate-300 fs-6 site-responsive-md-type-text-xl mt-4 site-type-leading-relaxed site-copy text-secondary">{{ $description }}</p> @endif @if ($startingPackage)
                     <p class="site-type-text-sm site-responsive-md-type-text-base site-color-text-slate-200 site-spacing-mt-5 site-copy text-secondary fs-6 fw-medium">
@@ -45,15 +45,15 @@
     </section> @if ($service->intro || $service->content)
     <section class="w-100 site-surface-bg-arbitrary-hex-0b0f14-opacity-70 border-top border-bottom border-white border-opacity-10 position-relative site-spacing-py-16 site-responsive-md-spacing-py-24 bg-white site-soft-border site-section site-section--light">
         <div class="site-dimension-max-w-4xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
-            <span class="d-inline-block site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">সার্ভিস পরিচিতি</span> @if ($service->intro)
+            <x-frontend.eyebrow class="d-inline-block">সার্ভিস পরিচিতি</x-frontend.eyebrow> @if ($service->intro)
             <div class="mt-4 site-type-text-lg site-color-text-slate-200 site-type-leading-relaxed text-secondary">{!! nl2br(e($service->intro)) !!}</div> @endif @if ($service->content)
-            <div class="mt-4 site-color-text-slate-300 site-type-leading-relaxed site-spacing-space-y-4 text-secondary">{!! $service->content !!}</div> @endif
+            <div class="service-content mt-4 site-color-text-slate-300 site-type-leading-relaxed site-spacing-space-y-4 text-secondary">{!! $service->content !!}</div> @endif
         </div>
     </section> @endif @if ($features->isNotEmpty())
     <section class="w-100 position-relative site-spacing-py-16 site-responsive-md-spacing-py-24 site-section site-section--dark">
         <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
             <div class="site-dimension-max-w-3xl text-center mx-auto mb-5 site-responsive-md-spacing-mb-14">
-                <span class="d-inline-block site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">যা যা পাচ্ছেন</span>
+                <x-frontend.eyebrow class="d-inline-block">যা যা পাচ্ছেন</x-frontend.eyebrow>
                 <h2 class="site-type-font-heading site-type-text-3xl site-responsive-md-type-text-4xl site-type-font-extrabold text-white mt-3 site-type-tracking-tight site-heading text-white">এই সার্ভিসের মূল ফিচারসমূহ</h2>
             </div>
             <div class="d-grid site-layout-grid-cols-1 site-responsive-md-layout-grid-cols-2 site-responsive-lg-layout-grid-cols-3 gap-4"> @foreach ($features as $feature)
@@ -70,7 +70,7 @@
     <section class="w-100 site-surface-bg-arbitrary-hex-0b0f14-opacity-70 border-top border-bottom border-white border-opacity-10 position-relative site-spacing-py-16 site-responsive-md-spacing-py-24 bg-white site-soft-border site-section site-section--light">
         <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
             <div class="site-dimension-max-w-3xl text-center mx-auto mb-5 site-responsive-md-spacing-mb-14">
-                <span class="d-inline-block site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">কাজের ধাপ</span>
+                <x-frontend.eyebrow class="d-inline-block">কাজের ধাপ</x-frontend.eyebrow>
                 <h2 class="site-type-font-heading site-type-text-3xl site-responsive-md-type-text-4xl site-type-font-extrabold text-white mt-3 site-type-tracking-tight site-heading text-white">কীভাবে কাজটি সম্পন্ন হয়</h2>
             </div>
             <ol class="d-grid site-layout-grid-cols-1 site-responsive-sm-layout-grid-cols-2 site-responsive-lg-layout-grid-cols-4 gap-4"> @foreach ($steps as $step)
@@ -85,7 +85,7 @@
     <section class="w-100 position-relative site-spacing-py-16 site-responsive-md-spacing-py-24 site-section site-section--dark">
         <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
             <div class="site-dimension-max-w-3xl text-center mx-auto mb-5 site-responsive-md-spacing-mb-14">
-                <span class="d-inline-block site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">প্যাকেজ ও মূল্য</span>
+                <x-frontend.eyebrow class="d-inline-block">প্যাকেজ ও মূল্য</x-frontend.eyebrow>
                 <h2 class="site-type-font-heading site-type-text-3xl site-responsive-md-type-text-4xl site-type-font-extrabold text-white mt-3 site-type-tracking-tight site-heading text-white">এই সার্ভিসের প্যাকেজসমূহ</h2>
             </div>
             <div class="d-grid site-layout-grid-cols-1 site-responsive-lg-layout-grid-cols-3 site-spacing-gap-8 align-items-stretch"> @foreach ($service->packages as $package)
@@ -125,10 +125,10 @@
         <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
             <div class="d-flex flex-column flex-md-row align-items-md-end justify-content-between mb-5 gap-4">
                 <div>
-                    <span class="d-inline-block site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">সংশ্লিষ্ট কাজ</span>
+                    <x-frontend.eyebrow class="d-inline-block">সংশ্লিষ্ট কাজ</x-frontend.eyebrow>
                     <h2 id="related-projects-title" class="site-type-font-heading site-type-text-3xl site-responsive-md-type-text-4xl site-type-font-extrabold text-white mt-3 site-type-tracking-tight site-heading text-white">এই সার্ভিসের প্রজেক্টসমূহ</h2>
                 </div>
-                <a class="d-inline-flex align-items-center gap-1-5 text-primary site-state-hover-color-text-white site-type-text-sm fw-semibold site-motion-transition-colors text-dark fs-6 site-content-action" href="{{ route('portfolio.index') }}">সকল প্রজেক্ট দেখুন<span class="material-symbols-outlined fs-6">north_east</span></a>
+                <x-frontend.buttons.section :href="route('portfolio.index')" text="সকল প্রজেক্ট দেখুন" />
             </div> @if ($service->projects->isNotEmpty())
             <div class="d-grid site-layout-grid-cols-1 site-responsive-md-layout-grid-cols-3 gap-4"> @foreach ($service->projects as $project) @php $image = $project->getFirstMediaUrl('project-image'); @endphp
                 <article class="rounded-4 site-surface-bg-arbitrary-hex-111722 border border-white border-opacity-10 site-state-hover-border-border-primary-fixed-opacity-40 overflow-hidden site-elevation-shadow-xl site-state-hover-style-translate-y-1-5 site-motion-transition-all site-style-group d-flex flex-column bg-white site-soft-border"> @if ($image)
@@ -142,20 +142,20 @@
                             </h3>
                             <p class="site-type-text-xs site-color-text-slate-300 site-copy text-secondary small fw-medium">{{ $project->summary }}</p>
                         </div>
-                        <a class="mt-3 site-type-text-xs text-primary fw-semibold d-flex align-items-center gap-1 site-state-hover-type-underline text-dark small site-content-action" href="{{ route('portfolio.show', $project) }}">প্রজেক্ট দেখুন<span class="material-symbols-outlined site-type-text-arbitrary-14px">north_east</span></a>
+                        <x-frontend.buttons.card :href="route('portfolio.show', $project)" text="প্রজেক্ট দেখুন" />
                     </div>
                 </article> @endforeach
             </div> @else
             <div class="rounded-4 site-surface-bg-arbitrary-hex-111722 border border-white border-opacity-10 p-4 text-center bg-white site-soft-border">
                 <p class="site-type-text-sm site-color-text-slate-300 mb-3 site-copy text-secondary fs-6 fw-medium">এই সার্ভিসের সঙ্গে সম্পর্কিত প্রজেক্টগুলো শিগগিরই এখানে যোগ করা হবে।</p>
-                <a class="d-inline-flex align-items-center gap-1-5 text-primary site-state-hover-color-text-white site-type-text-sm fw-semibold site-motion-transition-colors text-dark fs-6 site-content-action" href="{{ route('contact') }}">আপনার প্রজেক্ট নিয়ে কথা বলুন<span class="material-symbols-outlined fs-6">north_east</span></a>
+                <x-frontend.buttons.section :href="route('contact')" text="আপনার প্রজেক্ট নিয়ে কথা বলুন" />
             </div> @endif
         </div>
     </section> @if ($faqs->isNotEmpty())
     <section class="w-100 position-relative site-spacing-py-16 site-responsive-md-spacing-py-24 site-section site-section--dark">
         <div class="site-dimension-max-w-4xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
             <div class="site-dimension-max-w-3xl text-center mx-auto mb-5">
-                <span class="d-inline-block site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">সচরাচর জিজ্ঞাসা</span>
+                <x-frontend.eyebrow class="d-inline-block">সচরাচর জিজ্ঞাসা</x-frontend.eyebrow>
                 <h2 class="site-type-font-heading site-type-text-3xl site-responsive-md-type-text-4xl site-type-font-extrabold text-white mt-3 site-type-tracking-tight site-heading text-white">আপনার প্রশ্নের উত্তর</h2>
             </div>
             <div class="d-flex flex-column site-spacing-gap-3"> @foreach ($faqs as $faq)
@@ -169,7 +169,7 @@
     <section class="w-100 site-surface-bg-arbitrary-hex-0b0f14-opacity-70 border-top border-bottom border-white border-opacity-10 position-relative site-spacing-py-16 site-responsive-md-spacing-py-24 bg-white site-soft-border site-section site-section--light">
         <div class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
             <div class="site-dimension-max-w-3xl text-center mx-auto mb-5">
-                <span class="d-inline-block site-type-text-xs site-type-font-mono text-uppercase site-type-tracking-widest text-primary bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 site-spacing-px-3-5 py-1 rounded-pill site-accent-component text-dark small fw-medium">আরও সার্ভিস</span>
+                <x-frontend.eyebrow class="d-inline-block">আরও সার্ভিস</x-frontend.eyebrow>
                 <h2 class="site-type-font-heading site-type-text-3xl site-responsive-md-type-text-4xl site-type-font-extrabold text-white mt-3 site-type-tracking-tight site-heading text-white">অন্যান্য সার্ভিসসমূহ</h2>
             </div>
             <div class="d-grid site-layout-grid-cols-1 site-responsive-md-layout-grid-cols-3 gap-4"> @foreach ($otherServices as $other) @php $image = $other->getFirstMediaUrl('service-image'); $description = $other->short_description ?: \Illuminate\Support\Str::limit(strip_tags($other->intro ?: $other->content ?: ''), 110); @endphp
@@ -200,5 +200,5 @@
             </div>
         </div>
     </section>
-</main>
+</x-frontend.page>
 @endsection

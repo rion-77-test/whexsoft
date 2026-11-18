@@ -1,7 +1,7 @@
-@extends('frontend.layouts.app') @section('title', 'কাজের ধাপ | WhexSoft')
+@extends('layouts.frontend') @section('title', 'কাজের ধাপ | WhexSoft')
 @section('description', 'প্রাথমিক আলোচনা, পরিকল্পনা, ডিজাইন, ডেভেলপমেন্ট ও লঞ্চ—WhexSoft-এর সঙ্গে একটি প্রজেক্ট কীভাবে এগোয় জানুন।')
 @section('page', 'process') @section('content')
-<main class="w-100 position-relative site-effect-overflow-x-clip site-spacing-pt-20"><div class="w-100 site-surface-bg-surface-default-opacity-80 site-effect-backdrop-blur-md position-sticky site-position-top-20 site-position-z-30 site-elevation-shadow-md">
+<x-frontend.page class="site-spacing-pt-20"><div class="w-100 site-surface-bg-surface-default-opacity-80 site-effect-backdrop-blur-md position-sticky site-position-top-20 site-position-z-30 site-elevation-shadow-md">
         <div class="site-dimension-max-w-7xl mx-auto site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10 site-spacing-py-3 d-flex align-items-center justify-content-sm-between gap-3 overflow-x-auto site-type-text-xs site-type-font-label-md scroll-row small fw-medium">
             <div class="d-none d-md-flex align-items-center gap-2 text-primary flex-shrink-0 text-dark">
                 <span class="site-dimension-w-2 site-dimension-h-2 rounded-pill bg-primary site-motion-animate-ping"></span>
@@ -384,5 +384,5 @@
             </div>
         </div>
     </section>
-</main>
+</x-frontend.page>
 @endsection
