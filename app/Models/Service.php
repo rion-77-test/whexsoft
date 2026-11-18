@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Support\YouTubeVideo;
 
 class Service extends Model implements HasMedia
 {
@@ -23,6 +24,7 @@ class Service extends Model implements HasMedia
         'title',
         'slug',
         'short_description',
+        'service_walkthrough_url',
         'intro',
         'content',
         'features',
@@ -84,5 +86,10 @@ class Service extends Model implements HasMedia
     {
         return $this->getFirstMediaUrl('service-image')
             ?: asset('assets/admin/images/default-fallback-image.png');
+    }
+
+    public function getWalkthroughEmbedUrlAttribute(): ?string
+    {
+        return YouTubeVideo::embedUrl($this->service_walkthrough_url);
     }
 }

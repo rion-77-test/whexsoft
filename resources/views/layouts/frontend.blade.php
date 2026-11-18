@@ -26,7 +26,7 @@
     class="site-type-font-sans site-type-antialiased min-vh-100 site-state-selection-surface-bg-arbitrary-hex-b9f516 site-state-selection-color-text-arbitrary-hex-070400 bg-ambient site-page"
     data-page="@yield('page', 'home')"> @include('partials.frontend.header') @yield('content') @include('partials.frontend.footer')
     @include('partials.frontend.floating')
-    <script src="{{ asset('assets/frontend/js/main.js') }}" defer></script> @stack('scripts')
+    @vite('resources/js/frontend/frontend.js') @stack('scripts')
 </body>
 
 </html>

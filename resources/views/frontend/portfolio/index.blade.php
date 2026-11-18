@@ -3,7 +3,7 @@
     'WhexSoft-এর নির্বাচিত ওয়েবসাইট ও ডিজিটাল প্রজেক্ট দেখুন। প্রতিটি কাজের বিস্তারিত জানতে
     প্রজেক্টের পাতায় যান।')
     @section('page', 'portfolio') @section('content')
-   
+
     <x-frontend.page>
         <section
             class="position-relative w-100 overflow-hidden site-spacing-pt-32 site-responsive-md-spacing-pt-40 pb-5 site-responsive-md-spacing-pb-16 site-section site-section--dark">
@@ -20,35 +20,35 @@
                     class="site-color-text-slate-300 site-type-text-sm site-responsive-sm-type-text-base site-spacing-mt-3 site-dimension-max-w-2xl site-type-leading-relaxed site-copy text-secondary fs-6 fw-medium">
                     উচ্চ-কার্যকর ওয়েবসাইট ও ডিজিটাল অভিজ্ঞতার মাধ্যমে বিভিন্ন ব্র্যান্ডের প্রবৃদ্ধিতে আমাদের কাজগুলো দেখুন।
                 </p>
-                <div
-                    class="site-spacing-mt-10 d-flex flex-wrap align-items-center justify-content-center gap-2-5 site-responsive-sm-spacing-gap-3">
-                    <a class="site-spacing-px-5 py-2 rounded-pill site-type-text-xs site-responsive-sm-type-text-sm fw-semibold site-motion-transition-all border {{ $activeCategory === '' ? 'site-border-border-primary-fixed bg-primary site-color-text-arbitrary-hex-070a0e' : 'site-surface-bg-arbitrary-hex-11171f site-color-text-slate-300 site-state-hover-color-text-white border-white border-opacity-10 site-state-hover-border-border-primary-fixed-opacity-40' }} site-accent-component text-black small"
-                        href="{{ route('portfolio.index') }}">সব প্রজেক্ট</a>
-                    @foreach ($categories as $category)
-                        <a class="site-spacing-px-5 py-2 rounded-pill site-type-text-xs site-responsive-sm-type-text-sm fw-semibold site-motion-transition-all border {{ $activeCategory === $category->slug ? 'site-border-border-primary-fixed bg-primary site-color-text-arbitrary-hex-070a0e' : 'site-surface-bg-arbitrary-hex-11171f site-color-text-slate-300 site-state-hover-color-text-white border-white border-opacity-10 site-state-hover-border-border-primary-fixed-opacity-40' }} site-accent-component text-black small"
-                            href="{{ route('portfolio.index', ['category' => $category->slug]) }}"> {{ $category->name }}
-                        </a>
-                    @endforeach
-                </div>
+
             </div>
         </section>
         <section class="w-100 position-relative py-5 site-responsive-md-spacing-py-16 site-section site-section--light">
+
             <div
                 class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
-                @if ($projects->isEmpty())
-                    <div
-                        class="rounded-4 site-surface-bg-arbitrary-hex-11171f-opacity-80 border border-white border-opacity-10 site-spacing-p-10 text-center site-color-text-slate-300 bg-white site-soft-border text-secondary">
-                        এই ক্যাটাগরিতে এখনো কোনো প্রজেক্ট যুক্ত করা হয়নি।</div>
-                @else
-                    <div
-                        class="d-grid site-layout-grid-cols-1 site-responsive-md-layout-grid-cols-2 site-responsive-lg-layout-grid-cols-3 site-spacing-gap-8">
-                        @foreach ($projects as $project)
-                            <x-frontend.card.project :project="$project" />
+
+                <div id="portfolio-wrapper">
+                    {{-- Category Filters --}}
+                    <div id="portfolio-filters"
+                        class="site-spacing-mt-10 d-flex flex-wrap align-items-center justify-content-center gap-2-5 site-responsive-sm-spacing-gap-3 mb-5">
+                        <a href="{{ route('portfolio.index') }}" data-portfolio-filter data-category=""
+                            class="service-filter site-spacing-px-5 py-2 rounded-pill fw-semibold border small site-motion-transition-all {{ $activeCategory === '' ? 'is-active' : '' }}">
+                            সব প্রজেক্ট</a>
+
+                        @foreach ($categories as $category)
+                            <a href="{{ route('portfolio.index', ['category' => $category->slug]) }}" data-portfolio-filter
+                                data-category="{{ $category->slug }}"
+                                class="service-filter site-spacing-px-5 py-2 rounded-pill fw-semibold border small site-motion-transition-all {{ $activeCategory === $category->slug ? 'is-active' : '' }}">
+                                {{ $category->name }}</a>
                         @endforeach
                     </div>
-                    {{-- Pagination --}}
-                    {{ $projects->links('partials.frontend.pagination') }}
-                @endif
+
+                    {{-- Projects + pagination --}}
+                    <div id="portfolio-results">
+                        @include('frontend.portfolio.partials.grid')
+                    </div>
+                </div>
             </div>
         </section>
         <section class="w-100 position-relative py-5 site-responsive-md-spacing-py-16 site-section site-section--dark">

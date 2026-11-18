@@ -13,6 +13,7 @@ export default defineConfig({
                 "resources/js/admin/adminlte.js",
                 "resources/js/admin/filepond.js",
                 "resources/js/app.js",
+                "resources/js/frontend/frontend.js",
             ],
             refresh: true,
             fonts: [

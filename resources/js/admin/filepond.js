@@ -1,36 +1,43 @@
-import * as FilePond from 'filepond';
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import * as FilePond from "filepond";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 
-import 'filepond/dist/filepond.min.css';
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
+import "filepond/dist/filepond.min.css";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
 
-FilePond.registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
+FilePond.registerPlugin(
+    FilePondPluginImagePreview,
+    FilePondPluginImageExifOrientation,
+);
 
 const initializeImageFields = () => {
-    document.querySelectorAll('input[data-filepond]').forEach((input) => {
-        if (input.dataset.filepondInitialized === 'true') {
+    document.querySelectorAll("input[data-filepond]").forEach((input) => {
+        if (input.dataset.filepondInitialized === "true") {
             return;
         }
 
-        input.dataset.filepondInitialized = 'true';
+        input.dataset.filepondInitialized = "true";
+
+        const isMultiple = input.hasAttribute("data-multiple");
 
         FilePond.create(input, {
-            allowMultiple: false,
+            allowMultiple: isMultiple,
+            maxFiles: isMultiple ? Number(input.dataset.maxFiles || 10) : 1,
             credits: false,
             storeAsFile: true,
             instantUpload: false,
             allowImagePreview: true,
             imagePreviewMaxHeight: 200,
-            acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
-            labelIdle:
-                'Drag & drop an image or <span class="filepond--label-action">Browse</span>',
+            acceptedFileTypes: ["image/jpeg", "image/png", "image/webp"],
+            labelIdle: isMultiple
+                ? 'Drag & drop images or <span class="filepond--label-action">Browse</span>'
+                : 'Drag & drop an image or <span class="filepond--label-action">Browse</span>',
         });
     });
 };
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeImageFields);
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeImageFields);
 } else {
     initializeImageFields();
 }

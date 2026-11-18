@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Testimonial extends Model implements HasMedia
 {
@@ -41,6 +43,14 @@ class Testimonial extends Model implements HasMedia
             ->useFallbackUrl(asset('assets/admin/images/default-fallback-image.png'));
     }
 
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->performOnCollections('photo')
+            ->fit(Fit::Crop, 160, 160) // square crop, 2x the 40px display size for sharp retina screens
+            ->nonQueued();
+    }
+
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);
@@ -53,7 +63,7 @@ class Testimonial extends Model implements HasMedia
 
     public function getPhotoUrlAttribute(): string
     {
-        return $this->getFirstMediaUrl('photo')
+        return $this->getFirstMediaUrl('photo', 'thumb')
             ?: asset('assets/admin/images/default-fallback-image.png');
     }
 }

@@ -48,12 +48,15 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
-        $testimonials = Testimonial::query()
-            ->published()
+        $testimonials = Testimonial::published()
             ->with('media')
             ->orderBy('sort_order')
-            ->take(6)
             ->get();
+        // $testimonials = Testimonial::query()
+        //     ->published()
+        //     ->with('media')
+        //     ->orderBy('sort_order')
+        //     ->get();
 
         return view('frontend.home', compact('services', 'projects', 'posts', 'testimonials'));
     }

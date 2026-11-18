@@ -48,13 +48,16 @@ class ProjectController extends Controller
     {
         $validated = $this->validatedProjectData($request);
         $image = $request->file('image');
-        unset($validated['image'], $validated['remove_image']);
+        $gallery = $request->file('gallery', []);
+        unset($validated['image'], $validated['remove_image'], $validated['gallery'], $validated['remove_gallery']);
 
         $project = Project::create($validated);
 
         if ($image !== null) {
             $project->addMedia(WebpImage::convert($image))->toMediaCollection('project-image');
         }
+
+        $this->storeGallery($project, $gallery);
 
         return redirect()
             ->route('admin.projects.index')
@@ -90,7 +93,9 @@ class ProjectController extends Controller
         $validated = $this->validatedProjectData($request, $project);
         $image = $request->file('image');
         $removeImage = $request->boolean('remove_image');
-        unset($validated['image'], $validated['remove_image']);
+        $gallery = $request->file('gallery', []);
+        $removeGallery = $request->input('remove_gallery', []);
+        unset($validated['image'], $validated['remove_image'], $validated['gallery'], $validated['remove_gallery']);
 
         $project->update($validated);
 
@@ -99,6 +104,9 @@ class ProjectController extends Controller
         } elseif ($removeImage) {
             $project->clearMediaCollection('project-image');
         }
+
+        $this->removeGalleryImages($project, $removeGallery);
+        $this->storeGallery($project, $gallery);
 
         return redirect()
             ->route('admin.projects.show', $project)
@@ -115,6 +123,31 @@ class ProjectController extends Controller
         return redirect()
             ->route('admin.projects.index')
             ->with('success', 'Project deleted successfully.');
+    }
+
+    /**
+     * @param  array<int, \Illuminate\Http\UploadedFile>  $files
+     */
+    private function storeGallery(Project $project, array $files): void
+    {
+        foreach ($files as $file) {
+            $project->addMedia(WebpImage::convert($file))->toMediaCollection('project-gallery');
+        }
+    }
+
+    /**
+     * @param  array<int, int|string>  $ids
+     */
+    private function removeGalleryImages(Project $project, array $ids): void
+    {
+        if ($ids === []) {
+            return;
+        }
+
+        // Only delete media that belongs to this project's gallery
+        $project->getMedia('project-gallery')
+            ->whereIn('id', $ids)
+            ->each(fn($media) => $media->delete());
     }
 
     /**
@@ -151,6 +184,10 @@ class ProjectController extends Controller
             'sort_order' => ['required', 'integer', 'between:0,65535'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'extensions:jpg,jpeg,png,webp', 'max:5120'],
             'remove_image' => ['sometimes', 'boolean'],
+            'gallery' => ['nullable', 'array', 'max:10'],
+            'gallery.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'extensions:jpg,jpeg,png,webp', 'max:5120'],
+            'remove_gallery' => ['sometimes', 'array'],
+            'remove_gallery.*' => ['integer'],
         ]);
     }
 }

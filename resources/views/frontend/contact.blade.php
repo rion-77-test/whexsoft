@@ -2,8 +2,9 @@
 @section('description', 'আপনার ওয়েবসাইট বা ডিজিটাল প্রজেক্ট নিয়ে কথা বলতে WhexSoft-এর সঙ্গে যোগাযোগ করুন। কল করুন
     ০১৩৩৫-১৯৮৮৫৯ নম্বরে।')
     @section('page', 'contact') @section('content')
-    @php$selectedService = old('service_type', request('service'));
-        $selectedPackage = request('package');
+    @php
+    // $selectedService = old('service_type', request('service'));
+        // $selectedPackage = request('package');
         $budgetOptions = [
             '৫,৯৯৯ - ৯,৯৯৯ টাকা (স্টার্টার ল্যান্ডিং)' => '৫,৯৯৯ - ৯,৯৯৯ টাকা (স্টার্টার ল্যান্ডিং)',
             '১০,০০০ - ১৯,৯৯৯ টাকা (স্ট্যান্ডার্ড বিজনেস/ইকমার্স)' =>
@@ -81,13 +82,13 @@
                                 <span class="material-symbols-outlined fs-5">edit_note</span>
                             </div>
                         </div>
-                        @if ($selectedPackage)
+                        {{-- @if ($selectedPackage)
                             <div
                                 class="mb-4 rounded-4 bg-primary bg-opacity-10 border site-border-border-primary-fixed-opacity-30 px-3 site-spacing-py-3 site-type-text-sm text-light site-accent-component text-white fs-6 fw-medium">
                                 নির্বাচিত প্যাকেজ:
                                 <strong class="text-primary site-body-text text-dark">{{ $selectedPackage }}</strong>
                             </div>
-                        @endif
+                        @endif --}}
                         <form class="d-flex flex-column gap-4" action="{{ route('contact.store') }}" method="POST"
                             novalidate> @csrf
                             <div class="d-grid site-layout-grid-cols-1 site-responsive-md-layout-grid-cols-2 gap-4">
@@ -141,12 +142,15 @@
                                         class="w-100 site-dimension-h-arbitrary-52px site-surface-bg-surface-default text-light px-3 rounded-4 site-state-focus-style-outline-none site-state-focus-border-ring-2 site-state-focus-border-ring-primary-fixed-opacity-40 site-motion-transition-all site-type-font-body-sm site-effect-cursor-pointer text-white"
                                         id="serviceType" name="service_type" required>
                                         <option class="text-body-secondary text-secondary" disabled value=""
-                                            @selected(!$selectedService)>ওয়েবসাইটের ধরন বেছে নিন</option>
+                                            {{-- @selected(!$selectedService)>ওয়েবসাইটের ধরন বেছে নিন</option> --}}
+                                        >ওয়েবসাইটের ধরন বেছে নিন</option>
                                         @foreach ($services as $service)
-                                            <option value="{{ $service->title }}" @selected($selectedService === $service->title)>
+                                            {{-- <option value="{{ $service->title }}" @selected($selectedService === $service->title)> --}}
+                                            <option value="{{ $service->title }}">
                                                 {{ $service->title }}</option>
                                             @endforeach @foreach (['ক্লিনিক ও ডায়াগনস্টিক পোর্টাল', 'কাস্টম ওয়েব অ্যাপ্লিকেশন / SaaS', 'অন্যান্য'] as $extra)
-                                                <option value="{{ $extra }}" @selected($selectedService === $extra)>
+                                                <option value="{{ $extra }}">
+                                                {{-- <option value="{{ $extra }}" @selected($selectedService === $extra)> --}}
                                                     {{ $extra }}</option>
                                             @endforeach
                                     </select> @error('service_type')
@@ -358,39 +362,5 @@
         {{-- Contact Section --}}
         @include('partials.frontend.contact-section')
 
-        <section class="w-100 position-relative py-5 site-responsive-md-spacing-py-16 site-section site-section--light">
-            <div
-                class="site-dimension-max-w-7xl mx-auto w-100 position-relative site-spacing-px-5 site-responsive-sm-spacing-px-8 site-responsive-lg-spacing-px-10">
-                <div
-                    class="site-surface-bg-gradient-to-r site-surface-from-surface-card-elevated site-surface-via-surface-card site-surface-to-surface-card-elevated site-spacing-p-8 p-lg-5 site-shape-rounded-3xl site-elevation-shadow-2xl position-relative overflow-hidden d-flex flex-column flex-md-row align-items-center justify-content-between site-spacing-gap-8 site-gradient-background">
-                    <div
-                        class="position-absolute site-style-left-16 site-style-top-16 site-dimension-w-60 site-dimension-h-60 bg-primary bg-opacity-10 site-effect-blur-arbitrary-80px pe-none rounded-pill">
-                    </div>
-                    <div
-                        class="d-flex flex-column gap-2 site-dimension-max-w-xl text-center text-md-start position-relative">
-                        <span
-                            class="site-type-font-label-md text-primary text-uppercase site-type-tracking-wider text-dark">চলুন,
-                            অসাধারণ কিছু তৈরি করি</span>
-                        <h3 class="site-type-font-headline-md text-light site-heading text-white">আপনার ধারণা আছে? আমরা তা
-                            বাস্তবে রূপ দিই</h3>
-                        <p class="site-type-font-body-sm text-body-secondary site-copy text-secondary">আপনার প্রজেক্টের কথা
-                            জানান। আমরা ২৪ ঘণ্টার মধ্যে আপনার সঙ্গে যোগাযোগ করব।</p>
-                    </div>
-                    <div
-                        class="d-flex flex-column flex-sm-row align-items-center gap-3 flex-shrink-0 w-100 site-responsive-sm-dimension-w-auto position-relative">
-                        <a class="w-100 site-responsive-sm-dimension-w-auto site-spacing-px-8 py-3 bg-primary site-color-text-text-inverse site-type-font-headline-sm fw-bold rounded-4 site-elevation-shadow-arbitrary-0-0-25px-rgba-197-243-49-0-3 site-state-hover-surface-bg-primary-fixed-dim site-state-hover-motion-scale-105 site-state-active-motion-scale-95 site-motion-transition-all text-center d-flex align-items-center justify-content-center gap-2 text-black"
-                            href="tel:01335198859">
-                            <span class="material-symbols-outlined fs-5">call</span>
-                            <span>০১৩৩৫-১৯৮৮৫৯</span>
-                        </a>
-                        <a class="w-100 site-responsive-sm-dimension-w-auto px-4 py-3 site-surface-bg-surface-card-elevated text-light site-type-font-headline-sm fw-semibold rounded-4 site-state-hover-surface-bg-surface-container-high site-motion-transition-all text-center d-flex align-items-center justify-content-center gap-2 bg-white text-white"
-                            href="https://wa.me/8801335198859" rel="noopener noreferrer" target="_blank">
-                            <span class="material-symbols-outlined fs-5 site-color-text-success-whatsapp">chat</span>
-                            <span>হোয়াটসঅ্যাপ মেসেজ</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
     </x-frontend.page>
 @endsection

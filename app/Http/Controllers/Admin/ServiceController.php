@@ -13,6 +13,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use App\Support\YouTubeVideo;
+use Closure;
 
 class ServiceController extends Controller
 {
@@ -91,9 +93,9 @@ class ServiceController extends Controller
     {
         $service->load([
             'serviceCategory',
-            'packages' => fn ($query) => $query->orderBy('sort_order'),
-            'projects' => fn ($query) => $query->with(['projectCategory', 'media'])->orderBy('sort_order'),
-            'testimonials' => fn ($query) => $query->with('media')->orderBy('sort_order'),
+            'packages' => fn($query) => $query->orderBy('sort_order'),
+            'projects' => fn($query) => $query->with(['projectCategory', 'media'])->orderBy('sort_order'),
+            'testimonials' => fn($query) => $query->with('media')->orderBy('sort_order'),
             'media',
         ]);
 
@@ -188,6 +190,16 @@ class ServiceController extends Controller
             ],
             'service_category_id' => ['required', 'integer', 'exists:service_categories,id'],
             'short_description' => ['nullable', 'string', 'max:255'],
+            'service_walkthrough_url' => [
+                'nullable',
+                'url:http,https',
+                'max:255',
+                function (string $attribute, mixed $value, Closure $fail): void {
+                    if (filled($value) && YouTubeVideo::videoId($value) === null) {
+                        $fail('The service walkthrough must be a valid YouTube video link.');
+                    }
+                },
+            ],
             'intro' => ['nullable', 'string'],
             'content' => ['nullable', 'string'],
             'features' => ['nullable', 'array'],
@@ -231,7 +243,7 @@ class ServiceController extends Controller
 
                 return $row;
             })
-            ->filter(fn (array $row): bool => implode('', $row) !== '')
+            ->filter(fn(array $row): bool => implode('', $row) !== '')
             ->values()
             ->all();
     }

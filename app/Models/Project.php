@@ -63,12 +63,20 @@ class Project extends Model implements HasMedia
         $this->addMediaCollection('project-image')
             ->singleFile()
             ->useFallbackUrl(asset('assets/admin/images/default-fallback-image.png'));
+
+        // No singleFile(), so this collection holds many images
+        $this->addMediaCollection('project-gallery');
     }
 
     public function getImageUrlAttribute(): string
     {
         return $this->getFirstMediaUrl('project-image')
             ?: asset('assets/admin/images/default-fallback-image.png');
+    }
+
+    public function getGalleryImagesAttribute()
+    {
+        return $this->getMedia('project-gallery');
     }
 
     public function getWalkthroughEmbedUrlAttribute(): ?string
