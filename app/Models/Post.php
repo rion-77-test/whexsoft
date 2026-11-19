@@ -9,13 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Models\Concerns\HasLocaleTranslations;
 
 class Post extends Model implements HasMedia
 {
     /** @use HasFactory<PostFactory> */
     use HasFactory;
-
+    use HasLocaleTranslations;
     use InteractsWithMedia;
+
+    protected array $translatable = ['title', 'excerpt', 'content', 'meta_title', 'meta_description'];
 
     protected $fillable = [
         'title',
@@ -53,9 +56,15 @@ class Post extends Model implements HasMedia
 
     public function getReadTimeAttribute(): int
     {
-        $words = str_word_count(strip_tags((string) $this->content));
+        $text = trim(strip_tags((string) $this->tr('content')));
+        $words = count(preg_split('/\s+/u', $text, -1, PREG_SPLIT_NO_EMPTY) ?: []);
 
         return max(1, (int) ceil($words / 200));
+    }
+
+    public function getCategoryLabelAttribute(): ?string
+    {
+        return $this->postCategory?->tr('name') ?? $this->category;
     }
 
     public function registerMediaCollections(): void
@@ -73,4 +82,6 @@ class Post extends Model implements HasMedia
         return $this->getFirstMediaUrl('featured-image')
             ?: ($this->featured_image ?: asset('assets/admin/images/default-fallback-image.png'));
     }
+
+    
 }

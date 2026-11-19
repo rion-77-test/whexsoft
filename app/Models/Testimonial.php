@@ -11,13 +11,16 @@ use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use App\Models\Concerns\HasLocaleTranslations;
 
 class Testimonial extends Model implements HasMedia
 {
     /** @use HasFactory<TestimonialFactory> */
     use HasFactory;
-
+    use HasLocaleTranslations;
     use InteractsWithMedia;
+
+    protected array $translatable = ['quote', 'business_name'];
 
     protected $fillable = [
         'service_id',

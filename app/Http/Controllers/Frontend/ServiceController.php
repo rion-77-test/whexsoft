@@ -17,7 +17,6 @@ class ServiceController extends Controller
      */
     public function index(Request $request): View|JsonResponse
     {
-
         $categories = ServiceCategory::query()
             ->where('is_active', true)
             ->withCount(['services' => fn($query) => $query->active()])
@@ -26,7 +25,6 @@ class ServiceController extends Controller
             ->get();
 
         $activeCategory = $request->string('category')->toString();
-
 
         $services = Service::query()
             ->active()
@@ -38,33 +36,15 @@ class ServiceController extends Controller
             ->orderBy('title')
             ->get();
 
-
-        $serviceFeatures = $services->flatMap(fn(Service $service) => collect($service->features ?? [])
-            ->filter(fn(array $feature): bool => filled($feature['title'] ?? null) && filled($feature['text'] ?? null))
-            ->map(fn(array $feature): array => [
-                'title' => $feature['title'],
-                'text' => $feature['text'],
-                'service_title' => $service->title,
-            ]))
-            ->take(4)
-            ->values();
-
-
         if ($request->ajax() || $request->wantsJson()) {
             return response()
                 ->json([
                     'grid' => view('frontend.services.partials.grid', compact('services'))->render(),
-                    'features' => view('frontend.services.partials.features', compact('serviceFeatures'))->render(),
                 ])
                 ->header('Vary', 'X-Requested-With');
         }
 
-        return view('frontend.services.index', compact(
-            'services',
-            'categories',
-            'activeCategory',
-            'serviceFeatures',
-        ));
+        return view('frontend.services.index', compact('services', 'categories', 'activeCategory'));
     }
 
     /**

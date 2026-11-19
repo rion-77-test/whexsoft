@@ -66,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const filters = document.querySelector("#service-filters");
     const results = document.querySelector("#services-results");
-    const features = document.querySelector("#service-features");
     if (!filters || !results) return;
 
     let controller;
@@ -100,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const data = await res.json();
             results.innerHTML = data.grid;
-            if (features) features.innerHTML = data.features;
 
             setActive(url);
             if (push) history.pushState({}, "", url);

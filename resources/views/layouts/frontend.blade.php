@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="{{ config('locales.supported.' . app()->getLocale() . '.html', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title', 'WhexSoft - Dhaka Studio | ডিজিটাল ও ওয়েব ডেভেলপমেন্ট এজেন্সি')</title>
-    <meta name="description" content="@yield('description', 'আপনার ব্যবসার জন্য এমন ওয়েবসাইট, যা ফলাফল এনে দেয়।')" />
+    <title>@yield('title', __('site.meta.default_title'))</title>
+    <meta name="description" content="@yield('description', __('site.meta.default_description'))" />
     <meta name="theme-color" content="#67768E" />
     <link rel="canonical" href="{{ url()->current() }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="@yield('title', 'WhexSoft - Dhaka Studio')" />
-    <meta property="og:description" content="@yield('description', 'আপনার ব্যবসার জন্য এমন ওয়েবসাইট, যা ফলাফল এনে দেয়।')" />
+    <meta property="og:description" content="@yield('description', __('site.meta.default_description'))" />
     <meta property="og:image" content="@yield('og_image', asset('assets/frontend/images/hero.jpg'))" />
     <link rel="icon" type="image/jpg" href="{{ asset('assets/frontend/images/whexsoft-logo.jpg') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

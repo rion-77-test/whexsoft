@@ -43,7 +43,7 @@ class HomeController extends Controller
 
         $posts = Post::query()
             ->published()
-            ->with('media')
+            ->with(['postCategory', 'media'])
             ->latest('published_at')
             ->take(3)
             ->get();

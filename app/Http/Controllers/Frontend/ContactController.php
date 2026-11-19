@@ -48,13 +48,15 @@ class ContactController extends Controller
             'সার্ভিসের ধরন' => $validated['service_type'] ?? '—',
             'আনুমানিক বাজেট' => $validated['budget'] ?? '—',
             'বার্তা' => $validated['message'] ?? '—',
-        ])->map(fn (string $value, string $label): string => "{$label}: {$value}")
+            'ভাষা' => strtoupper(app()->getLocale()),
+        ])->map(fn(string $value, string $label): string => "{$label}: {$value}")
             ->implode("\n");
 
         try {
             Mail::raw($body, function ($message) use ($validated): void {
-                $message->to('contact.whexsoft@gmail.com')
-                    ->subject('নতুন কোটেশন অনুরোধ — '.$validated['name']);
+                // $message->to('contact.whexsoft@gmail.com')
+                $message->to('testmailrion77@gmail.com')
+                    ->subject('নতুন কোটেশন অনুরোধ — ' . $validated['name']);
 
                 if (! empty($validated['email'])) {
                     $message->replyTo($validated['email']);
@@ -65,11 +67,11 @@ class ContactController extends Controller
 
             return back()
                 ->withInput()
-                ->with('error', 'দুঃখিত, আপনার বার্তাটি পাঠানো যায়নি। অনুগ্রহ করে সরাসরি ফোন বা হোয়াটসঅ্যাপে যোগাযোগ করুন।');
+                ->with('error', __('messages.contact_failed'));
         }
 
         return redirect()
             ->route('contact')
-            ->with('success', 'ধন্যবাদ! আপনার অনুরোধটি গৃহীত হয়েছে। আমাদের টিম দ্রুততম সময়ে যোগাযোগ করবে।');
+            ->with('success', __('messages.contact_sent'));
     }
 }

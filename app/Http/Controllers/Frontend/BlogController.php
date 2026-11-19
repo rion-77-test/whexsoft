@@ -25,12 +25,18 @@ class BlogController extends Controller
 
         $posts = Post::query()
             ->published()
-            ->with('media')
+            ->with(['media', 'postCategory'])
             ->when($search !== '', function ($query) use ($search): void {
                 $query->where(function ($query) use ($search): void {
                     $query->where('title', 'like', "%{$search}%")
                         ->orWhere('excerpt', 'like', "%{$search}%")
                         ->orWhere('content', 'like', "%{$search}%");
+
+                    if (app()->isLocale('en')) {
+                        $query->orWhere('translations->en->title', 'like', "%{$search}%")
+                            ->orWhere('translations->en->excerpt', 'like', "%{$search}%")
+                            ->orWhere('translations->en->content', 'like', "%{$search}%");
+                    }
                 });
             })
             ->when($activeCategory !== '', fn ($query) => $query->where('category', $activeCategory))
@@ -49,11 +55,11 @@ class BlogController extends Controller
         abort_unless($post->status === 'published', 404);
         abort_if($post->published_at !== null && $post->published_at->isFuture(), 404);
 
-        $post->load('media');
+        $post->load(['media', 'postCategory']);
 
         $relatedPosts = Post::query()
             ->published()
-            ->with('media')
+            ->with(['media', 'postCategory'])
             ->whereKeyNot($post->getKey())
             ->when($post->category, fn ($query) => $query->where('category', $post->category))
             ->latest('published_at')
@@ -62,7 +68,7 @@ class BlogController extends Controller
 
         $recentPosts = Post::query()
             ->published()
-            ->with('media')
+            ->with(['media', 'postCategory'])
             ->whereKeyNot($post->getKey())
             ->latest('published_at')
             ->take(4)

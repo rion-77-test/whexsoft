@@ -14,12 +14,12 @@
                 <p class="testimonial-name site-type-text-sm fw-semibold fs-6 mb-0">
                     {{ $testimonial->client_name }}</p>
                 <p class="testimonial-business site-type-text-xs small fw-medium mb-0">
-                    {{ $testimonial->business_name }}</p>
+                    {{ $testimonial->tr('business_name') }}</p>
             </div>
         </figcaption>
 
         <blockquote class="testimonial-quote site-type-text-sm site-type-leading-relaxed fs-6 fw-medium mt-3 mb-0">
-            {{ \Illuminate\Support\Str::limit($testimonial->quote, 220) }}
+            {{ \Illuminate\Support\Str::limit($testimonial->tr('quote'), 220) }}
         </blockquote>
     </figure>
 </div>

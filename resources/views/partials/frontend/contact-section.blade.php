@@ -9,18 +9,17 @@
             <div class="position-relative">
                 <h2
                     class="site-type-font-heading site-type-text-3xl site-responsive-md-type-text-4xl site-type-font-extrabold text-white site-type-tracking-tight site-heading text-white">
-                    আপনার প্রজেক্ট নিয়ে কথা বলতে চান?</h2>
+                    {{ __('site.contact_cta.title') }}</h2>
                 <p
                     class="site-color-text-slate-300 fs-6 site-responsive-md-type-text-lg mt-3 site-dimension-max-w-2xl mx-auto site-type-leading-relaxed site-copy text-secondary">
-                    আপনার লক্ষ্য ও প্রয়োজনীয় ফিচার জানান। কাজের পরিধি অনুযায়ী আমরা পরবর্তী ধাপ ও সম্ভাব্য খরচ
-                    জানাব।</p>
+                    {{ __('site.contact_cta.description') }}</p>
                 <div class="d-flex flex-wrap justify-content-center gap-3 site-spacing-mt-8">
                     <a class="w-100 site-responsive-sm-dimension-w-auto d-inline-flex align-items-center justify-content-center gap-2 site-dimension-h-12 site-spacing-px-7 rounded-pill bg-primary site-color-text-arbitrary-hex-070a0e site-type-font-heading fw-bold site-state-hover-surface-bg-primary-fixed-dim site-motion-transition-all site-elevation-shadow-arbitrary-0-0-30px-rgba-197-243-49-0-25"
-                        href="{{ route('contact') }}">ফ্রি কনসাল্টেশন নিন<span
+                        href="{{ route('contact') }}">{{ __('site.contact_cta.consultation') }}<span
                             class="material-symbols-outlined fs-5">arrow_forward</span></a>
                     <a class="w-100 site-responsive-sm-dimension-w-auto d-inline-flex align-items-center justify-content-center gap-2 site-dimension-h-12 site-spacing-px-7 rounded-pill site-surface-bg-white-opacity-5 border site-border-border-white-opacity-20 text-white site-type-font-heading fw-semibold site-state-hover-surface-bg-white-opacity-10 site-motion-transition-all site-white-tint site-soft-border text-white"
                         href="tel:01335198859"><span
-                            class="material-symbols-outlined fs-5 text-primary text-dark">call</span>০১৩৩৫-১৯৮৮৫৯</a>
+                            class="material-symbols-outlined fs-5 text-primary text-dark">call</span>{{ __('site.phone') }}</a>
                 </div>
             </div>
         </div>

@@ -8,13 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Models\Concerns\HasLocaleTranslations;
 
 class ServiceCategory extends Model implements HasMedia
 {
     /** @use HasFactory<ServiceCategoryFactory> */
-    use HasFactory;
-
+     use HasFactory;
+    use HasLocaleTranslations;
     use InteractsWithMedia;
+
+    protected array $translatable = ['name', 'description'];
 
     protected $fillable = [
         'name',

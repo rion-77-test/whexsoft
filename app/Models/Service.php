@@ -11,13 +11,25 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Support\YouTubeVideo;
+use App\Models\Concerns\HasLocaleTranslations;
 
 class Service extends Model implements HasMedia
 {
-    /** @use HasFactory<ServiceFactory> */
     use HasFactory;
-
+    use HasLocaleTranslations;
     use InteractsWithMedia;
+
+    protected array $translatable = [
+        'title',
+        'short_description',
+        'intro',
+        'content',
+        'features',
+        'steps',
+        'faqs',
+        'meta_title',
+        'meta_description',
+    ];
 
     protected $fillable = [
         'service_category_id',
