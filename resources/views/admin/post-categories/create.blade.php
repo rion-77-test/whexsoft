@@ -22,6 +22,15 @@
                             <x-admin.form-fields.textarea name="description" label="Description"
                                 class="col-12" rows="4" />
                             <div class="col-12">
+                                <hr>
+                                <h2 class="h5">English translation</h2>
+                                <p class="text-secondary small">Leave a field empty to show the Bengali text.</p>
+                            </div>
+                            <x-admin.form-fields.input name="translations[en][name]" label="Name (EN)"
+                                class="col-md-6" />
+                            <x-admin.form-fields.textarea name="translations[en][description]" label="Description (EN)"
+                                class="col-12" rows="4" />
+                            <div class="col-12">
                                 <x-admin.form-fields.checkbox name="is_active" label="Active" :checked="true" />
                             </div>
                         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProjectCategory;
+use App\Support\TranslationPayload;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -101,7 +102,7 @@ class ProjectCategoryController extends Controller
      */
     private function validatedCategoryData(Request $request, ?ProjectCategory $projectCategory = null): array
     {
-        return $request->validate([
+        $validated = $request->validate([
             'name' => [
                 'required',
                 'string',
@@ -115,8 +116,16 @@ class ProjectCategoryController extends Controller
                 Rule::unique('project_categories', 'slug')->ignore($projectCategory),
             ],
             'description' => ['nullable', 'string'],
+            'translations' => ['nullable', 'array'],
+            'translations.en' => ['nullable', 'array'],
+            'translations.en.name' => ['nullable', 'string', 'max:255'],
+            'translations.en.description' => ['nullable', 'string'],
             'is_active' => ['required', 'boolean'],
             'sort_order' => ['required', 'integer', 'between:0,65535'],
         ]);
+
+        $validated['translations'] = TranslationPayload::clean($validated['translations'] ?? []);
+
+        return $validated;
     }
 }

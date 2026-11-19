@@ -7,6 +7,7 @@
 ])
 
 @php
+    $dotName = str_replace(['[', ']'], ['.', ''], $name);
     $editorId = $name.'-editor';
     $valueId = $name.'-value';
     $imageInputId = $name.'-image-upload';
@@ -20,6 +21,10 @@
         integrity="sha384-ecIckRi4QlKYya/FQUbBUjS4qp65jF/J87Guw5uzTbO1C1Jfa/6kYmd6dXUF6D7i"
         crossorigin="anonymous">
     <style>
+        .ql-container[data-wysiwyg-editor] {
+            height: auto;
+        }
+
         .ql-editor {
             min-height: 18rem;
         }
@@ -31,10 +36,10 @@
     <div id="{{ $editorId }}" data-wysiwyg-editor data-value-id="{{ $valueId }}"
         data-image-input-id="{{ $imageInputId }}" data-upload-url="{{ $uploadUrl }}"
         data-required="{{ $required ? 'true' : 'false' }}"></div>
-    <textarea id="{{ $valueId }}" name="{{ $name }}" class="d-none">{{ old($name, $value) }}</textarea>
+    <textarea id="{{ $valueId }}" name="{{ $name }}" class="d-none">{{ old($dotName, $value) }}</textarea>
     <input id="{{ $imageInputId }}" type="file" accept=".jpg,.jpeg,.png,.webp" class="d-none">
     <div id="{{ $errorId }}" class="text-danger mt-2" role="alert" aria-live="polite" hidden></div>
-    @error($name)
+    @error($dotName)
         <div class="invalid-feedback d-block">{{ $message }}</div>
     @enderror
 </div>

@@ -24,6 +24,18 @@
             ['name' => 'question', 'label' => 'Question', 'col' => 4],
             ['name' => 'answer', 'label' => 'Answer', 'type' => 'textarea', 'col' => 8],
         ];
+        $englishFeatureFields = [
+            ['name' => 'title', 'label' => 'Title (EN)', 'col' => 4],
+            ['name' => 'text', 'label' => 'Text (EN)', 'type' => 'textarea', 'col' => 8],
+        ];
+        $englishStepFields = [
+            ['name' => 'title', 'label' => 'Step Title (EN)', 'col' => 4],
+            ['name' => 'text', 'label' => 'Step Text (EN)', 'type' => 'textarea', 'col' => 8],
+        ];
+        $englishFaqFields = [
+            ['name' => 'question', 'label' => 'Question (EN)', 'col' => 4],
+            ['name' => 'answer', 'label' => 'Answer (EN)', 'type' => 'textarea', 'col' => 8],
+        ];
     @endphp
     <main class="app-main">
         <div class="app-content-header">
@@ -84,6 +96,34 @@
                                     class="col-md-6" />
                                 <x-admin.form-fields.textarea name="meta_description" label="Meta Description"
                                     :value="$service->meta_description" class="col-md-6" rows="3" />
+                            </div>
+
+                            <hr class="my-4">
+                            <h2 class="h5">English translation</h2>
+                            <p class="text-secondary small">Leave a field empty to show the Bengali text.</p>
+                            <div class="row g-3">
+                                <x-admin.form-fields.input name="translations[en][title]" label="Title (EN)"
+                                    :value="data_get($service->translations, 'en.title')" class="col-md-6" />
+                                <x-admin.form-fields.textarea name="translations[en][short_description]" label="Short Description (EN)"
+                                    :value="data_get($service->translations, 'en.short_description')" class="col-12" rows="2" />
+                                <x-admin.form-fields.textarea name="translations[en][intro]" label="Intro (EN)"
+                                    :value="data_get($service->translations, 'en.intro')" class="col-12" rows="3" />
+                                <x-admin.form-fields.wysiwyg name="translations[en][content]" label="Content (EN)"
+                                    :value="data_get($service->translations, 'en.content')"
+                                    :upload-url="route('admin.services.content-images.store')" class="col-12" />
+                                <x-admin.form-fields.repeater name="translations[en][features]" label="Features (EN)"
+                                    :fields="$englishFeatureFields" :value="data_get($service->translations, 'en.features', [])"
+                                    add-label="Add feature" empty-text="No translated features yet." class="col-12" />
+                                <x-admin.form-fields.repeater name="translations[en][steps]" label="How It Works (EN)"
+                                    :fields="$englishStepFields" :value="data_get($service->translations, 'en.steps', [])"
+                                    add-label="Add step" empty-text="No translated steps yet." class="col-12" />
+                                <x-admin.form-fields.repeater name="translations[en][faqs]" label="FAQs (EN)"
+                                    :fields="$englishFaqFields" :value="data_get($service->translations, 'en.faqs', [])"
+                                    add-label="Add FAQ" empty-text="No translated FAQs yet." class="col-12" />
+                                <x-admin.form-fields.input name="translations[en][meta_title]" label="Meta Title (EN)"
+                                    :value="data_get($service->translations, 'en.meta_title')" class="col-md-6" />
+                                <x-admin.form-fields.textarea name="translations[en][meta_description]" label="Meta Description (EN)"
+                                    :value="data_get($service->translations, 'en.meta_description')" class="col-md-6" rows="3" />
                             </div>
 
                             <div class="d-flex gap-2 mt-4">

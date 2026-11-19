@@ -2,14 +2,11 @@
 
 use App\Models\Post;
 use App\Models\PostCategory;
-use App\Models\Setting;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 uses(LazilyRefreshDatabase::class);
 
 it('finds English post translations by title excerpt and content when English is active', function () {
-    Setting::put('default_locale', 'en');
-
     $category = PostCategory::factory()->create();
     foreach ([
         'title' => 'EnglishTitleToken',
@@ -27,7 +24,8 @@ it('finds English post translations by title excerpt and content when English is
             ],
         ]);
 
-        $this->get(route('blog.index', ['q' => $term]))
+        $this->withCookie('locale', 'en')
+            ->get(route('blog.index', ['q' => $term]))
             ->assertOk()
             ->assertSee('<html lang="en">', false)
             ->assertViewHas('posts', fn ($posts): bool => $posts->total() === 1

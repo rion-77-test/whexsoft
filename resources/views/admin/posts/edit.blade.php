@@ -48,6 +48,23 @@
                                 :value="$post->meta_description" class="col-md-6" rows="3" />
                         </div>
 
+                        <hr class="my-4">
+                        <h2 class="h5">English translation</h2>
+                        <p class="text-secondary small">Leave a field empty to show the Bengali text.</p>
+                        <div class="row g-3">
+                            <x-admin.form-fields.input name="translations[en][title]" label="Title (EN)"
+                                :value="data_get($post->translations, 'en.title')" class="col-md-6" />
+                            <x-admin.form-fields.textarea name="translations[en][excerpt]" label="Excerpt (EN)"
+                                :value="data_get($post->translations, 'en.excerpt')" class="col-12" rows="3" />
+                            <x-admin.form-fields.wysiwyg name="translations[en][content]" label="Content (EN)"
+                                :value="data_get($post->translations, 'en.content')"
+                                :upload-url="route('admin.posts.content-images.store')" class="col-12" />
+                            <x-admin.form-fields.input name="translations[en][meta_title]" label="Meta Title (EN)"
+                                :value="data_get($post->translations, 'en.meta_title')" class="col-md-6" />
+                            <x-admin.form-fields.textarea name="translations[en][meta_description]" label="Meta Description (EN)"
+                                :value="data_get($post->translations, 'en.meta_description')" class="col-md-6" rows="3" />
+                        </div>
+
                         <div class="d-flex gap-2 mt-4">
                             <button type="submit" class="btn btn-primary">Save Changes</button>
                             <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-outline-secondary">Cancel</a>

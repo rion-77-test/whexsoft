@@ -36,6 +36,7 @@
                             <thead>
                                 <tr>
                                     <th>Post</th>
+                                    <th>English</th>
                                     <th>Category</th>
                                     <th>Status</th>
                                     <th>Published</th>
@@ -55,6 +56,7 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td><x-admin.translation-status :model="$post" /></td>
                                         <td>{{ $post->category ?: '—' }}</td>
                                         <td>
                                             <span class="badge {{ $post->status === 'published' ? 'text-bg-success' : 'text-bg-secondary' }}">
@@ -84,7 +86,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center text-secondary py-4">
+                                        <td colspan="6" class="text-center text-secondary py-4">
                                             No posts yet. Create your first post to get started.
                                         </td>
                                     </tr>

@@ -21,6 +21,15 @@
                             <x-admin.form-fields.input name="slug" label="Slug" class="col-md-6" required />
                             <x-admin.form-fields.textarea name="description" label="Description"
                                 class="col-12" rows="4" />
+                            <div class="col-12">
+                                <hr>
+                                <h2 class="h5">English translation</h2>
+                                <p class="text-secondary small">Leave a field empty to show the Bengali text.</p>
+                            </div>
+                            <x-admin.form-fields.input name="translations[en][name]" label="Name (EN)"
+                                class="col-md-6" />
+                            <x-admin.form-fields.textarea name="translations[en][description]" label="Description (EN)"
+                                class="col-12" rows="4" />
                             <x-admin.form-fields.input name="sort_order" label="Sort Order" type="number"
                                 class="col-md-6" min="0" max="65535" value="0" required />
                             <div class="col-12">

@@ -3,12 +3,14 @@
     'label',
     'fields',
     'value' => [],
+    'translationFields' => [],
     'addLabel' => 'Add item',
     'emptyText' => 'No items yet.',
 ])
 
 @php
-    $items = old($name, $value);
+    $dotName = str_replace(['[', ']'], ['.', ''], $name);
+    $items = old($dotName, $value);
     $items = is_array($items) ? array_values($items) : [];
 @endphp
 
@@ -23,7 +25,7 @@
     <div data-repeater-items>
         @foreach ($items as $index => $item)
             <x-admin.form-fields.repeater-row :name="$name" :index="$index" :fields="$fields"
-                :item="is_array($item) ? $item : []" />
+                :item="is_array($item) ? $item : []" :translation-fields="$translationFields" />
         @endforeach
     </div>
 
@@ -32,7 +34,8 @@
     </div>
 
     <template data-repeater-template>
-        <x-admin.form-fields.repeater-row :name="$name" index="__INDEX__" :fields="$fields" />
+        <x-admin.form-fields.repeater-row :name="$name" index="__INDEX__" :fields="$fields"
+            :translation-fields="$translationFields" />
     </template>
 </div>
 

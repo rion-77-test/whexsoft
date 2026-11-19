@@ -28,6 +28,7 @@
                             <thead>
                                 <tr>
                                     <th>Package</th>
+                                    <th>English</th>
                                     <th>Service</th>
                                     <th>Price</th>
                                     <th>Popular</th>
@@ -45,6 +46,7 @@
                                                 <div class="text-secondary small">{{ $package->tagline }}</div>
                                             @endif
                                         </td>
+                                        <td><x-admin.translation-status :model="$package" /></td>
                                         <td>{{ $package->service?->title ?? 'General' }}</td>
                                         <td>{{ $package->price_label }}</td>
                                         <td>
@@ -82,7 +84,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center text-secondary py-4">
+                                        <td colspan="8" class="text-center text-secondary py-4">
                                             No packages yet. Create your first package to get started.
                                         </td>
                                     </tr>

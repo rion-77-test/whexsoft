@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Support\ContentImageUploader;
 use App\Support\RichTextSanitizer;
+use App\Support\TranslationPayload;
 use App\Support\WebpImage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -69,13 +70,15 @@ class ServiceController extends Controller
         unset($validated['image'], $validated['remove_image']);
 
         $validated['content'] = $this->sanitizeServiceContent($validated['content'] ?? '') ?: null;
+        $validated['translations'] = $this->sanitizeServiceTranslations($validated['translations'] ?? []);
 
         $service = Service::create($validated);
 
         if (filled($service->content)) {
             $service->content = $this->sanitizeServiceContent((string) $service->content, $service);
-            $service->save();
         }
+        $service->translations = $this->sanitizeServiceTranslations($service->translations ?? [], $service);
+        $service->save();
 
         if ($image !== null) {
             $service->addMedia(WebpImage::convert($image))->toMediaCollection('service-image');
@@ -125,13 +128,15 @@ class ServiceController extends Controller
         unset($validated['image'], $validated['remove_image']);
 
         $validated['content'] = $this->sanitizeServiceContent($validated['content'] ?? '') ?: null;
+        $validated['translations'] = $this->sanitizeServiceTranslations($validated['translations'] ?? []);
 
         $service->update($validated);
 
         if (filled($service->content)) {
             $service->content = $this->sanitizeServiceContent((string) $service->content, $service);
-            $service->save();
         }
+        $service->translations = $this->sanitizeServiceTranslations($service->translations ?? [], $service);
+        $service->save();
 
         $this->sanitizer->deleteUnusedContentImages($service);
 
@@ -176,6 +181,21 @@ class ServiceController extends Controller
     }
 
     /**
+     * @param  array<string, mixed>  $translations
+     * @return array<string, mixed>|null
+     */
+    private function sanitizeServiceTranslations(array $translations, ?Service $service = null): ?array
+    {
+        $content = data_get($translations, 'en.content');
+
+        if (filled($content)) {
+            data_set($translations, 'en.content', $this->sanitizeServiceContent((string) $content, $service) ?: null);
+        }
+
+        return TranslationPayload::clean($translations);
+    }
+
+    /**
      * @return array<string, mixed>
      */
     private function normalizedServiceData(Request $request, ?Service $service = null): array
@@ -213,6 +233,23 @@ class ServiceController extends Controller
             'faqs.*.answer' => ['nullable', 'string'],
             'meta_title' => ['nullable', 'string', 'max:70'],
             'meta_description' => ['nullable', 'string', 'max:180'],
+            'translations' => ['nullable', 'array'],
+            'translations.en' => ['nullable', 'array'],
+            'translations.en.title' => ['nullable', 'string', 'max:255'],
+            'translations.en.short_description' => ['nullable', 'string', 'max:255'],
+            'translations.en.intro' => ['nullable', 'string'],
+            'translations.en.content' => ['nullable', 'string'],
+            'translations.en.features' => ['nullable', 'array'],
+            'translations.en.features.*.title' => ['nullable', 'string', 'max:255'],
+            'translations.en.features.*.text' => ['nullable', 'string'],
+            'translations.en.steps' => ['nullable', 'array'],
+            'translations.en.steps.*.title' => ['nullable', 'string', 'max:255'],
+            'translations.en.steps.*.text' => ['nullable', 'string'],
+            'translations.en.faqs' => ['nullable', 'array'],
+            'translations.en.faqs.*.question' => ['nullable', 'string', 'max:255'],
+            'translations.en.faqs.*.answer' => ['nullable', 'string'],
+            'translations.en.meta_title' => ['nullable', 'string', 'max:70'],
+            'translations.en.meta_description' => ['nullable', 'string', 'max:180'],
             'sort_order' => ['required', 'integer', 'between:0,65535'],
             'is_active' => ['required', 'boolean'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'extensions:jpg,jpeg,png,webp', 'max:5120'],
@@ -222,6 +259,13 @@ class ServiceController extends Controller
         $validated['features'] = $this->normalizeItems($validated['features'] ?? [], ['title', 'text']);
         $validated['steps'] = $this->normalizeItems($validated['steps'] ?? [], ['title', 'text']);
         $validated['faqs'] = $this->normalizeItems($validated['faqs'] ?? [], ['question', 'answer']);
+        $translations = $validated['translations'] ?? [];
+        foreach (['features' => ['title', 'text'], 'steps' => ['title', 'text'], 'faqs' => ['question', 'answer']] as $field => $keys) {
+            if (isset($translations['en'][$field])) {
+                $translations['en'][$field] = $this->normalizeItems($translations['en'][$field], $keys);
+            }
+        }
+        $validated['translations'] = TranslationPayload::clean($translations);
 
         return $validated;
     }

@@ -3,6 +3,7 @@
     'index',
     'fields',
     'item' => [],
+    'translationFields' => [],
 ])
 
 <div class="border rounded p-3 mb-2" data-repeater-row>
@@ -32,6 +33,29 @@
                     <input id="{{ $fieldId }}" name="{{ $fieldName }}" type="{{ $type }}"
                         class="form-control" value="{{ $fieldValue }}">
                 @endif
+            </div>
+        @endforeach
+        @foreach ($translationFields as $field)
+            @php
+                $fieldName = 'translations[en]['.$field['name'].']['.$index.']';
+                $fieldDotName = str_replace(['[', ']'], ['.', ''], $fieldName);
+                $fieldId = $fieldName;
+                $col = $field['col'] ?? 12;
+                $fieldValue = old($fieldDotName, $field['value'][$index] ?? ($field['default'] ?? null));
+            @endphp
+            <div class="col-md-{{ $col }}">
+                @if (($field['type'] ?? 'text') === 'textarea')
+                    <label for="{{ $fieldId }}" class="form-label">{{ $field['label'] }}</label>
+                    <textarea id="{{ $fieldId }}" name="{{ $fieldName }}" rows="{{ $field['rows'] ?? 2 }}"
+                        class="form-control @error($fieldDotName) is-invalid @enderror">{{ $fieldValue }}</textarea>
+                @else
+                    <label for="{{ $fieldId }}" class="form-label">{{ $field['label'] }}</label>
+                    <input id="{{ $fieldId }}" name="{{ $fieldName }}" type="{{ $field['type'] ?? 'text' }}"
+                        class="form-control @error($fieldDotName) is-invalid @enderror" value="{{ $fieldValue }}">
+                @endif
+                @error($fieldDotName)
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
         @endforeach
         <div class="col-12 text-end">

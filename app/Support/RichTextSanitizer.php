@@ -110,9 +110,11 @@ class RichTextSanitizer
         string $field = 'content',
     ): void {
         $content = (string) $model->getAttribute($field);
+        $translatedContent = (string) data_get($model->getAttribute('translations'), 'en.'.$field, '');
 
         foreach ($model->getMedia($mediaCollection) as $media) {
-            if (! str_contains($content, $media->getUrl())) {
+            if (! str_contains($content, $media->getUrl())
+                && ! str_contains($translatedContent, $media->getUrl())) {
                 $media->delete();
             }
         }

@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\ProjectCategory;
 use App\Models\Service;
 use App\Support\WebpImage;
+use App\Support\TranslationPayload;
 use App\Support\YouTubeVideo;
 use Closure;
 use Illuminate\Http\RedirectResponse;
@@ -155,7 +156,7 @@ class ProjectController extends Controller
      */
     private function validatedProjectData(Request $request, ?Project $project = null): array
     {
-        return $request->validate([
+        $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'slug' => [
                 'required',
@@ -182,6 +183,11 @@ class ProjectController extends Controller
             'is_featured' => ['required', 'boolean'],
             'is_published' => ['required', 'boolean'],
             'sort_order' => ['required', 'integer', 'between:0,65535'],
+            'translations' => ['nullable', 'array'],
+            'translations.en' => ['nullable', 'array'],
+            'translations.en.title' => ['nullable', 'string', 'max:255'],
+            'translations.en.summary' => ['nullable', 'string', 'max:255'],
+            'translations.en.description' => ['nullable', 'string'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'extensions:jpg,jpeg,png,webp', 'max:5120'],
             'remove_image' => ['sometimes', 'boolean'],
             'gallery' => ['nullable', 'array', 'max:10'],
@@ -189,5 +195,9 @@ class ProjectController extends Controller
             'remove_gallery' => ['sometimes', 'array'],
             'remove_gallery.*' => ['integer'],
         ]);
+
+        $validated['translations'] = TranslationPayload::clean($validated['translations'] ?? []);
+
+        return $validated;
     }
 }

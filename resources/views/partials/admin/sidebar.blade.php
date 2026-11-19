@@ -82,6 +82,13 @@
                         <p>Testimonials</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.settings.language') }}"
+                        class="nav-link {{ request()->routeIs('admin.settings.language*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-translate"></i>
+                        <p>Settings &gt; Language</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

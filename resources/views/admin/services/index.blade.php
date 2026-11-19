@@ -35,6 +35,7 @@
                             <thead>
                                 <tr>
                                     <th>Service</th>
+                                    <th>English</th>
                                     <th>Category</th>
                                     <th>Packages</th>
                                     <th>Status</th>
@@ -56,6 +57,7 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td><x-admin.translation-status :model="$service" /></td>
                                         <td>{{ $service->serviceCategory?->name ?? '—' }}</td>
                                         <td>{{ $service->packages_count }}</td>
                                         <td>
@@ -87,7 +89,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center text-secondary py-4">
+                                        <td colspan="8" class="text-center text-secondary py-4">
                                             No services yet. Create your first service to get started.
                                         </td>
                                     </tr>

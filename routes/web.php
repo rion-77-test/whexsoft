@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProjectCategoryController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\TestimonialController;
@@ -65,6 +66,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', AdminLocale
     Route::resource('packages', PackageController::class);
     Route::resource('testimonials', TestimonialController::class);
     Route::resource('users', AdminUserController::class);
+    Route::get('settings/language', [SettingController::class, 'edit'])->name('settings.language');
+    Route::put('settings/language', [SettingController::class, 'update'])->name('settings.language.update');
 });
 
 require __DIR__.'/auth.php';

@@ -9,6 +9,17 @@
         ['name' => 'included', 'label' => 'Included', 'type' => 'checkbox', 'col' => 3, 'default' => true],
     ];
 @endphp
+@php
+    $englishFeatureFields = [
+        [
+            'name' => 'feature_texts',
+            'label' => 'Feature Text (EN)',
+            'type' => 'textarea',
+            'col' => 12,
+            'value' => [],
+        ],
+    ];
+@endphp
 <main class="app-main">
     <div class="app-content-header">
         <div class="container-fluid">
@@ -35,13 +46,27 @@
                                 class="col-12" rows="2" />
                             <div class="col-12">
                                 <x-admin.form-fields.repeater name="features" label="Features"
-                                    :fields="$featureFields" add-label="Add feature"
+                                    :fields="$featureFields" :translation-fields="$englishFeatureFields"
+                                    add-label="Add feature"
                                     empty-text="No features yet." />
                             </div>
                             <div class="col-12">
                                 <x-admin.form-fields.checkbox name="is_popular" label="Mark as popular" class="mb-2" />
                                 <x-admin.form-fields.checkbox name="is_active" label="Active" :checked="true" />
                             </div>
+                        </div>
+
+                        <hr class="my-4">
+                        <h2 class="h5">English translation</h2>
+                        <p class="text-secondary small">Leave a field empty to show the Bengali text.</p>
+                        <div class="row g-3">
+                            <x-admin.form-fields.input name="translations[en][name]" label="Name (EN)"
+                                class="col-md-6" />
+                            <x-admin.form-fields.input name="translations[en][price_label]" label="Price Label (EN)"
+                                class="col-md-6" />
+                            <x-admin.form-fields.textarea name="translations[en][tagline]" label="Tagline (EN)"
+                                class="col-12" rows="2" />
+                            <p class="col-12 text-secondary small mb-0">English feature text fields are shown beside each Bengali feature above.</p>
                         </div>
 
                         <div class="d-flex gap-2 mt-4">

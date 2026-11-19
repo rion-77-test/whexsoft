@@ -39,6 +39,16 @@
                                 class="col-12" rows="5" required />
                         </div>
 
+                        <hr class="my-4">
+                        <h2 class="h5">English translation</h2>
+                        <p class="text-secondary small">Leave a field empty to show the Bengali text.</p>
+                        <div class="row g-3">
+                            <x-admin.form-fields.input name="translations[en][business_name]" label="Business Name (EN)"
+                                :value="data_get($testimonial->translations, 'en.business_name')" class="col-md-6" />
+                            <x-admin.form-fields.textarea name="translations[en][quote]" label="Quote (EN)"
+                                :value="data_get($testimonial->translations, 'en.quote')" class="col-12" rows="5" />
+                        </div>
+
                         <div class="d-flex gap-2 mt-4">
                             <button type="submit" class="btn btn-primary">Save Changes</button>
                             <a href="{{ route('admin.testimonials.show', $testimonial) }}"

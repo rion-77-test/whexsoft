@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\PostCategory;
 use App\Support\ContentImageUploader;
 use App\Support\RichTextSanitizer;
+use App\Support\TranslationPayload;
 use App\Support\WebpImage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -64,10 +65,12 @@ class PostController extends Controller
         $validated = $this->normalizePublicationDate($this->validatedPostData($request));
         $image = $request->file('image');
         $validated['content'] = $this->sanitizer->sanitize($validated['content']);
+        $validated['translations'] = $this->sanitizeTranslations($validated['translations'] ?? []);
         unset($validated['image'], $validated['remove_image']);
 
         $post = Post::create($validated);
         $post->content = $this->sanitizer->sanitize($post->content, $post);
+        $post->translations = $this->sanitizeTranslations($post->translations ?? [], $post);
         $post->save();
 
         if ($image !== null) {
@@ -111,10 +114,12 @@ class PostController extends Controller
         $image = $request->file('image');
         $removeImage = $request->boolean('remove_image');
         $validated['content'] = $this->sanitizer->sanitize($validated['content']);
+        $validated['translations'] = $this->sanitizeTranslations($validated['translations'] ?? []);
         unset($validated['image'], $validated['remove_image']);
 
         $post->update($validated);
         $post->content = $this->sanitizer->sanitize($post->content, $post);
+        $post->translations = $this->sanitizeTranslations($post->translations ?? [], $post);
         $post->save();
         $this->sanitizer->deleteUnusedContentImages($post);
 
@@ -148,7 +153,7 @@ class PostController extends Controller
      */
     private function validatedPostData(Request $request, ?Post $post = null): array
     {
-        return $request->validate([
+        $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'slug' => [
                 'required',
@@ -163,9 +168,44 @@ class PostController extends Controller
             'published_at' => ['nullable', 'date'],
             'meta_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:255'],
+            'translations' => ['nullable', 'array'],
+            'translations.en' => ['nullable', 'array'],
+            'translations.en.title' => ['nullable', 'string', 'max:255'],
+            'translations.en.excerpt' => ['nullable', 'string', 'max:255'],
+            'translations.en.content' => ['nullable', 'string'],
+            'translations.en.meta_title' => ['nullable', 'string', 'max:255'],
+            'translations.en.meta_description' => ['nullable', 'string', 'max:255'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'extensions:jpg,jpeg,png,webp', 'max:5120'],
             'remove_image' => ['sometimes', 'boolean'],
         ]);
+
+        $validated['translations'] = TranslationPayload::clean($validated['translations'] ?? []);
+
+        return $validated;
+    }
+
+    /**
+     * @param  array<string, mixed>  $translations
+     * @return array<string, mixed>|null
+     */
+    private function sanitizeTranslations(array $translations, ?Post $post = null): ?array
+    {
+        $content = data_get($translations, 'en.content');
+
+        if (filled($content)) {
+            data_set(
+                $translations,
+                'en.content',
+                $this->sanitizer->sanitize(
+                    (string) $content,
+                    $post,
+                    requireContent: false,
+                    label: 'English post',
+                ) ?: null,
+            );
+        }
+
+        return TranslationPayload::clean($translations);
     }
 
     /**

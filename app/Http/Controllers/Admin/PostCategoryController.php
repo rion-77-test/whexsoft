@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\PostCategory;
+use App\Support\TranslationPayload;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -116,7 +117,7 @@ class PostCategoryController extends Controller
      */
     private function validatedCategoryData(Request $request, ?PostCategory $postCategory = null): array
     {
-        return $request->validate([
+        $validated = $request->validate([
             'name' => [
                 'required',
                 'string',
@@ -130,7 +131,15 @@ class PostCategoryController extends Controller
                 Rule::unique('post_categories', 'slug')->ignore($postCategory),
             ],
             'description' => ['nullable', 'string'],
+            'translations' => ['nullable', 'array'],
+            'translations.en' => ['nullable', 'array'],
+            'translations.en.name' => ['nullable', 'string', 'max:100'],
+            'translations.en.description' => ['nullable', 'string'],
             'is_active' => ['required', 'boolean'],
         ]);
+
+        $validated['translations'] = TranslationPayload::clean($validated['translations'] ?? []);
+
+        return $validated;
     }
 }

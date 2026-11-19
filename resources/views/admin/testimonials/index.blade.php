@@ -28,6 +28,7 @@
                             <thead>
                                 <tr>
                                     <th>Client</th>
+                                    <th>English</th>
                                     <th>Service</th>
                                     <th>Quote</th>
                                     <th>Status</th>
@@ -50,6 +51,7 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td><x-admin.translation-status :model="$testimonial" /></td>
                                         <td>{{ $testimonial->service?->title ?? '—' }}</td>
                                         <td class="text-secondary">{{ \Illuminate\Support\Str::limit($testimonial->quote, 120) }}</td>
                                         <td>
@@ -81,7 +83,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6" class="text-center text-secondary py-4">
+                                        <td colspan="7" class="text-center text-secondary py-4">
                                             No testimonials yet.
                                         </td>
                                     </tr>

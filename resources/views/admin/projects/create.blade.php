@@ -51,6 +51,17 @@
                                     class="col-md-6" min="0" max="65535" value="0" required />
                             </div>
 
+                            <hr class="my-4">
+                            <h2 class="h5">English translation</h2>
+                            <p class="text-secondary small">Leave a field empty to show the Bengali text.</p>
+                            <div class="row g-3">
+                                <x-admin.form-fields.input name="translations[en][title]" label="Title (EN)" class="col-md-6" />
+                                <x-admin.form-fields.input name="translations[en][summary]" label="Summary (EN)"
+                                    class="col-md-6" />
+                                <x-admin.form-fields.textarea name="translations[en][description]" label="Description (EN)"
+                                    class="col-12" rows="5" />
+                            </div>
+
                             <div class="d-flex gap-2 mt-4">
                                 <button type="submit" class="btn btn-primary">Create Project</button>
                                 <a href="{{ route('admin.projects.index') }}" class="btn btn-outline-secondary">Cancel</a>

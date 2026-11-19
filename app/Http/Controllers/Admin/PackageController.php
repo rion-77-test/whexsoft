@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Package;
 use App\Models\Service;
+use App\Support\TranslationPayload;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -104,12 +105,21 @@ class PackageController extends Controller
             'features' => ['nullable', 'array'],
             'features.*.text' => ['nullable', 'string', 'max:255'],
             'features.*.included' => ['nullable', 'boolean'],
+            'translations' => ['nullable', 'array'],
+            'translations.en' => ['nullable', 'array'],
+            'translations.en.name' => ['nullable', 'string', 'max:100'],
+            'translations.en.tagline' => ['nullable', 'string', 'max:255'],
+            'translations.en.price_label' => ['nullable', 'string', 'max:60'],
+            'translations.en.feature_texts' => ['nullable', 'array'],
+            'translations.en.feature_texts.*' => ['nullable', 'string', 'max:255'],
             'is_popular' => ['required', 'boolean'],
             'sort_order' => ['required', 'integer', 'between:0,65535'],
             'is_active' => ['required', 'boolean'],
         ]);
 
-        $validated['features'] = collect($validated['features'] ?? [])
+        $submittedFeatures = $validated['features'] ?? [];
+        $featureTexts = data_get($validated, 'translations.en.feature_texts', []);
+        $validated['features'] = collect($submittedFeatures)
             ->map(fn (array $feature): array => [
                 'text' => trim((string) ($feature['text'] ?? '')),
                 'included' => filter_var($feature['included'] ?? false, FILTER_VALIDATE_BOOLEAN),
@@ -117,6 +127,29 @@ class PackageController extends Controller
             ->filter(fn (array $feature): bool => $feature['text'] !== '')
             ->values()
             ->all();
+
+        $translations = $validated['translations'] ?? [];
+        unset($translations['en']['feature_texts']);
+        $translations = TranslationPayload::clean($translations) ?? [];
+        $translatedFeatureTexts = [];
+        $targetIndex = 0;
+
+        foreach ($submittedFeatures as $index => $feature) {
+            if (trim((string) ($feature['text'] ?? '')) === '') {
+                continue;
+            }
+
+            $translatedFeatureTexts[$targetIndex] = filled($featureTexts[$index] ?? null)
+                ? trim((string) $featureTexts[$index])
+                : null;
+            $targetIndex++;
+        }
+
+        if (collect($translatedFeatureTexts)->contains(fn ($text): bool => filled($text))) {
+            $translations['en']['feature_texts'] = $translatedFeatureTexts;
+        }
+
+        $validated['translations'] = $translations === [] ? null : $translations;
 
         return $validated;
     }

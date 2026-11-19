@@ -34,6 +34,7 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>English</th>
                                     <th>Slug</th>
                                     <th>Posts</th>
                                     <th>Status</th>
@@ -49,6 +50,7 @@
                                                 <div class="text-secondary small">{{ $category->description }}</div>
                                             @endif
                                         </td>
+                                        <td><x-admin.translation-status :model="$category" /></td>
                                         <td>{{ $category->slug }}</td>
                                         <td>{{ $category->posts_count }}</td>
                                         <td>
@@ -79,7 +81,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center text-secondary py-4">
+                                        <td colspan="6" class="text-center text-secondary py-4">
                                             No post categories yet.
                                         </td>
                                     </tr>

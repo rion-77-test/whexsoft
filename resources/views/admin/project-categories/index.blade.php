@@ -34,6 +34,7 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>English</th>
                                     <th>Slug</th>
                                     <th>Projects</th>
                                     <th>Status</th>
@@ -50,6 +51,7 @@
                                                 <div class="text-secondary small">{{ $category->description }}</div>
                                             @endif
                                         </td>
+                                        <td><x-admin.translation-status :model="$category" /></td>
                                         <td>{{ $category->slug }}</td>
                                         <td>{{ $category->projects_count }}</td>
                                         <td>
@@ -81,7 +83,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6" class="text-center text-secondary py-4">
+                                        <td colspan="7" class="text-center text-secondary py-4">
                                             No project categories yet.
                                         </td>
                                     </tr>

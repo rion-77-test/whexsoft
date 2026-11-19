@@ -87,6 +87,18 @@
                                     :value="$project->sort_order" class="col-md-6" min="0" max="65535" required />
                             </div>
 
+                            <hr class="my-4">
+                            <h2 class="h5">English translation</h2>
+                            <p class="text-secondary small">Leave a field empty to show the Bengali text.</p>
+                            <div class="row g-3">
+                                <x-admin.form-fields.input name="translations[en][title]" label="Title (EN)"
+                                    :value="data_get($project->translations, 'en.title')" class="col-md-6" />
+                                <x-admin.form-fields.input name="translations[en][summary]" label="Summary (EN)"
+                                    :value="data_get($project->translations, 'en.summary')" class="col-md-6" />
+                                <x-admin.form-fields.textarea name="translations[en][description]" label="Description (EN)"
+                                    :value="data_get($project->translations, 'en.description')" class="col-12" rows="5" />
+                            </div>
+
                             <div class="d-flex gap-2 mt-4">
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
                                 <a href="{{ route('admin.projects.show', $project) }}"

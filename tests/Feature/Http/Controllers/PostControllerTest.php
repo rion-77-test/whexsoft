@@ -125,6 +125,46 @@ test('post content images are uploaded and attached to the post', function () {
         ->assertDontSee('<script');
 });
 
+test('English-only content images remain attached until the translation is removed', function () {
+    $this->actingAsAdmin();
+
+    Storage::fake('public');
+    $uploadResponse = $this->postJson(route('admin.posts.content-images.store'), [
+        'image' => UploadedFile::fake()->image('english-content.png'),
+    ])->assertOk();
+
+    $imageUrl = $uploadResponse->json('url');
+    $this->post(route('admin.posts.store'), [
+        'title' => 'English image post',
+        'slug' => 'english-image-post',
+        'excerpt' => 'Source excerpt',
+        'content' => 'Source content without an image',
+        'status' => 'draft',
+        'translations' => [
+            'en' => [
+                'title' => 'English image post',
+                'content' => '<p><img src="'.$imageUrl.'" alt="English image"></p>',
+            ],
+        ],
+    ])->assertRedirect(route('admin.posts.index'));
+
+    $post = Post::query()->where('slug', 'english-image-post')->firstOrFail();
+    $media = $post->getFirstMedia('content-images');
+    expect($media)->not->toBeNull()
+        ->and($post->translations['en']['content'])->toContain($media->getUrl());
+
+    $this->put(route('admin.posts.update', $post), [
+        'title' => $post->title,
+        'slug' => $post->slug,
+        'excerpt' => $post->excerpt,
+        'content' => 'Updated source content',
+        'status' => 'draft',
+        'translations' => ['en' => ['title' => 'English image post']],
+    ])->assertRedirect(route('admin.posts.show', $post));
+
+    $this->assertDatabaseMissing('media', ['id' => $media->id]);
+});
+
 test('post content image uploads reject non-image files', function () {
     $this->actingAsAdmin();
 

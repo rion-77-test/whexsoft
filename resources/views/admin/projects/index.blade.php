@@ -36,6 +36,7 @@
                             <thead>
                                 <tr>
                                     <th>Project</th>
+                                    <th>English</th>
                                     <th>Category</th>
                                     <th>Service</th>
                                     <th>Client Type</th>
@@ -58,6 +59,7 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td><x-admin.translation-status :model="$project" /></td>
                                         <td>{{ $project->projectCategory?->name ?? '—' }}</td>
                                         <td>{{ $project->service?->title ?? '—' }}</td>
                                         <td>
@@ -100,7 +102,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="8" class="text-center text-secondary py-4">
+                                        <td colspan="9" class="text-center text-secondary py-4">
                                             No projects yet. Create your first project to get started.
                                         </td>
                                     </tr>

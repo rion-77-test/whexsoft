@@ -34,6 +34,7 @@
                             <thead>
                                 <tr>
                                     <th>Category</th>
+                                    <th>English</th>
                                     <th>Slug</th>
                                     <th>Services</th>
                                     <th>Status</th>
@@ -56,6 +57,7 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td><x-admin.translation-status :model="$category" /></td>
                                         <td>{{ $category->slug }}</td>
                                         <td>{{ $category->services_count }}</td>
                                         <td>
@@ -87,7 +89,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6" class="text-center text-secondary py-4">
+                                        <td colspan="7" class="text-center text-secondary py-4">
                                             No service categories yet.
                                         </td>
                                     </tr>

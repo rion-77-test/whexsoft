@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ServiceCategory;
 use App\Support\WebpImage;
+use App\Support\TranslationPayload;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -123,7 +124,7 @@ class ServiceCategoryController extends Controller
      */
     private function validatedCategoryData(Request $request, ?ServiceCategory $serviceCategory = null): array
     {
-        return $request->validate([
+        $validated = $request->validate([
             'name' => [
                 'required',
                 'string',
@@ -137,10 +138,18 @@ class ServiceCategoryController extends Controller
                 Rule::unique('service_categories', 'slug')->ignore($serviceCategory),
             ],
             'description' => ['nullable', 'string', 'max:255'],
+            'translations' => ['nullable', 'array'],
+            'translations.en' => ['nullable', 'array'],
+            'translations.en.name' => ['nullable', 'string', 'max:150'],
+            'translations.en.description' => ['nullable', 'string', 'max:255'],
             'sort_order' => ['required', 'integer', 'between:0,65535'],
             'is_active' => ['required', 'boolean'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'extensions:jpg,jpeg,png,webp', 'max:5120'],
             'remove_image' => ['sometimes', 'boolean'],
         ]);
+
+        $validated['translations'] = TranslationPayload::clean($validated['translations'] ?? []);
+
+        return $validated;
     }
 }

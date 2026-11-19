@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\Testimonial;
 use App\Support\WebpImage;
+use App\Support\TranslationPayload;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -116,15 +117,23 @@ class TestimonialController extends Controller
      */
     private function validatedTestimonialData(Request $request): array
     {
-        return $request->validate([
+        $validated = $request->validate([
             'service_id' => ['nullable', 'integer', 'exists:services,id'],
             'client_name' => ['required', 'string', 'max:255'],
             'business_name' => ['nullable', 'string', 'max:255'],
             'quote' => ['required', 'string'],
+            'translations' => ['nullable', 'array'],
+            'translations.en' => ['nullable', 'array'],
+            'translations.en.quote' => ['nullable', 'string'],
+            'translations.en.business_name' => ['nullable', 'string', 'max:255'],
             'is_published' => ['required', 'boolean'],
             'sort_order' => ['required', 'integer', 'between:0,65535'],
             'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'extensions:jpg,jpeg,png,webp', 'max:5120'],
             'remove_photo' => ['sometimes', 'boolean'],
         ]);
+
+        $validated['translations'] = TranslationPayload::clean($validated['translations'] ?? []);
+
+        return $validated;
     }
 }

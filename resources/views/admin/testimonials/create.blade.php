@@ -36,6 +36,16 @@
                                 rows="5" required />
                         </div>
 
+                        <hr class="my-4">
+                        <h2 class="h5">English translation</h2>
+                        <p class="text-secondary small">Leave a field empty to show the Bengali text.</p>
+                        <div class="row g-3">
+                            <x-admin.form-fields.input name="translations[en][business_name]" label="Business Name (EN)"
+                                class="col-md-6" />
+                            <x-admin.form-fields.textarea name="translations[en][quote]" label="Quote (EN)"
+                                class="col-12" rows="5" />
+                        </div>
+
                         <div class="d-flex gap-2 mt-4">
                             <button type="submit" class="btn btn-primary">Create Testimonial</button>
                             <a href="{{ route('admin.testimonials.index') }}"
