@@ -24,6 +24,8 @@ class LanguageController extends Controller
         $safe = parse_url($previous, PHP_URL_HOST) === $request->getHost()
             && ! str_contains($previous, '/language/');
 
-        return redirect()->to($safe ? $previous : route('home'));
+        return redirect()
+    ->to($safe ? $previous : route('home'))
+    ->header('X-Robots-Tag', 'noindex, nofollow');
     }
 }

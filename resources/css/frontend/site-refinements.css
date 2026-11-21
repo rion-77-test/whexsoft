@@ -4172,3 +4172,38 @@ body {
         aspect-ratio: auto;
     }
 } */
+
+/* ---------- Language-specific typography ---------- */
+
+/* English: balanced headings, safe wrapping for long words and URLs */
+html[lang="en"] h1,
+html[lang="en"] h2,
+html[lang="en"] h3 {
+    text-wrap: balance;
+}
+
+html[lang="en"] .site-copy,
+html[lang="en"] .site-body-text,
+html[lang="en"] .service-content,
+html[lang="en"] .article-content {
+    overflow-wrap: anywhere;
+    hyphens: auto;
+}
+
+/* Bengali: slightly more line height so matras and conjuncts are not cramped */
+html[lang="bn"] .site-copy,
+html[lang="bn"] .site-body-text {
+    line-height: 1.75;
+}
+
+/* Keep nav links and buttons on one line in both languages */
+.site-header nav a,
+.site-page main .site-content-action {
+    white-space: nowrap;
+}
+
+/* English only: tighter word and letter spacing in the header menu and CTA buttons */
+html[lang="en"] .site-header .site-type-text-label-lg {
+    word-spacing: -0.15em;
+    letter-spacing: 0;
+}

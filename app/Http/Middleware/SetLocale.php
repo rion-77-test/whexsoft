@@ -44,7 +44,21 @@ class SetLocale
         Carbon::setLocale($locale);
 
         $response = $next($request);
-        $response->setVary('Cookie', false); // caches must keep one copy per language cookie
+
+        // Caches must keep one copy per language cookie.
+        $vary = array_merge($response->headers->all('Vary'), ['Cookie']);
+
+        if (Setting::geoEnabled()) {
+            foreach (config('locales.geo.country_headers', []) as $serverKey) {
+                if (str_starts_with($serverKey, 'HTTP_')) {
+                    // HTTP_CF_IPCOUNTRY -> CF-IPCOUNTRY
+                    $vary[] = str_replace('_', '-', substr($serverKey, 5));
+                }
+            }
+        }
+
+        // One combined header line (rather than several) so every proxy reads all values.
+        $response->headers->set('Vary', implode(', ', array_unique(array_filter($vary))));
 
         return $response;
     }

@@ -12,6 +12,8 @@
     <meta property="og:title" content="@yield('title', 'WhexSoft - Dhaka Studio')" />
     <meta property="og:description" content="@yield('description', __('site.meta.default_description'))" />
     <meta property="og:image" content="@yield('og_image', asset('assets/frontend/images/hero.jpg'))" />
+    <meta property="og:locale" content="{{ app()->getLocale() === 'en' ? 'en_US' : 'bn_BD' }}">
+    <meta property="og:locale:alternate" content="{{ app()->getLocale() === 'en' ? 'bn_BD' : 'en_US' }}">
     <link rel="icon" type="image/jpg" href="{{ asset('assets/frontend/images/whexsoft-logo.jpg') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

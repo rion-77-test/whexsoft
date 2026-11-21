@@ -53,6 +53,8 @@ return [
             'HTTP_X_COUNTRY_CODE', // Reverse proxy / load balancer
             'GEOIP_COUNTRY_CODE',  // Nginx / Apache GeoIP module
         ],
+        // Only trust country headers when the request comes from a trusted proxy (set TRUSTED_PROXIES below).
+        'require_trusted_proxy' => env('GEO_REQUIRE_TRUSTED_PROXY', env('APP_ENV') === 'production'),
     ],
 
 ];

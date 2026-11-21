@@ -17,7 +17,7 @@
     $isFiltered = $search !== '' || $activeCategory !== '';
     $featured = !$isFiltered && $posts->currentPage() === 1 ? $posts->first() : null;
     $gridPosts = $featured ? $posts->getCollection()->slice(1) : $posts->getCollection();
-    $categoryLabels = $categories->mapWithKeys(fn ($c) => [$c->name => $c->tr('name')]);
+    $categoryLabels = $categories->mapWithKeys(fn($c) => [$c->name => $c->tr('name')]);
 @endphp
 <x-frontend.page>
     <div

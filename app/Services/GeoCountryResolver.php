@@ -8,18 +8,21 @@ class GeoCountryResolver
 {
     public function resolveCountryCode(Request $request): ?string
     {
-        foreach (config('locales.geo.country_headers', []) as $headerKey) {
-            $code = strtoupper(trim((string) $this->headerValue($request, $headerKey)));
+        // Headers are only read when the request really came through the proxy/CDN
+        $trusted = ! config('locales.geo.require_trusted_proxy') || $request->isFromTrustedProxy();
 
-            if (preg_match('/^[A-Z]{2}$/', $code) && ! in_array($code, ['XX', 'T1'], true)) {
-                return $code;
+        if ($trusted) {
+            foreach (config('locales.geo.country_headers', []) as $serverKey) {
+                $code = strtoupper(trim((string) $request->server($serverKey, '')));
+                if (preg_match('/^[A-Z]{2}$/', $code) && ! in_array($code, ['XX', 'T1'], true)) {
+                    return $code;
+                }
             }
         }
 
-        // Local development helper (only active when APP_ENV=local)
+        // Local development helper (only when APP_ENV=local): ?__country=US
         if (app()->isLocal() && $request->filled('__country')) {
             $override = strtoupper(trim((string) $request->query('__country')));
-
             if (preg_match('/^[A-Z]{2}$/', $override)) {
                 return $override;
             }

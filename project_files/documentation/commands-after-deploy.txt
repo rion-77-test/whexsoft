@@ -1,0 +1,19 @@
+php artisan optimize:clear
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+What each one does:
+
+config:cache combines all config files, including config/locales.php, into one fast file. Important: once it is cached, Laravel stops reading .env directly, so TRUSTED_PROXIES and GEO_REQUIRE_TRUSTED_PROXY only take effect after you run this command again.
+route:cache speeds up route loading. It requires all routes to use controllers or named callables, not closures. If it errors, tell me which route it names.
+view:cache pre-compiles all Blade templates, so the first visitor doesn't wait.
+
+
+3. When the admin changes the language setting
+
+Nothing extra is needed. Setting::put() already clears its own cache entry. If you ever change the value directly in the database, clear it by hand:
+
+bash
+php artisan cache:forget setting.default_locale
+php artisan cache:forget setting.geo_language_enabled

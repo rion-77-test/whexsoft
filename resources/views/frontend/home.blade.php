@@ -43,7 +43,6 @@
 @section('content')
     <x-frontend.page class="home-page container-fluid p-0">
         {{-- Hero Section --}}
-        {{-- Hero Section --}}
         <section
             class="home-hero position-relative w-100 site-dimension-min-h-arbitrary-100svh d-flex align-items-center overflow-hidden site-surface-bg-canvas-base site-section site-home-hero">
             <img alt="" aria-hidden="true"
