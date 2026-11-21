@@ -4173,6 +4173,7 @@ body {
     }
 } */
 
+/* **************************************** */
 /* ---------- Language-specific typography ---------- */
 
 /* English: balanced headings, safe wrapping for long words and URLs */
@@ -4206,4 +4207,91 @@ html[lang="bn"] .site-body-text {
 html[lang="en"] .site-header .site-type-text-label-lg {
     word-spacing: -0.15em;
     letter-spacing: 0;
+}
+
+
+/* ************************************ */
+/* Messenger-style live chat widget */
+
+.chat-panel {
+    width: min(360px, calc(100vw - 2rem));
+    height: min(500px, calc(100vh - 7.5rem));
+    margin-bottom: 0.75rem;
+    border-color: var(--site-border) !important;
+}
+
+.chat-header {
+    background-color: var(--site-slate) !important;
+}
+
+.chat-avatar {
+    width: 2.25rem;
+    height: 2.25rem;
+    background-color: var(--site-accent);
+    color: var(--site-ink);
+}
+
+.chat-status-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    background-color: #25d366;
+}
+
+.chat-messages {
+    background-color: var(--site-canvas);
+}
+
+.chat-bubble {
+    max-width: 82%;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.chat-bubble--visitor {
+    background-color: var(--site-accent);
+    color: var(--site-ink);
+    font-weight: 500;
+    border-bottom-right-radius: 0.35rem !important;
+}
+
+.chat-bubble--admin {
+    background-color: var(--site-card);
+    color: var(--site-ink);
+    border: 1px solid var(--site-border);
+    border-bottom-left-radius: 0.35rem !important;
+}
+
+.chat-accent-btn {
+    background-color: var(--site-accent) !important;
+    color: var(--site-ink) !important;
+    border: 0 !important;
+}
+
+.chat-accent-btn:hover {
+    filter: brightness(0.95);
+}
+
+.chat-send-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+    background-color: var(--site-accent);
+    color: var(--site-ink);
+    border: 0;
+}
+
+.chat-send-btn:hover {
+    filter: brightness(0.95);
+}
+
+.chat-fab {
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: #25d366 !important;
+    color: #ffffff !important;
+    border: 0 !important;
+}
+
+.chat-fab:hover {
+    background-color: #20ba5a !important;
+    color: #ffffff !important;
 }

@@ -5,11 +5,12 @@ use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProjectCategoryController;
 use App\Http\Controllers\Admin\ProjectController;
-use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -17,16 +18,23 @@ use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\PortfolioController;
 use App\Http\Controllers\Frontend\ServiceController;
 use App\Http\Controllers\LanguageController;
-use App\Http\Middleware\AdminLocale;
-use App\Http\Middleware\SetLocale;
+use App\Http\Controllers\WhatsAppWebhookController;
 use Illuminate\Support\Facades\Route;
 
 // Language switcher (no SetLocale: only stores the cookie and redirects back)
 Route::get('/language/{locale}', LanguageController::class)
     ->whereIn('locale', ['bn', 'en'])->name('language.switch');
 
+// Visitor live chat & WhatsApp Cloud API webhook
+Route::post('/chat/start', [ChatController::class, 'start'])->name('chat.start');
+Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
+Route::get('/chat/messages', [ChatController::class, 'messages'])->name('chat.messages');
+
+Route::get('/webhooks/whatsapp', [WhatsAppWebhookController::class, 'verify'])->name('webhooks.whatsapp.verify');
+Route::post('/webhooks/whatsapp', [WhatsAppWebhookController::class, 'handle'])->name('webhooks.whatsapp.handle');
+
 // Public site
-Route::middleware(SetLocale::class)->group(function () {
+Route::middleware(\App\Http\Middleware\SetLocale::class)->group(function () {
     Route::get('/', HomeController::class)->name('home');
     Route::get('/about', [PageController::class, 'about'])->name('about');
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
@@ -44,7 +52,7 @@ Route::middleware(SetLocale::class)->group(function () {
 });
 
 // Admin
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', AdminLocale::class])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', \App\Http\Middleware\AdminLocale::class])->group(function () {
     Route::get('/', function () {
         // return view('admin.dashboard');
         return redirect()->route('admin.dashboard');

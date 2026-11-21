@@ -414,3 +414,309 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 })();
 
+
+/////////////////////////////////////
+// Chatbox
+document.addEventListener('DOMContentLoaded', () => {
+    const widget = document.getElementById('live-chat-widget');
+    if (!widget) {
+        return;
+    }
+
+    const startUrl = widget.dataset.startUrl;
+    const sendUrl = widget.dataset.sendUrl;
+    const messagesUrl = widget.dataset.messagesUrl;
+    const csrfToken = widget.dataset.csrf;
+
+    const STORAGE_TOKEN_KEY = 'whexsoft_chat_session_token';
+    const STORAGE_NAME_KEY = 'whexsoft_chat_visitor_name';
+    const STORAGE_PHONE_KEY = 'whexsoft_chat_visitor_phone';
+
+    const panel = document.getElementById('chat-box-panel');
+    const toggleBtn = document.getElementById('chat-toggle-btn');
+    const closeBtn = document.getElementById('chat-close-btn');
+    const fabIcon = document.getElementById('chat-fab-icon');
+    const unreadBadge = document.getElementById('chat-unread-badge');
+
+    const prechatForm = document.getElementById('chat-prechat-form');
+    const nameInput = document.getElementById('chat-visitor-name');
+    const phoneInput = document.getElementById('chat-visitor-phone');
+    const prechatError = document.getElementById('chat-prechat-error');
+    const startBtn = document.getElementById('chat-start-btn');
+
+    const threadView = document.getElementById('chat-thread-view');
+    const sessionBadge = document.getElementById('chat-session-badge');
+    const switchUserBtn = document.getElementById('chat-switch-user-btn');
+    const messagesList = document.getElementById('chat-messages-list');
+    const messageForm = document.getElementById('chat-message-form');
+    const messageInput = document.getElementById('chat-message-input');
+    const sendBtn = document.getElementById('chat-send-btn');
+    const sendError = document.getElementById('chat-send-error');
+
+    let isOpen = false;
+    let sessionToken = localStorage.getItem(STORAGE_TOKEN_KEY) || '';
+    let lastMessageId = 0;
+    let unreadCount = 0;
+    let pollTimer = null;
+    const renderedIds = new Set();
+
+    // Prefill saved visitor info if available
+    if (localStorage.getItem(STORAGE_NAME_KEY)) {
+        nameInput.value = localStorage.getItem(STORAGE_NAME_KEY);
+    }
+    if (localStorage.getItem(STORAGE_PHONE_KEY)) {
+        phoneInput.value = localStorage.getItem(STORAGE_PHONE_KEY);
+    }
+
+    function setOpen(openState) {
+        isOpen = openState;
+        panel.classList.toggle('d-none', !isOpen);
+        panel.classList.toggle('d-flex', isOpen);
+        panel.setAttribute('aria-hidden', String(!isOpen));
+        toggleBtn.setAttribute('aria-expanded', String(isOpen));
+        fabIcon.textContent = isOpen ? 'expand_more' : 'chat';
+
+        if (isOpen) {
+            unreadCount = 0;
+            updateUnreadBadge();
+            scrollToBottom();
+            if (sessionToken) {
+                startPolling();
+                fetchNewMessages();
+                messageInput?.focus();
+            } else {
+                nameInput?.focus();
+            }
+        }
+    }
+
+    function updateUnreadBadge() {
+        if (!unreadBadge) return;
+        if (unreadCount > 0 && !isOpen) {
+            unreadBadge.textContent = String(unreadCount);
+            unreadBadge.classList.remove('d-none');
+        } else {
+            unreadBadge.classList.add('d-none');
+        }
+    }
+
+    function showThreadView(name, phone) {
+        prechatForm.classList.add('d-none');
+        prechatForm.classList.remove('d-flex');
+        threadView.classList.remove('d-none');
+        threadView.classList.add('d-flex');
+        sessionBadge.textContent = `${name} (${phone})`;
+    }
+
+    function showPrechatView() {
+        stopPolling();
+        threadView.classList.add('d-none');
+        threadView.classList.remove('d-flex');
+        prechatForm.classList.remove('d-none');
+        prechatForm.classList.add('d-flex');
+    }
+
+    function scrollToBottom() {
+        requestAnimationFrame(() => {
+            messagesList.scrollTop = messagesList.scrollHeight;
+        });
+    }
+
+    function formatTime(isoString) {
+        if (!isoString) return '';
+        const date = new Date(isoString);
+        if (Number.isNaN(date.getTime())) return '';
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function appendMessage(msg, countUnreadIfAdmin = false) {
+        if (!msg || !msg.id || renderedIds.has(msg.id)) {
+            return;
+        }
+        renderedIds.add(msg.id);
+        if (msg.id > lastMessageId) {
+            lastMessageId = msg.id;
+        }
+
+        const isVisitor = msg.sender === 'visitor';
+        const row = document.createElement('div');
+        row.className = `d-flex flex-column ${isVisitor ? 'align-items-end' : 'align-items-start'}`;
+
+        const bubble = document.createElement('div');
+        bubble.className = `chat-bubble px-3 py-2 rounded-4 small ${isVisitor ? 'chat-bubble--visitor' : 'chat-bubble--admin'}`;
+        bubble.textContent = msg.body;
+
+        const time = document.createElement('span');
+        time.className = 'site-copy mt-1';
+        time.style.fontSize = '0.68rem';
+        time.textContent = `${isVisitor ? 'You' : 'Support'} • ${formatTime(msg.created_at)}`;
+
+        row.appendChild(bubble);
+        row.appendChild(time);
+        messagesList.appendChild(row);
+
+        if (!isVisitor && countUnreadIfAdmin && !isOpen) {
+            unreadCount += 1;
+            updateUnreadBadge();
+        }
+    }
+
+    async function startOrResumeSession(name, phone, token = '') {
+        prechatError.classList.add('d-none');
+        startBtn.disabled = true;
+        startBtn.textContent = 'Connecting...';
+
+        try {
+            const response = await fetch(startUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                },
+                body: JSON.stringify({
+                    name,
+                    phone,
+                    session_token: token || null,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Please check your name and phone number.');
+            }
+
+            sessionToken = data.session_token;
+            localStorage.setItem(STORAGE_TOKEN_KEY, sessionToken);
+            localStorage.setItem(STORAGE_NAME_KEY, data.visitor_name);
+            localStorage.setItem(STORAGE_PHONE_KEY, data.visitor_phone);
+
+            messagesList.innerHTML = '';
+            renderedIds.clear();
+            lastMessageId = 0;
+
+            showThreadView(data.visitor_name, data.visitor_phone);
+
+            (data.messages || []).forEach((msg) => appendMessage(msg, false));
+            scrollToBottom();
+            startPolling();
+            messageInput?.focus();
+        } catch (err) {
+            prechatError.textContent = err.message || 'Unable to start chat.';
+            prechatError.classList.remove('d-none');
+        } finally {
+            startBtn.disabled = false;
+            startBtn.textContent = 'Start Chat';
+        }
+    }
+
+    async function fetchNewMessages() {
+        if (!sessionToken) return;
+
+        try {
+            const url = `${messagesUrl}?session_token=${encodeURIComponent(sessionToken)}&after_id=${lastMessageId}`;
+            const response = await fetch(url, {
+                headers: { 'Accept': 'application/json' },
+            });
+
+            if (!response.ok) return;
+
+            const data = await response.json();
+            const incoming = data.messages || [];
+            if (incoming.length > 0) {
+                incoming.forEach((msg) => appendMessage(msg, true));
+                scrollToBottom();
+            }
+        } catch (_) {
+            // Silent retry on next poll interval
+        }
+    }
+
+    function startPolling() {
+        stopPolling();
+        pollTimer = setInterval(fetchNewMessages, 3000);
+    }
+
+    function stopPolling() {
+        if (pollTimer) {
+            clearInterval(pollTimer);
+            pollTimer = null;
+        }
+    }
+
+    toggleBtn?.addEventListener('click', () => setOpen(!isOpen));
+    closeBtn?.addEventListener('click', () => setOpen(false));
+
+    switchUserBtn?.addEventListener('click', () => {
+        localStorage.removeItem(STORAGE_TOKEN_KEY);
+        sessionToken = '';
+        showPrechatView();
+    });
+
+    prechatForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = nameInput.value.trim();
+        const phone = phoneInput.value.trim();
+        if (!name || !phone) return;
+        startOrResumeSession(name, phone, sessionToken);
+    });
+
+    messageForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!sessionToken) return;
+
+        const text = messageInput.value.trim();
+        if (!text) return;
+
+        sendError.classList.add('d-none');
+        sendBtn.disabled = true;
+        messageInput.disabled = true;
+
+        try {
+            const response = await fetch(sendUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                },
+                body: JSON.stringify({
+                    session_token: sessionToken,
+                    message: text,
+                }),
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.message || 'Failed to send message.');
+            }
+
+            messageInput.value = '';
+            if (data.message) {
+                appendMessage(data.message, false);
+                scrollToBottom();
+            }
+        } catch (err) {
+            sendError.textContent = err.message || 'Could not send message.';
+            sendError.classList.remove('d-none');
+        } finally {
+            sendBtn.disabled = false;
+            messageInput.disabled = false;
+            messageInput?.focus();
+        }
+    });
+
+    // Resume existing session silently in background so unread badge updates even before opening
+    if (sessionToken) {
+        fetchNewMessages().then(() => {
+            if (lastMessageId > 0) {
+                showThreadView(
+                    localStorage.getItem(STORAGE_NAME_KEY) || 'Visitor',
+                    localStorage.getItem(STORAGE_PHONE_KEY) || ''
+                );
+                startPolling();
+            }
+        });
+    }
+});
